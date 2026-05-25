@@ -309,16 +309,18 @@ body {
 .partner-card p { font-size: .85rem; color: var(--parch-mid); line-height: 1.6; text-shadow: 1px 1px 2px rgba(0,0,0,.6); }
 
 /* ================================================================
-   GALLERY  (corkboard + photo frames)
+   GALLERY  (corkboard 3 fases)
    ================================================================ */
 .gallery-section {
   padding: 90px 40px;
   background: linear-gradient(180deg, var(--green-dark), #0f2a1a);
 }
+
+/* painel de cortiça */
 .gallery-corkboard {
-  max-width: 1200px; margin: 0 auto;
-  display: grid; grid-template-columns: repeat(auto-fill, minmax(260px,1fr)); gap: 36px;
-  padding: 36px;
+  max-width: 1280px; margin: 0 auto;
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 0;
   background:
     repeating-linear-gradient(0deg,   transparent, transparent 5px, rgba(160,120,70,.04) 5px, rgba(160,120,70,.04) 6px),
     repeating-linear-gradient(90deg,  transparent, transparent 5px, rgba(140,100,50,.03) 5px, rgba(140,100,50,.03) 6px),
@@ -326,34 +328,86 @@ body {
     linear-gradient(135deg, #2a1e12, #1e1409 50%, #2a1e12);
   border-radius: 6px;
   box-shadow: inset 0 0 50px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.5);
+  overflow: hidden;
 }
 
+/* coluna de fase */
+.gallery-phase {
+  display: flex; flex-direction: column;
+  border-right: 3px solid rgba(0,0,0,.35);
+}
+.gallery-phase:last-child { border-right: none; }
+
+/* cabeçalho da fase — placa de madeira */
+.phase-label {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 2px; padding: 18px 12px;
+  position: sticky; top: 68px; z-index: 10;
+  border-bottom: 3px solid rgba(0,0,0,.4);
+  box-shadow: 0 4px 12px rgba(0,0,0,.4), inset 0 1px 0 rgba(255,255,255,.1);
+}
+.phase-label--before {
+  background: linear-gradient(180deg, #8a6a30, #6a4a10 40%, #4a2c08);
+}
+.phase-label--during {
+  background: linear-gradient(180deg, #1a5a7a, #0d3a5a 40%, #082840);
+}
+.phase-label--after {
+  background: linear-gradient(180deg, #1a6a3a, #0d4a28 40%, #083018);
+}
+
+.phase-num {
+  font-family: 'Courier New', monospace; font-size: .65rem; font-weight: 700;
+  letter-spacing: 3px; opacity: .6; color: rgba(255,255,255,.7);
+}
+.phase-title {
+  font-family: var(--font-display); font-size: 1.15rem; letter-spacing: 5px;
+  text-transform: uppercase; color: var(--gold-light);
+  text-shadow: 1px 2px 4px rgba(0,0,0,.8), -1px -1px 1px rgba(255,200,50,.1);
+  filter: drop-shadow(0 0 6px rgba(201,162,39,.2));
+}
+
+/* coluna de fotos */
+.phase-col {
+  flex: 1; padding: 28px 20px; display: flex; flex-direction: column; gap: 28px;
+}
+
+/* item de foto */
 .gallery-item { position: relative; cursor: zoom-in; }
 
 .photo-frame {
   background: linear-gradient(135deg, #fafaf5, #fff 50%, #f5f0e8);
-  padding: 12px 12px 40px;
+  padding: 10px 10px 36px;
   box-shadow: 3px 3px 6px rgba(0,0,0,.4), 6px 6px 16px rgba(0,0,0,.24),
               inset 0 0 0 1px rgba(0,0,0,.1);
   transform: rotate(var(--rot, 0deg));
-  transition: transform .3s, box-shadow .3s, z-index 0s;
+  transition: transform .3s, box-shadow .3s;
 }
-.gallery-item:nth-child(4n+1) { --rot: -1.8deg; }
-.gallery-item:nth-child(4n+2) { --rot:  1.2deg; }
-.gallery-item:nth-child(4n+3) { --rot: -.6deg; }
-.gallery-item:nth-child(4n+4) { --rot:  2deg; }
+
+/* rotação alternada por coluna */
+.gallery-phase:nth-child(1) .gallery-item:nth-child(odd)  { --rot: -1.6deg; }
+.gallery-phase:nth-child(1) .gallery-item:nth-child(even) { --rot:  1.2deg; }
+.gallery-phase:nth-child(2) .gallery-item:nth-child(odd)  { --rot:  .8deg; }
+.gallery-phase:nth-child(2) .gallery-item:nth-child(even) { --rot: -1.4deg; }
+.gallery-phase:nth-child(3) .gallery-item:nth-child(odd)  { --rot: -1deg; }
+.gallery-phase:nth-child(3) .gallery-item:nth-child(even) { --rot:  1.8deg; }
 
 .gallery-item:hover .photo-frame {
-  transform: rotate(0deg) scale(1.04) translateY(-6px);
-  box-shadow: 6px 10px 14px rgba(0,0,0,.55), 12px 18px 34px rgba(0,0,0,.3);
-  z-index: 10;
-}
-.photo-frame img { width: 100%; border: 1px solid rgba(0,0,0,.12); object-fit: cover; aspect-ratio: 4/3; }
-.photo-label {
-  text-align: center; padding-top: 10px; font-family: var(--font-serif);
-  font-size: .72rem; color: #555; font-style: italic;
+  transform: rotate(0deg) scale(1.03) translateY(-5px);
+  box-shadow: 6px 10px 16px rgba(0,0,0,.6), 10px 16px 32px rgba(0,0,0,.3);
+  z-index: 10; position: relative;
 }
 
+.photo-frame img {
+  width: 100%; border: 1px solid rgba(0,0,0,.12);
+  object-fit: cover; aspect-ratio: 4/3; display: block;
+}
+.photo-label {
+  text-align: center; padding-top: 8px; font-family: var(--font-serif);
+  font-size: .68rem; color: #555; font-style: italic;
+}
+
+/* percevejos */
 .pushpin {
   position: absolute; top: -10px; left: 50%; transform: translateX(-50%); z-index: 2;
   width: 18px; height: 18px; border-radius: 50%;
@@ -365,7 +419,7 @@ body {
   background: linear-gradient(180deg, #bbb, #777);
 }
 .pin-red    { background: radial-gradient(circle at 35% 35%, #ff7c7c, #cc2222 50%, #880000); }
-.pin-blue   { background: radial-gradient(circle at 35% 35%, #7c9fff, #2244cc 50%, #001888); }
+.pin-blue   { background: radial-gradient(circle at 35% 35%, #7cbfff, #2266cc 50%, #003488); }
 .pin-green  { background: radial-gradient(circle at 35% 35%, #7cff9f, #22cc44 50%, #008828); }
 .pin-yellow { background: radial-gradient(circle at 35% 35%, #ffe07c, #ccaa22 50%, #887700); }
 
@@ -746,6 +800,14 @@ body {
   .about-instruments   { flex-direction: row; flex-wrap: wrap; justify-content: center; }
   .timeline-scroll     { grid-template-columns: repeat(4,1fr); }
 }
+@media (max-width: 900px) {
+  .gallery-corkboard { grid-template-columns: 1fr; }
+  .gallery-phase     { border-right: none; border-bottom: 3px solid rgba(0,0,0,.35); }
+  .gallery-phase:last-child { border-bottom: none; }
+  .phase-label       { position: static; }
+  .phase-col         { display: grid; grid-template-columns: repeat(2,1fr); gap: 20px; padding: 20px; }
+}
+
 @media (max-width: 768px) {
   .navbar { padding: 0 20px; }
   .nav-menu {
