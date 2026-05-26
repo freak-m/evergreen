@@ -855,7 +855,9 @@ body {
   .navbar { padding: 0 16px; overflow: visible; max-width: 100vw; }
 
   /* oculta texto do logo — só exibe a imagem */
-  .logo-text-wrap { display: none; }
+  .logo-text-wrap { display: flex; }
+  .logo-name { font-size: .95rem; letter-spacing: 4px; }
+  .logo-sub  { font-size: .45rem; letter-spacing: 3px; }
   .nav-logo-img   { width: 48px; height: 48px; }
 
   /* burger visível */
