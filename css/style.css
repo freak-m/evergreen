@@ -210,11 +210,11 @@ body {
 .hero-video-bg iframe {
   position: absolute;
   top: 50%; left: 50%;
-  width: 556vw;
-  height: 312.5vw;
-  min-height: 556vh;
-  min-width: 989vh;
-  transform: translate(-50%, -50%) scale(0.18);
+  width: 360vw;
+  height: 202.5vw;
+  min-height: 360vh;
+  min-width: 640vh;
+  transform: translate(-50%, -50%) scale(0.28);
   transform-origin: center center;
   border: none; pointer-events: none;
 }
