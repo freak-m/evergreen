@@ -884,6 +884,8 @@ body {
   .contact-section    { padding: 70px 20px; }
   .partners-section   { padding: 70px 20px; }
   .gallery-section    { padding: 70px 20px; }
+  .portfolio-section  { padding: 36px 16px 40px; }
+  .portfolio-section .section-plaque { margin-bottom: 16px; }
 }
 @media (max-width: 520px) {
   .timeline-scroll { grid-template-columns: 1fr 1fr; }
