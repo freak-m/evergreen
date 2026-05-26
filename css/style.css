@@ -91,8 +91,11 @@ body {
   display: flex; align-items: center; gap: 10px;
   text-decoration: none;
 }
-.nav-logo-img { width: 48px; height: 48px; object-fit: contain; filter: drop-shadow(0 2px 4px rgba(0,0,0,.5)) brightness(1.1); }
-.logo-leaf   { font-size: 1.6rem; filter: drop-shadow(1px 1px 2px rgba(0,0,0,.8)); }
+.nav-logo-img { width: 44px; height: 44px; object-fit: contain; filter: drop-shadow(0 2px 4px rgba(0,0,0,.5)) brightness(1.1); flex-shrink: 0; }
+.logo-text-wrap { display: flex; flex-direction: column; line-height: 1.1; }
+.logo-main { font-family: var(--font-display); font-size: 1.1rem; letter-spacing: 3px; color: var(--gold-light); text-shadow: 1px 1px 2px rgba(0,0,0,.8); }
+.logo-sub  { font-size: .55rem; letter-spacing: 5px; text-transform: uppercase; color: var(--parch-dark); text-shadow: 1px 1px 2px rgba(0,0,0,.6); }
+.logo-leaf { font-size: 1.6rem; filter: drop-shadow(1px 1px 2px rgba(0,0,0,.8)); }
 .logo-text-wrap { display: flex; flex-direction: column; line-height: 1.1; }
 .logo-main {
   font-family: var(--font-display); font-size: 1.25rem; letter-spacing: 3px;
@@ -840,16 +843,18 @@ body {
 }
 
 @media (max-width: 768px) {
-  .navbar { padding: 0 20px; }
+  .navbar { padding: 0 16px; }
   .nav-menu {
-    position: fixed; top: 68px; left: 0; right: 0; flex-direction: column;
-    padding: 18px 20px; gap: 6px; z-index: 900;
+    display: none;
+    position: fixed; top: 68px; left: 0; right: 0;
+    flex-direction: column;
+    padding: 12px 16px 20px; gap: 6px; z-index: 900;
     background: linear-gradient(180deg, var(--wood-mid), var(--wood-dark));
     box-shadow: 0 8px 20px rgba(0,0,0,.6), inset 0 -2px 4px rgba(0,0,0,.5);
     border-bottom: 2px solid var(--wood-dark);
-    transform: translateY(-110%); transition: transform .3s ease;
   }
-  .nav-menu.open      { transform: translateY(0); }
+  .nav-menu.open      { display: flex; }
+  .nav-menu .nav-link { width: 100%; text-align: center; padding: 12px; font-size: .9rem; }
   .nav-burger         { display: flex; }
   .timeline-scroll    { grid-template-columns: repeat(2,1fr); }
   .timeline-track     { display: none; }

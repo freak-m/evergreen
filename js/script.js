@@ -9,7 +9,16 @@ const navMenu = document.querySelector('.nav-menu');
 burger?.addEventListener('click', () => {
   const open = navMenu.classList.toggle('open');
   burger.classList.toggle('open', open);
-  burger.setAttribute('aria-expanded', open);
+  burger.setAttribute('aria-expanded', String(open));
+});
+
+// fecha o menu ao clicar fora
+document.addEventListener('click', e => {
+  if (!e.target.closest('.navbar')) {
+    navMenu.classList.remove('open');
+    burger?.classList.remove('open');
+    burger?.setAttribute('aria-expanded', 'false');
+  }
 });
 
 document.querySelectorAll('.nav-link').forEach(link => {
