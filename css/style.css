@@ -219,11 +219,7 @@ body {
   border: none; pointer-events: none;
 }
 
-/* overlay escuro leve para legibilidade — vídeo bem visível */
-.hero-video-overlay {
-  position: absolute; inset: 0; z-index: 1; pointer-events: none;
-  background: rgba(0,0,0,.42);
-}
+.hero-video-overlay { display: none; }
 
 /* ── Conteúdo ── */
 .hero-content {
