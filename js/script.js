@@ -30,17 +30,6 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   });
 });
 
-// ── Swiper — Partners ───────────────────────────────────────────
-new Swiper('.partners-swiper', {
-  slidesPerView: 1,
-  spaceBetween: 28,
-  loop: true,
-  autoplay: { delay: 3200, disableOnInteraction: false },
-  pagination: { el: '.partners-swiper .swiper-pagination', clickable: true },
-  navigation: { prevEl: '.partners-swiper .swiper-button-prev', nextEl: '.partners-swiper .swiper-button-next' },
-  breakpoints: { 580: { slidesPerView: 2 }, 900: { slidesPerView: 3 } },
-});
-
 // ── Swiper — Portfolio ──────────────────────────────────────────
 new Swiper('.portfolio-swiper', {
   slidesPerView: 1,
