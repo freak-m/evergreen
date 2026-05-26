@@ -230,7 +230,7 @@ body {
 /* logo da empresa */
 .hero-logo-img {
   width: 140px; height: 140px; object-fit: contain; margin: 0 auto 18px;
-  filter: drop-shadow(0 4px 16px rgba(0,0,0,.6)) brightness(1.05);
+  filter: drop-shadow(0 0 8px rgba(0,0,0,1)) drop-shadow(0 0 24px rgba(0,0,0,1)) drop-shadow(0 0 48px rgba(0,0,0,.9)) brightness(1.05);
 }
 
 .hero-title {
@@ -238,7 +238,7 @@ body {
   font-size: clamp(2.2rem, 6vw, 4rem);
   background: linear-gradient(180deg, var(--gold-hi) 0%, var(--gold-light) 50%, var(--gold-mid) 100%);
   -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
-  filter: drop-shadow(1px 3px 6px rgba(0,0,0,.9));
+  filter: drop-shadow(0 0 8px rgba(0,0,0,1)) drop-shadow(0 0 24px rgba(0,0,0,1)) drop-shadow(0 0 48px rgba(0,0,0,.9));
 }
 .hero-subtitle {
   font-family: var(--font-display); letter-spacing: 8px; margin-bottom: 18px;
