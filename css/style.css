@@ -636,12 +636,13 @@ body {
    PORTFOLIO
    ================================================================ */
 .portfolio-section {
-  padding: 90px 40px;
+  padding: 50px 40px 60px;
   background:
     repeating-linear-gradient(90deg, transparent, transparent 60px, rgba(0,0,0,.02) 60px, rgba(0,0,0,.02) 61px),
     linear-gradient(180deg, var(--wood-dark), #3d2010 50%, var(--wood-dark));
   border-top: 4px solid var(--wood-high); border-bottom: 4px solid var(--wood-high);
 }
+.portfolio-section .section-plaque { margin-bottom: 28px; }
 .portfolio-card {
   border-radius: 4px; overflow: hidden;
   background: linear-gradient(145deg, #1a1a1a, #2a2a2a 50%, #1a1a1a);
