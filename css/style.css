@@ -566,7 +566,7 @@ body {
     linear-gradient(180deg, var(--wood-high), var(--wood-light) 25%, var(--wood-mid) 60%, var(--wood-dark));
   box-shadow: 0 10px 30px rgba(0,0,0,.6), inset 0 2px 4px rgba(255,255,255,.08), inset 0 -2px 4px rgba(0,0,0,.5);
 }
-.board-frame-inner { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap: 24px; }
+.board-frame-inner { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
 
 .index-card {
   padding: 22px; border-radius: 2px; position: relative;
@@ -886,6 +886,7 @@ body {
   .contact-section    { padding: 70px 20px; }
   .partners-section   { padding: 70px 20px; }
   .gallery-section    { padding: 70px 20px; }
+  .board-frame-inner  { grid-template-columns: 1fr; }
   .portfolio-section  { padding: 36px 16px 40px; }
   .portfolio-section .section-plaque { margin-bottom: 16px; }
 }
