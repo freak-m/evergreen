@@ -206,7 +206,7 @@ body {
 /* ── Imagem de fundo ── */
 .hero-img-bg {
   position: absolute; inset: 0; z-index: 0;
-  background: url('../img/hero-bg.jpg') center center / cover no-repeat;
+  background: url('../img/hero-bg.png') center center / cover no-repeat;
   filter: brightness(0.72);
 }
 
