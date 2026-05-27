@@ -203,23 +203,12 @@ body {
   overflow: hidden;
 }
 
-/* ── Vídeo fullscreen de fundo ── */
-.hero-video-bg {
-  position: absolute; inset: 0; z-index: 0; overflow: hidden;
+/* ── Imagem de fundo ── */
+.hero-img-bg {
+  position: absolute; inset: 0; z-index: 0;
+  background: url('../img/hero-bg.jpg') center center / cover no-repeat;
+  filter: brightness(0.72);
 }
-.hero-video-bg iframe {
-  position: absolute;
-  top: 50%; left: 50%;
-  width: 500vw;
-  height: 281.25vw;
-  min-height: 500vh;
-  min-width: 890vh;
-  transform: translate(-50%, -50%) scale(0.20);
-  transform-origin: center center;
-  border: none; pointer-events: none;
-}
-
-.hero-video-overlay { display: none; }
 
 /* ── Conteúdo ── */
 .hero-content {
