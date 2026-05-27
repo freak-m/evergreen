@@ -381,8 +381,8 @@ body {
               inset 0 1px 0 rgba(255,255,255,.14), inset 0 -1px 0 rgba(0,0,0,.3);
 }
 .partner-icon { font-size: 2.8rem; margin-bottom: 14px; filter: drop-shadow(1px 2px 3px rgba(0,0,0,.7)); }
-.partner-img-wrap { height: 120px; display: flex; align-items: center; justify-content: center; margin-bottom: 14px; }
-.partner-img-wrap img { max-height: 120px; max-width: 100%; object-fit: contain; filter: drop-shadow(1px 2px 4px rgba(0,0,0,.6)); }
+.partner-img-wrap { height: 150px; display: flex; align-items: center; justify-content: center; margin-bottom: 14px; }
+.partner-img-wrap img { max-height: 150px; max-width: 100%; object-fit: contain; filter: drop-shadow(1px 2px 4px rgba(0,0,0,.6)); }
 .partner-card h3 {
   font-family: var(--font-display); font-size: 1.05rem; letter-spacing: 3px;
   text-transform: uppercase; color: var(--gold-light); margin-bottom: 10px;
