@@ -317,7 +317,7 @@ body {
 .ba-card {
   position: relative; border-radius: 4px; overflow: hidden;
   box-shadow: 0 4px 16px rgba(0,0,0,.25), 0 8px 32px rgba(0,0,0,.15);
-  border: 3px solid #fff;
+  border: 3px solid #fff; cursor: pointer;
 }
 .ba-card img {
   width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block;
@@ -850,15 +850,29 @@ body {
    LIGHTBOX
    ================================================================ */
 .lightbox { position: fixed; inset: 0; z-index: 2000; display: none; align-items: center; justify-content: center; }
-.lightbox.active { display: flex; }
+.lightbox.active { display: flex; animation: lbFadeIn .25s ease forwards; }
 .lightbox-overlay { position: absolute; inset: 0; background: rgba(0,0,0,.92); backdrop-filter: blur(4px); }
-.lightbox-frame-wrap { position: relative; z-index: 1; }
+.lightbox-frame-wrap { position: relative; z-index: 1; overflow: hidden; }
 .lightbox-wood-frame {
   padding: 14px;
   background: linear-gradient(135deg, var(--wood-high), var(--wood-light) 25%, var(--wood-mid) 55%, var(--wood-dark) 80%, var(--wood-high));
   box-shadow: 0 0 0 2px var(--wood-dark), 0 20px 60px rgba(0,0,0,.9), inset 0 0 0 1px rgba(255,255,255,.08);
 }
-#lightbox-img { max-width: 84vw; max-height: 84vh; border: 1px solid rgba(0,0,0,.4); }
+#lightbox-img { max-width: 84vw; max-height: 84vh; border: 1px solid rgba(0,0,0,.4); display: block; cursor: grab; }
+
+/* lightbox animations */
+@keyframes lbFadeIn    { from { opacity: 0; }                                         to { opacity: 1; } }
+@keyframes lbOpen      { from { transform: scale(.35); opacity: 0; }                  to  { transform: scale(1); opacity: 1; } }
+@keyframes lbOutLeft   { from { transform: translateX(0); opacity: 1; }               to  { transform: translateX(-80px); opacity: 0; } }
+@keyframes lbOutRight  { from { transform: translateX(0); opacity: 1; }               to  { transform: translateX(80px); opacity: 0; } }
+@keyframes lbInRight   { from { transform: translateX(80px) scale(.96); opacity: 0; } to  { transform: none; opacity: 1; } }
+@keyframes lbInLeft    { from { transform: translateX(-80px) scale(.96); opacity: 0; } to { transform: none; opacity: 1; } }
+
+#lightbox-img.lb-opening   { animation: lbOpen     .38s cubic-bezier(.22,.68,0,1.15) forwards; }
+#lightbox-img.lb-out-left  { animation: lbOutLeft  .2s ease forwards; }
+#lightbox-img.lb-out-right { animation: lbOutRight .2s ease forwards; }
+#lightbox-img.lb-in-right  { animation: lbInRight  .28s cubic-bezier(.22,.68,0,1.1) forwards; }
+#lightbox-img.lb-in-left   { animation: lbInLeft   .28s cubic-bezier(.22,.68,0,1.1) forwards; }
 .lb-btn {
   position: absolute; background: linear-gradient(135deg, #4a4a4a, #2a2a2a);
   border: 1px solid #1a1a1a; color: var(--gold-light); cursor: pointer;
