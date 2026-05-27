@@ -411,8 +411,7 @@ body {
 .gallery-scroll-wrap::-webkit-scrollbar-thumb { background: var(--gold-dark); border-radius: 3px; }
 
 .gallery-corkboard {
-  min-width: 780px;
-  width: 100%;
+  width: max(100%, 1080px);
   display: grid; grid-template-columns: repeat(3, 1fr);
   gap: 0;
   background:
@@ -939,7 +938,8 @@ body {
   .timeline-scroll     { grid-template-columns: repeat(4,1fr); }
 }
 @media (max-width: 900px) {
-  .gallery-section    { padding: 60px 0; }
+  .gallery-section    { padding: 60px 0 60px; }
+  .gallery-section .section-plaque { padding: 0 20px; }
   .phase-label       { position: static; }
   .phase-col         { display: grid; grid-template-columns: repeat(2,1fr); gap: 20px; padding: 20px; }
 }
