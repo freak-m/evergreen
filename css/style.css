@@ -290,7 +290,8 @@ body {
   margin-top: -28px; margin-bottom: 40px;
   max-width: 700px; margin-left: auto; margin-right: auto;
 }
-.before-after-section .section-plaque h2 {
+.before-after-section .section-plaque h2,
+.about-section .section-plaque h2 {
   filter: drop-shadow(2px 2px 0 rgba(0,0,0,1));
 }
 
