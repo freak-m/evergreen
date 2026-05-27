@@ -44,6 +44,7 @@ new Swiper('.portfolio-swiper', {
   slidesPerView: 1,
   spaceBetween: 28,
   loop: true,
+  centeredSlides: true,
   pagination: { el: '.portfolio-swiper .swiper-pagination', clickable: true },
   navigation: { prevEl: '.portfolio-swiper .swiper-button-prev', nextEl: '.portfolio-swiper .swiper-button-next' },
   breakpoints: { 800: { slidesPerView: 1.18 }, 1100: { slidesPerView: 1.48 } },
