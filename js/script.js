@@ -105,5 +105,5 @@ const io = new IntersectionObserver((entries) => {
 }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
 
 document.querySelectorAll(
-  '.partner-card, .gallery-item, .timeline-card, .index-card, .portfolio-card, .gauge-body, .contact-item'
+  '.gallery-item, .timeline-card, .index-card, .portfolio-card, .gauge-body, .contact-item'
 ).forEach(el => { el.classList.add('anim-target'); io.observe(el); });
