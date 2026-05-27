@@ -934,7 +934,7 @@ body {
   .gallery-section    { padding: 70px 20px; }
   .board-frame-inner  { grid-template-columns: 1fr; }
   .before-after-section { padding: 60px 20px; }
-  .ba-pair { grid-template-columns: 1fr; }
+  .ba-pair { grid-template-columns: 1fr 1fr; }
   .portfolio-section  { padding: 36px 16px 40px; }
   .portfolio-section .section-plaque { margin-bottom: 16px; }
 }
