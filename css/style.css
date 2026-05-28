@@ -489,6 +489,17 @@ body {
 
 /* item de foto */
 .gallery-item { position: relative; cursor: zoom-in; }
+.gallery-item--empty { cursor: default; pointer-events: none; }
+.photo-frame--empty {
+  background: repeating-linear-gradient(
+    -45deg,
+    rgba(0,0,0,.04) 0, rgba(0,0,0,.04) 2px,
+    transparent 2px, transparent 10px
+  ), linear-gradient(135deg, #f0ece4, #e8e2d6);
+  aspect-ratio: 4/3;
+  box-shadow: inset 2px 2px 8px rgba(0,0,0,.15), 2px 2px 5px rgba(0,0,0,.2);
+  border: 1px dashed rgba(0,0,0,.18);
+}
 
 .photo-frame {
   background: linear-gradient(135deg, #fafaf5, #fff 50%, #f5f0e8);
