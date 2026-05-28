@@ -837,9 +837,9 @@ body {
   overflow: visible;
 }
 .cover-mockup-img {
-  max-height: 480px; width: auto;
+  max-height: 240px; width: auto;
   filter: drop-shadow(0 8px 20px rgba(0,0,0,.6));
-  margin-top: -340px;
+  margin-top: -170px;
   display: block;
 }
 .cover-title-row {
