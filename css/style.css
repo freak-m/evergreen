@@ -818,6 +818,7 @@ body {
     linear-gradient(180deg, var(--leather-light), var(--leather-mid) 45%, var(--leather-dark));
   border-bottom: 3px solid var(--wood-dark);
   position: relative;
+  overflow: visible;
 }
 .cover-rivets { display: flex; justify-content: space-between; }
 .rivet {
@@ -831,10 +832,13 @@ body {
 }
 .cover-photo-col {
   flex: 0 0 auto; display: flex; align-items: flex-end;
+  overflow: visible;
 }
 .cover-mockup-img {
   max-height: 480px; width: auto;
   filter: drop-shadow(0 8px 20px rgba(0,0,0,.6));
+  margin-top: -280px;
+  display: block;
 }
 .cover-title-row {
   flex: 1;
