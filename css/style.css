@@ -424,6 +424,37 @@ body {
 .gallery-section {
   padding: 90px 40px;
   background: linear-gradient(180deg, var(--green-dark), #0f2a1a);
+  position: relative;
+}
+
+/* dica de deslize — só mobile */
+.gallery-swipe-hint {
+  display: none;
+}
+@media (max-width: 768px) {
+  .gallery-swipe-hint {
+    display: flex; align-items: center; gap: 6px;
+    position: absolute; bottom: 18px; right: 18px; z-index: 20;
+    background: rgba(0,0,0,.55); backdrop-filter: blur(4px);
+    color: var(--gold-light); font-size: 0.72rem; font-family: var(--font-serif);
+    font-style: italic; letter-spacing: 0.5px;
+    padding: 6px 12px; border-radius: 20px;
+    border: 1px solid rgba(200,160,60,.35);
+    animation: swipeHintSlide 2s ease-in-out infinite;
+    pointer-events: none;
+  }
+  .swipe-hint-icon {
+    display: inline-block;
+    animation: swipeHintArrow 2s ease-in-out infinite;
+  }
+}
+@keyframes swipeHintSlide {
+  0%, 100% { opacity: .9; transform: translateX(0); }
+  50%       { opacity: 1;  transform: translateX(-5px); }
+}
+@keyframes swipeHintArrow {
+  0%, 100% { transform: translateX(0); }
+  50%       { transform: translateX(-4px); }
 }
 
 /* painel de cortiça */
