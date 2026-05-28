@@ -12,7 +12,6 @@ burger?.addEventListener('click', () => {
   burger.setAttribute('aria-expanded', String(open));
 });
 
-// fecha o menu ao clicar fora
 document.addEventListener('click', e => {
   if (!e.target.closest('.navbar')) {
     navMenu.classList.remove('open');
@@ -52,7 +51,7 @@ new Swiper('.portfolio-swiper', {
   breakpoints: { 800: { slidesPerView: 1.18 }, 1100: { slidesPerView: 1.48 } },
 });
 
-// ── Lightbox (gallery + before/after) ──────────────────────────
+// ── Lightbox ────────────────────────────────────────────────────
 const lightbox  = document.getElementById('lightbox');
 const lbImg     = document.getElementById('lightbox-img');
 const lbOverlay = document.getElementById('lightbox-overlay');
@@ -98,42 +97,45 @@ function navigateLb(dir) {
   });
 }
 
-// hook gallery items — navegação linha × coluna (pula células vazias)
-const galleryPhases   = [...document.querySelectorAll('.gallery-phase')];
-const galleryRowCount = Math.max(...galleryPhases.map(p => p.querySelectorAll('.gallery-item').length));
+// Gallery — event delegation, builds image list on demand so it works with dynamic content
+document.querySelector('.gallery-corkboard')?.addEventListener('click', e => {
+  const item = e.target.closest('.gallery-item:not(.gallery-item--empty)');
+  if (!item) return;
 
-const orderedGalleryImages = [];
-const galleryItemIndexMap  = new Map();
+  const phases   = [...document.querySelectorAll('.gallery-phase')];
+  const rowCount = Math.max(0, ...phases.map(p => p.querySelectorAll('.gallery-item').length));
+  const ordered  = [];
+  const itemIdx  = new Map();
 
-for (let row = 0; row < galleryRowCount; row++) {
-  for (const phase of galleryPhases) {
-    const item = phase.querySelectorAll('.gallery-item')[row];
-    if (!item || item.classList.contains('gallery-item--empty')) continue;
-    const img = item.querySelector('img');
-    if (!img) continue;
-    galleryItemIndexMap.set(item, orderedGalleryImages.length);
-    orderedGalleryImages.push({ src: img.src, alt: img.alt || '' });
+  for (let row = 0; row < rowCount; row++) {
+    for (const phase of phases) {
+      const it  = phase.querySelectorAll('.gallery-item')[row];
+      if (!it || it.classList.contains('gallery-item--empty')) continue;
+      const img = it.querySelector('img');
+      if (!img) continue;
+      itemIdx.set(it, ordered.length);
+      ordered.push({ src: img.src, alt: img.alt || '' });
+    }
   }
-}
 
-galleryPhases.forEach(phase =>
-  phase.querySelectorAll('.gallery-item:not(.gallery-item--empty)').forEach(item =>
-    item.addEventListener('click', () => {
-      const idx = galleryItemIndexMap.get(item);
-      if (idx !== undefined) openLb(orderedGalleryImages, idx);
-    })
-  )
-);
-
-// hook before/after cards
-const baCards  = [...document.querySelectorAll('.ba-card')];
-const baImages = baCards.map(el => {
-  const img = el.querySelector('img');
-  return { src: img?.src, alt: img?.alt || '' };
+  const idx = itemIdx.get(item);
+  if (idx !== undefined) openLb(ordered, idx);
 });
-baCards.forEach((el, i) => el.addEventListener('click', () => openLb(baImages, i)));
 
-// controls
+// Before/after — event delegation, reads current src on demand (content.js may have updated them)
+document.querySelector('.ba-grid')?.addEventListener('click', e => {
+  const card = e.target.closest('.ba-card');
+  if (!card) return;
+  const baCards  = [...document.querySelectorAll('.ba-card')];
+  const baImages = baCards.map(el => {
+    const img = el.querySelector('img');
+    return { src: img?.src || '', alt: img?.alt || '' };
+  });
+  const i = baCards.indexOf(card);
+  if (i !== -1) openLb(baImages, i);
+});
+
+// Controls
 lbOverlay?.addEventListener('click', closeLb);
 lbClose?.addEventListener('click', closeLb);
 lbPrev?.addEventListener('click', () => navigateLb(-1));
@@ -145,7 +147,7 @@ document.addEventListener('keydown', e => {
   if (e.key === 'ArrowRight') navigateLb(1);
 });
 
-// touch swipe
+// Touch swipe
 let lbTouchX = 0;
 lightbox.addEventListener('touchstart', e => { lbTouchX = e.touches[0].clientX; }, { passive: true });
 lightbox.addEventListener('touchend',   e => {
@@ -153,7 +155,7 @@ lightbox.addEventListener('touchend',   e => {
   if (Math.abs(dx) > 48) navigateLb(dx < 0 ? 1 : -1);
 });
 
-// mouse drag
+// Mouse drag
 let lbDragX = 0, lbDragging = false;
 const lbImg2 = document.getElementById('lightbox-img');
 lbImg2.addEventListener('mousedown', e => {
@@ -180,6 +182,15 @@ const io = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
 
-document.querySelectorAll(
-  '.gallery-item, .timeline-card, .index-card, .portfolio-card, .gauge-body, .contact-item'
-).forEach(el => { el.classList.add('anim-target'); io.observe(el); });
+// Called once on load and again by content.js after rendering dynamic gallery items
+function observeAnimTargets() {
+  document.querySelectorAll(
+    '.gallery-item, .timeline-card, .index-card, .portfolio-card, .gauge-body, .contact-item'
+  ).forEach(el => {
+    if (el.classList.contains('anim-target')) return;
+    el.classList.add('anim-target');
+    io.observe(el);
+  });
+}
+observeAnimTargets();
+window.observeAnimTargets = observeAnimTargets;

@@ -213,7 +213,7 @@
   <nav class="navbar" role="navigation" aria-label="Menu principal">
     <div class="nav-container">
       <a href="#inicio" class="nav-logo">
-        <img src="img/logo.png" alt="Evergreen Gramaverde" class="nav-logo-img">
+        <img src="img/logo.png" alt="Evergreen Gramaverde" class="nav-logo-img" data-photo="logo">
         <div class="logo-text-wrap">
           <span class="logo-main">EVERGREEN</span>
           <span class="logo-sub">HIDROSSEMEADURA</span>
@@ -237,13 +237,14 @@
   <section class="hero" id="inicio">
 
     <!-- Fundo -->
-    <div class="hero-img-bg"></div>
+    <div class="hero-img-bg" data-photo-bg="hero-bg"></div>
 
     <div class="hero-content">
       <img
         src="img/logo.png"
         alt="Evergreen Gramaverde"
-        class="hero-logo-img">
+        class="hero-logo-img"
+        data-photo="logo">
       <h1 class="hero-title">EVERGREEN<span class="sr-only"> – Hidrossemeadura e Plantio de Grama em Campinas SP</span></h1>
       <p class="hero-subtitle">HIDROSSEMEADURA</p>
       <p class="hero-tagline">Convertendo Desafios Ambientais em Valor Sustentável</p>
@@ -291,33 +292,33 @@
 
       <div class="ba-pair">
         <div class="ba-card">
-          <img src="img/before-hydroseed.webp" alt="Antes da hidrossemeadura — solo exposto" loading="lazy">
+          <img src="img/before-hydroseed.webp" alt="Antes da hidrossemeadura — solo exposto" loading="lazy" data-photo="ba1-before">
           <div class="ba-label ba-label--before">ANTES</div>
         </div>
         <div class="ba-card">
-          <img src="img/after-hydroseed.webp" alt="Depois da hidrossemeadura — tapete verde" loading="lazy">
+          <img src="img/after-hydroseed.webp" alt="Depois da hidrossemeadura — tapete verde" loading="lazy" data-photo="ba1-after">
           <div class="ba-label ba-label--after">DEPOIS</div>
         </div>
       </div>
 
       <div class="ba-pair">
         <div class="ba-card">
-          <img src="img/before-hydroseed-2.webp" alt="Antes — área recém hidrossemeada" loading="lazy">
+          <img src="img/before-hydroseed-2.webp" alt="Antes — área recém hidrossemeada" loading="lazy" data-photo="ba2-before">
           <div class="ba-label ba-label--before">ANTES</div>
         </div>
         <div class="ba-card">
-          <img src="img/after-hydroseed-2.webp" alt="Depois — gramado estabelecido" loading="lazy">
+          <img src="img/after-hydroseed-2.webp" alt="Depois — gramado estabelecido" loading="lazy" data-photo="ba2-after">
           <div class="ba-label ba-label--after">DEPOIS</div>
         </div>
       </div>
 
       <div class="ba-pair">
         <div class="ba-card">
-          <img src="img/before-hydroseed-3.webp" alt="Antes — talude exposto" loading="lazy">
+          <img src="img/before-hydroseed-3.webp" alt="Antes — talude exposto" loading="lazy" data-photo="ba3-before">
           <div class="ba-label ba-label--before">ANTES</div>
         </div>
         <div class="ba-card">
-          <img src="img/after-hydroseed-3.webp" alt="Depois — controle de erosão com raízes profundas" loading="lazy">
+          <img src="img/after-hydroseed-3.webp" alt="Depois — controle de erosão com raízes profundas" loading="lazy" data-photo="ba3-after">
           <div class="ba-label ba-label--after">DEPOIS</div>
         </div>
       </div>
@@ -337,62 +338,62 @@
         <div class="partners-ticker">
 
           <div class="partner-card">
-            <div class="partner-img-wrap"><img src="img/fertilizantes.png" alt="Corretivo de Solo" loading="lazy"></div>
+            <div class="partner-img-wrap"><img src="img/fertilizantes.png" alt="Corretivo de Solo" loading="lazy" data-photo="insumo-fertilizantes"></div>
             <h3>Corretivo de Solo</h3>
             <p>Solotrat equilibra o pH e condiciona o solo para a germinação rápida e uniforme</p>
           </div>
 
           <div class="partner-card">
-            <div class="partner-img-wrap"><img src="img/sementes.png" alt="Sementes" loading="lazy"></div>
+            <div class="partner-img-wrap"><img src="img/sementes.png" alt="Sementes" loading="lazy" data-photo="insumo-sementes"></div>
             <h3>Sementes</h3>
             <p>Variedades certificadas de grama líquida para cada tipo de solo e bioma</p>
           </div>
 
           <div class="partner-card">
-            <div class="partner-img-wrap"><img src="img/mulches.png" alt="Mulch de Fibra" loading="lazy"></div>
+            <div class="partner-img-wrap"><img src="img/mulches.png" alt="Mulch de Fibra" loading="lazy" data-photo="insumo-mulches"></div>
             <h3>Mulch de Fibra</h3>
             <p>Fibra de madeira + adubo orgânico que retém umidade e protege a biomembrana</p>
           </div>
 
           <div class="partner-card">
-            <div class="partner-img-wrap"><img src="img/fixadores.png" alt="Fixador" loading="lazy"></div>
+            <div class="partner-img-wrap"><img src="img/fixadores.png" alt="Fixador" loading="lazy" data-photo="insumo-fixadores"></div>
             <h3>Fixador</h3>
             <p>Liga os componentes ao solo com resistência ao escoamento por chuvas e ventos</p>
           </div>
 
           <div class="partner-card">
-            <div class="partner-img-wrap"><img src="img/fibra-de-madeira.png" alt="Adubo Orgânico" loading="lazy"></div>
+            <div class="partner-img-wrap"><img src="img/fibra-de-madeira.png" alt="Adubo Orgânico" loading="lazy" data-photo="insumo-fibra"></div>
             <h3>Adubo Orgânico</h3>
             <p>Nutrição natural de liberação lenta que sustenta o crescimento por semanas</p>
           </div>
 
           <!-- duplicatas para loop seamless -->
           <div class="partner-card" aria-hidden="true">
-            <div class="partner-img-wrap"><img src="img/fertilizantes.png" alt="" loading="lazy"></div>
+            <div class="partner-img-wrap"><img src="img/fertilizantes.png" alt="" loading="lazy" data-photo="insumo-fertilizantes"></div>
             <h3>Corretivo de Solo</h3>
             <p>Solotrat equilibra o pH e condiciona o solo para a germinação rápida e uniforme</p>
           </div>
 
           <div class="partner-card" aria-hidden="true">
-            <div class="partner-img-wrap"><img src="img/sementes.png" alt="" loading="lazy"></div>
+            <div class="partner-img-wrap"><img src="img/sementes.png" alt="" loading="lazy" data-photo="insumo-sementes"></div>
             <h3>Sementes</h3>
             <p>Variedades certificadas de grama líquida para cada tipo de solo e bioma</p>
           </div>
 
           <div class="partner-card" aria-hidden="true">
-            <div class="partner-img-wrap"><img src="img/mulches.png" alt="" loading="lazy"></div>
+            <div class="partner-img-wrap"><img src="img/mulches.png" alt="" loading="lazy" data-photo="insumo-mulches"></div>
             <h3>Mulch de Fibra</h3>
             <p>Fibra de madeira + adubo orgânico que retém umidade e protege a biomembrana</p>
           </div>
 
           <div class="partner-card" aria-hidden="true">
-            <div class="partner-img-wrap"><img src="img/fixadores.png" alt="" loading="lazy"></div>
+            <div class="partner-img-wrap"><img src="img/fixadores.png" alt="" loading="lazy" data-photo="insumo-fixadores"></div>
             <h3>Fixador</h3>
             <p>Liga os componentes ao solo com resistência ao escoamento por chuvas e ventos</p>
           </div>
 
           <div class="partner-card" aria-hidden="true">
-            <div class="partner-img-wrap"><img src="img/fibra-de-madeira.png" alt="" loading="lazy"></div>
+            <div class="partner-img-wrap"><img src="img/fibra-de-madeira.png" alt="" loading="lazy" data-photo="insumo-fibra"></div>
             <h3>Adubo Orgânico</h3>
             <p>Nutrição natural de liberação lenta que sustenta o crescimento por semanas</p>
           </div>
@@ -421,57 +422,7 @@
           <span class="phase-num">01</span>
           <span class="phase-title">Antes</span>
         </div>
-        <div class="phase-col">
-
-          <div class="gallery-item">
-            <div class="pushpin pin-yellow"></div>
-            <div class="photo-frame">
-              <img src="img/galeria-antes1.jpg" alt="Antes — Projeto 1" loading="lazy">
-              <div class="photo-label">Área a Recuperar</div>
-            </div>
-          </div>
-
-          <div class="gallery-item">
-            <div class="pushpin pin-yellow"></div>
-            <div class="photo-frame">
-              <img src="img/galeria-antes2.jpg" alt="Antes — Projeto 2" loading="lazy">
-              <div class="photo-label">Solo Exposto</div>
-            </div>
-          </div>
-
-          <div class="gallery-item">
-            <div class="pushpin pin-yellow"></div>
-            <div class="photo-frame">
-              <img src="img/galeria-antes3.jpg" alt="Antes — Projeto 3" loading="lazy">
-              <div class="photo-label">Área a Recuperar</div>
-            </div>
-          </div>
-
-          <div class="gallery-item">
-            <div class="pushpin pin-yellow"></div>
-            <div class="photo-frame">
-              <img src="img/galeria-antes4.jpg" alt="Antes — Projeto 4" loading="lazy">
-              <div class="photo-label">Talude Exposto</div>
-            </div>
-          </div>
-
-          <div class="gallery-item">
-            <div class="pushpin pin-yellow"></div>
-            <div class="photo-frame">
-              <img src="img/galeria-antes5.jpg" alt="Antes — Projeto 5" loading="lazy">
-              <div class="photo-label">Erosão Ativa</div>
-            </div>
-          </div>
-
-          <div class="gallery-item">
-            <div class="pushpin pin-yellow"></div>
-            <div class="photo-frame">
-              <img src="img/galeria-antes6.jpg" alt="Antes — Projeto 6" loading="lazy">
-              <div class="photo-label">Talude Degradado</div>
-            </div>
-          </div>
-
-        </div>
+        <div class="phase-col" data-gallery-phase="antes"></div>
       </div>
 
 
@@ -481,57 +432,7 @@
           <span class="phase-num">02</span>
           <span class="phase-title">Aplicação</span>
         </div>
-        <div class="phase-col">
-
-          <div class="gallery-item">
-            <div class="pushpin pin-blue"></div>
-            <div class="photo-frame">
-              <img src="img/galeria-durante1.jpg" alt="Aplicação — Projeto 1" loading="lazy">
-              <div class="photo-label">Hidrossemeadura em Curso</div>
-            </div>
-          </div>
-
-          <div class="gallery-item">
-            <div class="pushpin pin-blue"></div>
-            <div class="photo-frame">
-              <img src="img/galeria-durante2.jpg" alt="Aplicação — Projeto 2" loading="lazy">
-              <div class="photo-label">Biomembrana Aplicada</div>
-            </div>
-          </div>
-
-          <div class="gallery-item">
-            <div class="pushpin pin-blue"></div>
-            <div class="photo-frame">
-              <img src="img/galeria-durante3.jpg" alt="Aplicação — Projeto 3" loading="lazy">
-              <div class="photo-label">Biomembrana Aplicada</div>
-            </div>
-          </div>
-
-          <div class="gallery-item">
-            <div class="pushpin pin-blue"></div>
-            <div class="photo-frame">
-              <img src="img/galeria-durante4.jpg" alt="Aplicação — Projeto 4" loading="lazy">
-              <div class="photo-label">Cobertura Verde Aplicada</div>
-            </div>
-          </div>
-
-          <div class="gallery-item">
-            <div class="pushpin pin-blue"></div>
-            <div class="photo-frame">
-              <img src="img/galeria-durante5.jpg" alt="Aplicação — Projeto 5" loading="lazy">
-              <div class="photo-label">Hidrossemeadura em Curso</div>
-            </div>
-          </div>
-
-          <div class="gallery-item">
-            <div class="pushpin pin-blue"></div>
-            <div class="photo-frame">
-              <img src="img/galeria-durante6.jpg" alt="Aplicação — Projeto 6" loading="lazy">
-              <div class="photo-label">Aplicação no Talude</div>
-            </div>
-          </div>
-
-        </div>
+        <div class="phase-col" data-gallery-phase="aplicacao"></div>
       </div>
 
 
@@ -541,57 +442,7 @@
           <span class="phase-num">03</span>
           <span class="phase-title">Resultado</span>
         </div>
-        <div class="phase-col">
-
-          <div class="gallery-item">
-            <div class="pushpin pin-green"></div>
-            <div class="photo-frame">
-              <img src="img/galeria-depois1.jpg" alt="Resultado — Projeto 1" loading="lazy">
-              <div class="photo-label">Tapete Verde Formado</div>
-            </div>
-          </div>
-
-          <div class="gallery-item">
-            <div class="pushpin pin-green"></div>
-            <div class="photo-frame">
-              <img src="img/galeria-depois2.jpg" alt="Resultado — Projeto 2" loading="lazy">
-              <div class="photo-label">Revegetação Completa</div>
-            </div>
-          </div>
-
-          <div class="gallery-item">
-            <div class="pushpin pin-green"></div>
-            <div class="photo-frame">
-              <img src="img/galeria-depois3.jpg" alt="Resultado — Projeto 3" loading="lazy">
-              <div class="photo-label">Cobertura Estabelecida</div>
-            </div>
-          </div>
-
-          <div class="gallery-item">
-            <div class="pushpin pin-green"></div>
-            <div class="photo-frame">
-              <img src="img/galeria-depois4.jpg" alt="Resultado — Projeto 4" loading="lazy">
-              <div class="photo-label">Tapete Verde Formado</div>
-            </div>
-          </div>
-
-          <div class="gallery-item">
-            <div class="pushpin pin-green"></div>
-            <div class="photo-frame">
-              <img src="img/galeria-depois5.jpg" alt="Resultado — Projeto 5" loading="lazy">
-              <div class="photo-label">Área Recuperada</div>
-            </div>
-          </div>
-
-          <div class="gallery-item">
-            <div class="pushpin pin-green"></div>
-            <div class="photo-frame">
-              <img src="img/galeria-depois6.jpg" alt="Resultado — Projeto 6" loading="lazy">
-              <div class="photo-label">Verde Estabelecido</div>
-            </div>
-          </div>
-
-        </div>
+        <div class="phase-col" data-gallery-phase="resultado"></div>
       </div>
 
     </div><!-- /gallery-corkboard -->
@@ -692,7 +543,7 @@
 
         <div class="index-card index-card--img">
           <div class="card-number">01</div>
-          <img src="img/fases-aplicacao.png" alt="Aplicação de Hidrossemeadura" loading="lazy" class="card-photo">
+          <img src="img/fases-aplicacao.png" alt="Aplicação de Hidrossemeadura" loading="lazy" class="card-photo" data-photo="process-1">
           <div class="card-body">
             <h3>Formação da Capa Protetora</h3>
             <p>Quando o líquido é projetado no solo, a água evapora e os agentes colantes criam uma crosta porosa que protege as sementes contra erosão, chuvas e ventos.</p>
@@ -701,7 +552,7 @@
 
         <div class="index-card index-card--img">
           <div class="card-number">02</div>
-          <img src="img/fases-aplicado.png" alt="Retenção de Umidade" loading="lazy" class="card-photo">
+          <img src="img/fases-aplicado.png" alt="Retenção de Umidade" loading="lazy" class="card-photo" data-photo="process-2">
           <div class="card-body">
             <h3>Retenção de Umidade</h3>
             <p>As fibras orgânicas e aditivos funcionam como uma esponja, absorvendo e liberando gradualmente a água, criando o microclima ideal para despertar o embrião da semente.</p>
@@ -710,7 +561,7 @@
 
         <div class="index-card index-card--img">
           <div class="card-number">03</div>
-          <img src="img/solo-fases.png" alt="Camadas do Solo" loading="lazy" class="card-photo">
+          <img src="img/solo-fases.png" alt="Camadas do Solo" loading="lazy" class="card-photo" data-photo="process-3">
           <div class="card-body">
             <h3>Nutrição e Fixação Radicular</h3>
             <p>Os fertilizantes de liberação lenta fornecem nutrição contínua enquanto as raízes se fixam nas camadas do solo, garantindo cobertura permanente e controle de erosão.</p>
@@ -719,7 +570,7 @@
 
         <div class="index-card index-card--img">
           <div class="card-number">04</div>
-          <img src="img/nao-pise.png" alt="Tapete Fechado" loading="lazy" class="card-photo">
+          <img src="img/nao-pise.png" alt="Tapete Fechado" loading="lazy" class="card-photo" data-photo="process-4">
           <div class="card-body">
             <h3>Tapete Fechado</h3>
             <p>Em 30 dias a cobertura vegetal está consolidada. O solo protegido, as raízes fixadas e o tapete verde formado — sinal de que a hidrossemeadura cumpriu seu papel.</p>
@@ -742,7 +593,7 @@
         <div class="swiper-slide">
           <div class="portfolio-card">
             <div class="portfolio-frame">
-              <img src="img/portfolio-taludes.png" alt="Hidrossemeadura de Taludes" loading="lazy">
+              <img src="img/portfolio-taludes.png" alt="Hidrossemeadura de Taludes" loading="lazy" data-photo="portfolio-taludes">
               <div class="portfolio-frame-border"></div>
             </div>
             <div class="portfolio-placard">
@@ -761,7 +612,7 @@
         <div class="swiper-slide">
           <div class="portfolio-card">
             <div class="portfolio-frame">
-              <img src="img/portfolio-industrial.png" alt="Restauração Industrial" loading="lazy">
+              <img src="img/portfolio-industrial.png" alt="Restauração Industrial" loading="lazy" data-photo="portfolio-industrial">
               <div class="portfolio-frame-border"></div>
             </div>
             <div class="portfolio-placard">
@@ -780,7 +631,7 @@
         <div class="swiper-slide">
           <div class="portfolio-card">
             <div class="portfolio-frame">
-              <img src="img/portfolio-urbanas.png" alt="Revegetação Urbana" loading="lazy">
+              <img src="img/portfolio-urbanas.png" alt="Revegetação Urbana" loading="lazy" data-photo="portfolio-urbanas">
               <div class="portfolio-frame-border"></div>
             </div>
             <div class="portfolio-placard">
@@ -799,7 +650,7 @@
         <div class="swiper-slide">
           <div class="portfolio-card">
             <div class="portfolio-frame">
-              <img src="img/portfolio-erosao.png" alt="Controle de Erosão" loading="lazy">
+              <img src="img/portfolio-erosao.png" alt="Controle de Erosão" loading="lazy" data-photo="portfolio-erosao">
               <div class="portfolio-frame-border"></div>
             </div>
             <div class="portfolio-placard">
@@ -834,7 +685,7 @@
           </div>
           <div class="cover-cols">
             <div class="cover-photo-col">
-              <img src="img/mockup-phone.png" alt="Evergreen no celular" class="cover-mockup-img">
+              <img src="img/mockup-phone.png" alt="Evergreen no celular" class="cover-mockup-img" data-photo="contact-mockup">
             </div>
             <div class="cover-title-row">
               <h2>Entre em Contato</h2>
@@ -888,7 +739,7 @@
     <div class="footer-plank">
       <div class="footer-inner">
         <div class="footer-brand">
-          <img src="img/logo.png" alt="Evergreen" class="footer-logo-img">
+          <img src="img/logo.png" alt="Evergreen" class="footer-logo-img" data-photo="logo">
           <div>
             <p class="footer-name">EVERGREEN</p>
             <p class="footer-tagline-sm">HIDROSSEMEADURA</p>

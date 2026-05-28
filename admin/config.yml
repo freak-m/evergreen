@@ -12,6 +12,7 @@ collections:
     label: "Configurações do Site"
     files:
 
+      # ── SEO, Textos e Contato ──────────────────────────────────
       - label: "SEO, Textos e Contato"
         name: "site"
         file: "_data/site.json"
@@ -98,3 +99,115 @@ collections:
                 name: "hours_weekday"
                 widget: "string"
                 hint: 'Ex: "Seg–Sex: 8h às 18h"'
+
+      # ── Fotos do Site ──────────────────────────────────────────
+      - label: "Fotos do Site"
+        name: "photos"
+        file: "_data/photos.json"
+        format: json
+        fields:
+
+          - label: "Identidade Visual"
+            name: "identity"
+            widget: "object"
+            summary: "Logo, fundo do topo e mockup de celular"
+            fields:
+              - label: "Logo"
+                name: "logo"
+                widget: "image"
+                hint: "Usado na barra de navegação, no topo e no rodapé"
+              - label: "Imagem de Fundo (Topo da Página)"
+                name: "hero_bg"
+                widget: "image"
+                required: false
+                hint: "Foto de fundo da seção principal. Deixe vazio para usar a imagem padrão do CSS."
+              - label: "Foto do Celular (Seção de Contato)"
+                name: "contact_mockup"
+                widget: "image"
+
+          - label: "Antes & Depois — Par 1"
+            name: "ba1"
+            widget: "object"
+            fields:
+              - { label: "Antes", name: "before", widget: "image" }
+              - { label: "Depois", name: "after",  widget: "image" }
+
+          - label: "Antes & Depois — Par 2"
+            name: "ba2"
+            widget: "object"
+            fields:
+              - { label: "Antes", name: "before", widget: "image" }
+              - { label: "Depois", name: "after",  widget: "image" }
+
+          - label: "Antes & Depois — Par 3"
+            name: "ba3"
+            widget: "object"
+            fields:
+              - { label: "Antes", name: "before", widget: "image" }
+              - { label: "Depois", name: "after",  widget: "image" }
+
+          - label: "Portfólio (cards deslizantes)"
+            name: "portfolio"
+            widget: "object"
+            summary: "4 imagens dos cards de aplicações"
+            fields:
+              - { label: "Taludes",    name: "taludes",    widget: "image" }
+              - { label: "Industrial", name: "industrial", widget: "image" }
+              - { label: "Urbanas",    name: "urbanas",    widget: "image" }
+              - { label: "Erosão",     name: "erosao",     widget: "image" }
+
+          - label: "Processo de Germinação (4 etapas)"
+            name: "process"
+            widget: "object"
+            fields:
+              - { label: "Etapa 1 – Formação da Capa Protetora",   name: "step1", widget: "image" }
+              - { label: "Etapa 2 – Retenção de Umidade",          name: "step2", widget: "image" }
+              - { label: "Etapa 3 – Nutrição e Fixação Radicular", name: "step3", widget: "image" }
+              - { label: "Etapa 4 – Tapete Fechado",               name: "step4", widget: "image" }
+
+          - label: "Insumos (carrossel)"
+            name: "insumos"
+            widget: "object"
+            fields:
+              - { label: "Corretivo de Solo", name: "fertilizantes", widget: "image" }
+              - { label: "Sementes",          name: "sementes",      widget: "image" }
+              - { label: "Mulch de Fibra",    name: "mulches",       widget: "image" }
+              - { label: "Fixador",           name: "fixadores",     widget: "image" }
+              - { label: "Adubo Orgânico",    name: "fibra",         widget: "image" }
+
+      # ── Álbum — Galeria de Fotos ───────────────────────────────
+      - label: "Álbum – Galeria de Fotos"
+        name: "gallery"
+        file: "_data/gallery.json"
+        format: json
+        fields:
+
+          - label: "Fase 1 – Antes"
+            name: "antes"
+            widget: "list"
+            label_singular: "foto"
+            summary: "{{fields.label}}"
+            hint: "Adicione, remova ou reordene as fotos arrastando."
+            fields:
+              - { label: "Foto",    name: "image", widget: "image" }
+              - { label: "Legenda", name: "label", widget: "string", hint: 'Ex: "Talude Exposto"' }
+
+          - label: "Fase 2 – Aplicação"
+            name: "aplicacao"
+            widget: "list"
+            label_singular: "foto"
+            summary: "{{fields.label}}"
+            hint: "Adicione, remova ou reordene as fotos arrastando."
+            fields:
+              - { label: "Foto",    name: "image", widget: "image" }
+              - { label: "Legenda", name: "label", widget: "string", hint: 'Ex: "Hidrossemeadura em Curso"' }
+
+          - label: "Fase 3 – Resultado"
+            name: "resultado"
+            widget: "list"
+            label_singular: "foto"
+            summary: "{{fields.label}}"
+            hint: "Adicione, remova ou reordene as fotos arrastando."
+            fields:
+              - { label: "Foto",    name: "image", widget: "image" }
+              - { label: "Legenda", name: "label", widget: "string", hint: 'Ex: "Tapete Verde Formado"' }

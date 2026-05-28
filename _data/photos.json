@@ -1,0 +1,38 @@
+{
+  "identity": {
+    "logo": "img/logo.png",
+    "hero_bg": "",
+    "contact_mockup": "img/mockup-phone.png"
+  },
+  "ba1": {
+    "before": "img/before-hydroseed.webp",
+    "after":  "img/after-hydroseed.webp"
+  },
+  "ba2": {
+    "before": "img/before-hydroseed-2.webp",
+    "after":  "img/after-hydroseed-2.webp"
+  },
+  "ba3": {
+    "before": "img/before-hydroseed-3.webp",
+    "after":  "img/after-hydroseed-3.webp"
+  },
+  "portfolio": {
+    "taludes":    "img/portfolio-taludes.png",
+    "industrial": "img/portfolio-industrial.png",
+    "urbanas":    "img/portfolio-urbanas.png",
+    "erosao":     "img/portfolio-erosao.png"
+  },
+  "process": {
+    "step1": "img/fases-aplicacao.png",
+    "step2": "img/fases-aplicado.png",
+    "step3": "img/solo-fases.png",
+    "step4": "img/nao-pise.png"
+  },
+  "insumos": {
+    "fertilizantes": "img/fertilizantes.png",
+    "sementes":      "img/sementes.png",
+    "mulches":       "img/mulches.png",
+    "fixadores":     "img/fixadores.png",
+    "fibra":         "img/fibra-de-madeira.png"
+  }
+}
