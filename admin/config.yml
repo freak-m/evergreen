@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: freak-m/evergreen2
+  repo: freak-m/evergreen
   branch: main
 
 locale: pt
