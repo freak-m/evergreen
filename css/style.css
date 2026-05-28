@@ -210,7 +210,7 @@ body {
   filter: brightness(0.72);
 }
 @media (min-width: 769px) {
-  .hero-img-bg { background-position: 70% 20%; }
+  .hero-img-bg { background-position: 70% 35%; }
 }
 
 /* ── Conteúdo ── */
