@@ -855,11 +855,12 @@ body {
 }
 .cover-title-row p  { font-size: 0.85rem; color: var(--parch-mid); font-style: italic; text-shadow: 1px 1px 2px rgba(0,0,0,.6); margin: 0; }
 
-/* mobile: single column, centered */
+/* mobile: telefone à esquerda, títulos à direita */
 @media (max-width: 768px) {
-  .cover-cols { flex-direction: column; align-items: center; gap: 16px; }
-  .cover-photo-col { display: none; }
-  .cover-title-row { align-items: center; text-align: center; }
+  .cover-cols { flex-direction: row; align-items: flex-end; gap: 12px; }
+  .cover-photo-col { display: flex; align-items: flex-end; overflow: visible; }
+  .cover-mockup-img { max-height: 200px; margin-top: -60px; }
+  .cover-title-row { align-items: flex-start; text-align: left; justify-content: flex-end; }
 }
 
 .notepad-body {
