@@ -814,9 +814,20 @@ body {
   box-shadow: 0 1px 3px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.4);
   border: 1px solid var(--gold-dark);
 }
+.cover-cols {
+  display: flex; align-items: flex-end; gap: 32px;
+}
+.cover-photo-col {
+  flex: 0 0 auto; display: flex; align-items: flex-end;
+}
+.cover-mockup-img {
+  max-height: 160px; width: auto;
+  filter: drop-shadow(0 8px 20px rgba(0,0,0,.6));
+}
 .cover-title-row {
-  display: flex; flex-direction: column; align-items: center;
-  gap: 6px; text-align: center;
+  flex: 1;
+  display: flex; flex-direction: column; align-items: flex-start;
+  gap: 6px; text-align: left;
 }
 .cover-title-row h2 {
   font-family: var(--font-display); font-size: 1.7rem; letter-spacing: 4px;
@@ -824,6 +835,13 @@ body {
   margin: 0;
 }
 .cover-title-row p  { color: var(--parch-mid); font-style: italic; text-shadow: 1px 1px 2px rgba(0,0,0,.6); margin: 0; }
+
+/* mobile: single column, centered */
+@media (max-width: 768px) {
+  .cover-cols { flex-direction: column; align-items: center; gap: 16px; }
+  .cover-photo-col { display: none; }
+  .cover-title-row { align-items: center; text-align: center; }
+}
 
 .notepad-body {
   padding: 44px 50px; position: relative;
