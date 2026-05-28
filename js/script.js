@@ -99,13 +99,32 @@ function navigateLb(dir) {
   });
 }
 
-// hook gallery items
-const galleryItems = [...document.querySelectorAll('.gallery-item')];
-const galleryImages = galleryItems.map(el => {
-  const img = el.querySelector('img');
-  return { src: img?.src, alt: img?.alt || '' };
-});
-galleryItems.forEach((el, i) => el.addEventListener('click', () => openLb(galleryImages, i)));
+// hook gallery items — navegação linha × coluna (pula células vazias)
+const galleryPhases   = [...document.querySelectorAll('.gallery-phase')];
+const galleryRowCount = Math.max(...galleryPhases.map(p => p.querySelectorAll('.gallery-item').length));
+
+const orderedGalleryImages = [];
+const galleryItemIndexMap  = new Map();
+
+for (let row = 0; row < galleryRowCount; row++) {
+  for (const phase of galleryPhases) {
+    const item = phase.querySelectorAll('.gallery-item')[row];
+    if (!item || item.classList.contains('gallery-item--empty')) continue;
+    const img = item.querySelector('img');
+    if (!img) continue;
+    galleryItemIndexMap.set(item, orderedGalleryImages.length);
+    orderedGalleryImages.push({ src: img.src, alt: img.alt || '' });
+  }
+}
+
+galleryPhases.forEach(phase =>
+  phase.querySelectorAll('.gallery-item:not(.gallery-item--empty)').forEach(item =>
+    item.addEventListener('click', () => {
+      const idx = galleryItemIndexMap.get(item);
+      if (idx !== undefined) openLb(orderedGalleryImages, idx);
+    })
+  )
+);
 
 // hook before/after cards
 const baCards  = [...document.querySelectorAll('.ba-card')];
