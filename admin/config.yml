@@ -1,0 +1,100 @@
+backend:
+  name: github
+  repo: freak-m/evergreen2
+  branch: main
+
+locale: pt
+media_folder: "img"
+public_folder: "/img"
+
+collections:
+  - name: "settings"
+    label: "Configurações do Site"
+    files:
+
+      - label: "SEO, Textos e Contato"
+        name: "site"
+        file: "_data/site.json"
+        format: json
+        fields:
+
+          - label: "SEO – Posicionamento no Google"
+            name: "seo"
+            widget: "object"
+            summary: "Título, descrição e imagem para redes sociais"
+            fields:
+              - label: "Título da Página"
+                name: "title"
+                widget: "string"
+                hint: "Aparece na aba do navegador e nos resultados do Google. Ideal: 50–60 caracteres."
+              - label: "Descrição (Google)"
+                name: "description"
+                widget: "text"
+                hint: "Texto exibido abaixo do link no Google. Ideal: 150–160 caracteres."
+              - label: "Palavras-chave"
+                name: "keywords"
+                widget: "string"
+                hint: "Separadas por vírgula. Ex: hidrossemeadura Campinas, plantio de grama SP"
+              - label: "Imagem para Redes Sociais"
+                name: "og_image"
+                widget: "image"
+                hint: "Imagem exibida ao compartilhar o site no WhatsApp, Facebook e Instagram"
+
+          - label: "Seção Principal (topo da página)"
+            name: "hero"
+            widget: "object"
+            fields:
+              - label: "Frase de Impacto"
+                name: "tagline"
+                widget: "string"
+                hint: "Frase abaixo do logo no topo da página"
+              - label: "Estatística 1 – Número"
+                name: "stat1_value"
+                widget: "string"
+                hint: 'Ex: "5–7"'
+              - label: "Estatística 1 – Texto"
+                name: "stat1_label"
+                widget: "string"
+                hint: 'Ex: "dias p/ primeiros brotos"'
+              - label: "Estatística 2 – Número"
+                name: "stat2_value"
+                widget: "string"
+              - label: "Estatística 2 – Texto"
+                name: "stat2_label"
+                widget: "string"
+              - label: "Estatística 3 – Número"
+                name: "stat3_value"
+                widget: "string"
+              - label: "Estatística 3 – Texto"
+                name: "stat3_label"
+                widget: "string"
+
+          - label: "Chamada para Ação (meio da página)"
+            name: "cta"
+            widget: "object"
+            fields:
+              - label: "Pergunta"
+                name: "question"
+                widget: "string"
+                hint: 'Ex: "Quer esse resultado na sua obra?"'
+              - label: "Título"
+                name: "headline"
+                widget: "string"
+                hint: 'Ex: "Faça um orçamento já"'
+
+          - label: "Informações de Contato"
+            name: "contact"
+            widget: "object"
+            fields:
+              - label: "Telefone (como aparece na tela)"
+                name: "phone_display"
+                widget: "string"
+                hint: 'Ex: "+55 19 98945-5715"'
+              - label: "Número do WhatsApp (somente dígitos)"
+                name: "whatsapp_number"
+                widget: "string"
+                hint: 'Ex: "5519989455715"  —  código país + DDD + número, sem espaços'
+              - label: "Horário de Atendimento"
+                name: "hours_weekday"
+                widget: "string"
+                hint: 'Ex: "Seg–Sex: 8h às 18h"'

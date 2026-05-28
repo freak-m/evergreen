@@ -1,0 +1,26 @@
+{
+  "seo": {
+    "title": "Hidrossemeadura e Plantio de Grama em Campinas SP | Evergreen Gramaverde",
+    "description": "Empresa especializada em hidrossemeadura, plantio e venda de grama em Campinas-SP. Atendemos obras civis, taludes, mineração e agronegócio. Solicite orçamento!",
+    "keywords": "hidrossemeadura Campinas, plantio de grama Campinas, venda de grama Campinas, instalação de grama SP, gramado Campinas, revegetação talude, controle erosão, Evergreen Gramaverde",
+    "og_image": "img/contato.jpg"
+  },
+  "hero": {
+    "tagline": "Convertendo Desafios Ambientais em Valor Sustentável",
+    "stat1_value": "5–7",
+    "stat1_label": "dias p/ primeiros brotos",
+    "stat2_value": "30",
+    "stat2_label": "dias para cobertura total",
+    "stat3_value": "100%",
+    "stat3_label": "conformidade ambiental"
+  },
+  "cta": {
+    "question": "Quer esse resultado na sua obra?",
+    "headline": "Faça um orçamento já"
+  },
+  "contact": {
+    "phone_display": "+55 19 98945-5715",
+    "whatsapp_number": "5519989455715",
+    "hours_weekday": "Seg–Sex: 8h às 18h"
+  }
+}
