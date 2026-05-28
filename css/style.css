@@ -916,7 +916,7 @@ body {
 .lightbox { position: fixed; inset: 0; z-index: 2000; display: none; align-items: center; justify-content: center; }
 .lightbox.active { display: flex; animation: lbFadeIn .25s ease forwards; }
 .lightbox-overlay { position: absolute; inset: 0; background: rgba(0,0,0,.92); backdrop-filter: blur(4px); }
-.lightbox-frame-wrap { position: relative; z-index: 1; overflow: hidden; }
+.lightbox-frame-wrap { position: relative; z-index: 1; overflow: visible; }
 .lightbox-wood-frame {
   padding: 14px;
   background: linear-gradient(135deg, var(--wood-high), var(--wood-light) 25%, var(--wood-mid) 55%, var(--wood-dark) 80%, var(--wood-high));
