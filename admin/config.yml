@@ -100,6 +100,32 @@ collections:
                 widget: "string"
                 hint: 'Ex: "Seg–Sex: 8h às 18h"'
 
+          - label: "Analytics (Estatísticas de Visitas)"
+            name: "analytics"
+            widget: "object"
+            summary: "Google Analytics e painel de visitas"
+            fields:
+              - label: "ID do Google Analytics (GA4)"
+                name: "ga4_id"
+                widget: "string"
+                required: false
+                hint: 'O código começa com G-, ex: "G-XXXXXXXXXX". Deixe vazio se ainda não configurou.'
+              - label: "URL do Relatório Looker Studio"
+                name: "looker_url"
+                widget: "string"
+                required: false
+                hint: "URL de incorporação do Looker Studio para exibir o relatório completo no painel. Opcional."
+              - label: "Código do 2º País (sigla)"
+                name: "country2_code"
+                widget: "string"
+                required: false
+                hint: 'Sigla do segundo país mais visitante. Ex: "PT" (Portugal), "US" (EUA), "AR" (Argentina). Padrão: PT'
+              - label: "Nome do 2º País"
+                name: "country2_name"
+                widget: "string"
+                required: false
+                hint: 'Nome completo do segundo país para exibir no painel. Ex: "Portugal"'
+
       # ── Fotos do Site ──────────────────────────────────────────
       - label: "Fotos do Site"
         name: "photos"

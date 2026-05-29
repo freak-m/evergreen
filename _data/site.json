@@ -22,5 +22,11 @@
     "phone_display": "+55 19 98945-5715",
     "whatsapp_number": "5519989455715",
     "hours_weekday": "Seg–Sex: 8h às 18h"
+  },
+  "analytics": {
+    "ga4_id": "",
+    "looker_url": "",
+    "country2_code": "PT",
+    "country2_name": "Portugal"
   }
 }
