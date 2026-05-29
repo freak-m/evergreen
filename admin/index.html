@@ -275,6 +275,32 @@
     }
     .btn-ga-start:hover { background: #3367d6; }
 
+    /* ── CMS OVERLAY ── */
+    .cms-overlay {
+      display: none; position: fixed; inset: 0;
+      background: #fff;
+      z-index: 9100;
+      flex-direction: column;
+    }
+    .cms-overlay.open { display: flex; }
+    .cms-bar {
+      display: flex; align-items: center; gap: 14px;
+      padding: 10px 20px;
+      background: linear-gradient(135deg, var(--green-dark), var(--green));
+      color: #fff;
+      flex-shrink: 0;
+    }
+    .cms-bar-title { font-size: 17px; font-weight: 700; flex: 1; }
+    .cms-close {
+      background: rgba(255,255,255,0.18);
+      border: 2px solid rgba(255,255,255,0.4);
+      color: #fff; font-size: 22px; cursor: pointer;
+      border-radius: 8px; padding: 4px 14px; font-weight: 700;
+      transition: background .2s;
+    }
+    .cms-close:hover { background: rgba(255,255,255,0.32); }
+    .cms-frame { flex: 1; border: none; width: 100%; }
+
     /* ── MAP MODAL ── */
     .map-overlay {
       display: none; position: fixed; inset: 0;
@@ -372,26 +398,26 @@
 
       <div class="edit-grid">
 
-        <a class="edit-card" href="./editor.html">
+        <button class="edit-card" onclick="openCMS()">
           <div class="edit-card-icon">📝</div>
           <h2>Textos e Contato</h2>
           <p>Altere o telefone, WhatsApp, horário de atendimento, título e textos da página</p>
           <div class="edit-btn">Editar Textos</div>
-        </a>
+        </button>
 
-        <a class="edit-card" href="./editor.html">
+        <button class="edit-card" onclick="openCMS()">
           <div class="edit-card-icon">🖼️</div>
           <h2>Fotos do Site</h2>
           <p>Troque o logo, a foto de fundo, as fotos de antes e depois e o portfólio</p>
           <div class="edit-btn">Editar Fotos</div>
-        </a>
+        </button>
 
-        <a class="edit-card" href="./editor.html">
+        <button class="edit-card" onclick="openCMS()">
           <div class="edit-card-icon">📸</div>
           <h2>Álbum de Fotos</h2>
           <p>Adicione novas fotos, remova antigas ou reorganize a galeria de projetos</p>
           <div class="edit-btn">Abrir Álbum</div>
-        </a>
+        </button>
 
       </div>
     </section>
@@ -470,6 +496,15 @@
     </section>
   </main>
 
+  <!-- CMS OVERLAY -->
+  <div class="cms-overlay" id="cms-overlay">
+    <div class="cms-bar">
+      <span class="cms-bar-title">✏️ Editor do Site — Evergreen</span>
+      <button class="cms-close" onclick="closeCMS()">✕ Fechar</button>
+    </div>
+    <iframe id="cms-frame" class="cms-frame" src="about:blank" title="Editor CMS"></iframe>
+  </div>
+
   <!-- MAP MODAL -->
   <div class="map-overlay" id="map-overlay">
     <div class="map-dialog">
@@ -520,7 +555,19 @@
     document.getElementById('map-overlay').addEventListener('click', e => {
       if (e.target === e.currentTarget) closeMap();
     });
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMap(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeMap(); closeCMS(); } });
+
+    // ── CMS overlay ─────────────────────────────────────────────────
+    function openCMS() {
+      var frame = document.getElementById('cms-frame');
+      if (frame.src === 'about:blank') frame.src = './_cms.html';
+      document.getElementById('cms-overlay').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeCMS() {
+      document.getElementById('cms-overlay').classList.remove('open');
+      document.body.style.overflow = '';
+    }
 
     // ── Set country card ────────────────────────────────────────────
     function setCountryCard(n, code) {
@@ -573,7 +620,7 @@
                   '<li>Acesse <a href="https://lookerstudio.google.com" target="_blank" rel="noopener">lookerstudio.google.com</a> (gratuito)</li>' +
                   '<li>Crie um relatório com uma visualização de <strong>mapa geográfico</strong> conectado ao seu Google Analytics</li>' +
                   '<li>Clique em <strong>Compartilhar → Incorporar relatório</strong> e copie a URL</li>' +
-                  '<li>No <a href="./editor.html">Editor do Site</a>, vá em <strong>SEO e Configurações → URL do Looker Studio</strong> e cole</li>' +
+                  '<li>No <a href="#" onclick="openCMS();return false;">Editor do Site</a>, vá em <strong>SEO e Configurações → URL do Looker Studio</strong> e cole</li>' +
                 '</ol>' +
               '</div>' +
             '</div>' +
@@ -590,7 +637,7 @@
             '<li class="setup-step"><span class="s-badge">1</span><span class="s-text">Acesse <a href="https://analytics.google.com" target="_blank" rel="noopener">analytics.google.com</a> e faça login com sua conta Google</span></li>' +
             '<li class="setup-step"><span class="s-badge">2</span><span class="s-text">Clique em <strong>"+ Criar conta"</strong> e siga o assistente. No campo de endereço do site coloque: <code>www.evergreenhidrossemeadura.com.br</code></span></li>' +
             '<li class="setup-step"><span class="s-badge">3</span><span class="s-text">Após criar, o Google mostrará um <strong>ID de Medição</strong> que começa com <strong>G-</strong>, por exemplo: <code>G-XXXXXXXXXX</code>. Copie esse código.</span></li>' +
-            '<li class="setup-step"><span class="s-badge">4</span><span class="s-text">Abra o <a href="./editor.html">Editor do Site</a>, vá em <strong>Configurações do Site → SEO, Textos e Contato</strong> e cole o código no campo <strong>"ID do Google Analytics (GA4)"</strong>. Salve.</span></li>' +
+            '<li class="setup-step"><span class="s-badge">4</span><span class="s-text">Abra o <a href="#" onclick="openCMS();return false;">Editor do Site</a>, vá em <strong>Configurações do Site → SEO, Textos e Contato</strong> e cole o código no campo <strong>"ID do Google Analytics (GA4)"</strong>. Salve.</span></li>' +
             '<li class="setup-step"><span class="s-badge">5</span><span class="s-text">Pronto! Em até 24 horas os primeiros dados aparecerão. Volte a este painel e clique em <strong>"Abrir Google Analytics"</strong> para ver tudo.</span></li>' +
           '</ol>' +
           '<a href="https://analytics.google.com" target="_blank" rel="noopener" class="btn-ga-start">🚀 Começar no Google Analytics (grátis)</a>' +
