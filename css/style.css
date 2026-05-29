@@ -48,3 +48,88 @@ body {
 ::-webkit-scrollbar-track      { background: var(--wood-dark); box-shadow: inset 0 0 4px rgba(0,0,0,.5); }
 ::-webkit-scrollbar-thumb      { background: linear-gradient(180deg, var(--wood-high), var(--wood-mid), var(--wood-dark)); border-radius: 3px; border: 1px solid var(--wood-dark); }
 ::-webkit-scrollbar-thumb:hover{ background: linear-gradient(180deg, var(--gold-mid), var(--wood-light), var(--wood-mid)); }
+
+/* ── Cookie Banner ── */
+.cookie-banner {
+  position: fixed;
+  bottom: -100%;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  transition: bottom .4s cubic-bezier(.4,0,.2,1);
+  padding: 0 1rem 1rem;
+  pointer-events: none;
+}
+.cookie-banner--visible {
+  bottom: 0;
+  pointer-events: all;
+}
+.cookie-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  background:
+    linear-gradient(135deg, var(--wood-dark) 0%, var(--green-dark) 100%);
+  border: 1px solid var(--gold-mid);
+  border-bottom: none;
+  border-radius: 12px 12px 0 0;
+  padding: 1.1rem 1.4rem;
+  box-shadow: 0 -4px 24px rgba(0,0,0,.45);
+}
+.cookie-icon {
+  font-size: 1.8rem;
+  flex-shrink: 0;
+}
+.cookie-text {
+  flex: 1;
+  min-width: 200px;
+}
+.cookie-title {
+  font-family: var(--font-display);
+  font-size: .95rem;
+  color: var(--gold-light);
+  margin-bottom: .25rem;
+  letter-spacing: .04em;
+}
+.cookie-desc {
+  font-size: .8rem;
+  color: var(--parch-mid);
+  line-height: 1.5;
+}
+.cookie-link {
+  color: var(--gold-hi);
+  text-decoration: underline;
+}
+.cookie-link:hover { color: var(--parch-light); }
+.cookie-actions {
+  display: flex;
+  gap: .6rem;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+}
+.cookie-btn {
+  font-family: var(--font-body);
+  font-size: .8rem;
+  font-weight: 600;
+  padding: .5rem 1.1rem;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: filter .2s, transform .15s;
+  white-space: nowrap;
+}
+.cookie-btn:hover  { filter: brightness(1.15); transform: translateY(-1px); }
+.cookie-btn:active { transform: translateY(0); }
+.cookie-btn--accept {
+  background: linear-gradient(135deg, var(--gold-light), var(--gold-mid));
+  color: var(--wood-dark);
+}
+.cookie-btn--reject {
+  background: transparent;
+  border: 1px solid var(--gold-mid);
+  color: var(--parch-mid);
+}
+.cookie-btn--reject:hover { background: rgba(201,162,39,.1); }

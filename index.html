@@ -786,9 +786,43 @@
     </div>
   </div>
 
+  <!-- ========== COOKIE BANNER ========== -->
+  <div class="cookie-banner" id="cookieBanner" role="dialog" aria-label="Aviso de cookies" aria-live="polite">
+    <div class="cookie-inner">
+      <div class="cookie-icon">🍪</div>
+      <div class="cookie-text">
+        <p class="cookie-title">Utilizamos cookies</p>
+        <p class="cookie-desc">
+          Usamos cookies para melhorar sua experiência, analisar o tráfego e personalizar conteúdo.
+          Ao continuar navegando, você concorda com nossa
+          <a href="#" class="cookie-link">Política de Privacidade</a>.
+        </p>
+      </div>
+      <div class="cookie-actions">
+        <button class="cookie-btn cookie-btn--accept" id="cookieAccept">Aceitar todos</button>
+        <button class="cookie-btn cookie-btn--reject" id="cookieReject">Apenas essenciais</button>
+      </div>
+    </div>
+  </div>
+
   <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
   <script src="js/script.js"></script>
   <script src="js/content.js"></script>
+  <script>
+    (function () {
+      var banner = document.getElementById('cookieBanner');
+      if (!localStorage.getItem('cookieConsent')) {
+        banner.classList.add('cookie-banner--visible');
+      }
+      function dismiss(choice) {
+        localStorage.setItem('cookieConsent', choice);
+        banner.classList.remove('cookie-banner--visible');
+        setTimeout(function () { banner.style.display = 'none'; }, 400);
+      }
+      document.getElementById('cookieAccept').addEventListener('click', function () { dismiss('all'); });
+      document.getElementById('cookieReject').addEventListener('click', function () { dismiss('essential'); });
+    })();
+  </script>
 </body>
 </html>
