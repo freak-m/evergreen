@@ -1,8 +1,6 @@
 backend:
-  name: github
-  repo: freak-m/evergreen
+  name: git-gateway
   branch: main
-  base_url: https://api.netlify.com
 
 locale: pt
 media_folder: "img"
