@@ -5,7 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Painel – Evergreen Hidrossemeadura</title>
   <meta name="robots" content="noindex, nofollow">
+  <!-- Netlify Identity -->
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js" data-netlify-identity-url="https://evergreencd.netlify.app/.netlify/identity"></script>
   <style>
+    #auth-guard { display:none; }
+
     :root {
       --green:       #2d7d46;
       --green-dark:  #1b5c31;
@@ -323,7 +327,17 @@
     }
   </style>
 </head>
-<body>
+<body style="visibility:hidden">
+
+  <!-- AUTH GUARD -->
+  <div id="auth-guard" style="display:flex;align-items:center;justify-content:center;min-height:100vh;background:var(--page-bg)">
+    <div style="text-align:center;padding:48px;max-width:420px">
+      <img src="../img/logo.png" alt="Evergreen" style="width:72px;margin:0 auto 24px;border-radius:12px">
+      <p style="font-size:20px;font-weight:700;color:var(--green-dark);margin-bottom:8px">Área restrita</p>
+      <p style="font-size:17px;color:var(--muted);margin-bottom:28px">Verifique suas credenciais para continuar.</p>
+      <button onclick="netlifyIdentity.open()" style="padding:16px 36px;background:var(--green);color:#fff;border:none;border-radius:12px;font-size:18px;font-weight:700;cursor:pointer">Entrar</button>
+    </div>
+  </div>
 
   <!-- HEADER -->
   <header class="hd">
@@ -337,6 +351,9 @@
       <a href="https://www.evergreenhidrossemeadura.com.br/" target="_blank" rel="noopener" class="hd-site-btn">
         🌐 Ver o Site ao Vivo →
       </a>
+      <button onclick="netlifyIdentity.logout()" style="margin-left:10px;background:rgba(255,255,255,0.08);border:2px solid rgba(255,255,255,0.28);color:#fff;padding:9px 18px;border-radius:30px;font-size:15px;font-weight:600;cursor:pointer;transition:background .2s" onmouseover="this.style.background='rgba(255,255,255,0.20)'" onmouseout="this.style.background='rgba(255,255,255,0.08)'">
+        🔒 Sair
+      </button>
     </div>
   </header>
 
@@ -581,6 +598,34 @@
     }
 
     init();
+  </script>
+
+  <!-- AUTH GUARD LOGIC -->
+  <script>
+    (function () {
+      var guard   = document.getElementById('auth-guard');
+      var content = document.body;
+
+      function allow() {
+        guard.style.display   = 'none';
+        content.style.visibility = 'visible';
+      }
+      function deny() {
+        guard.style.display   = 'flex';
+        content.style.visibility = 'visible';
+      }
+
+      netlifyIdentity.on('init', function (user) {
+        if (user) { allow(); } else { deny(); }
+      });
+      netlifyIdentity.on('login', function () {
+        netlifyIdentity.close();
+        allow();
+      });
+      netlifyIdentity.on('logout', function () { deny(); });
+
+      netlifyIdentity.init({ container: '#auth-guard' });
+    })();
   </script>
 
 </body>
