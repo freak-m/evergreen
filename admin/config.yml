@@ -205,7 +205,7 @@ collections:
       # ── Álbum — Galeria de Fotos ───────────────────────────────
       - label: "Álbum – Galeria de Fotos"
         name: "gallery"
-        file: "_data/gallery.json"
+        file: "gallery.json"
         format: json
         fields:
 

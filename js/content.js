@@ -122,7 +122,7 @@
 
   // ── Álbum — Galeria de Fotos ───────────────────────────────────
   try {
-    const res = await fetch('_data/gallery.json?v=' + Date.now());
+    const res = await fetch('gallery.json?v=' + Date.now());
     if (res.ok) {
       const g = await res.json();
       const pinMap = { antes: 'pin-yellow', aplicacao: 'pin-blue', resultado: 'pin-green' };
