@@ -39,7 +39,7 @@
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-  <link rel="icon" href="https://hermespot-evergreen.ukpg18.easypanel.host/wp-content/uploads/2026/05/favicon-1.png">
+  <link rel="icon" href="img/logo.png" type="image/png">
   <link rel="stylesheet" href="css/style.css">
 
   <!-- JSON-LD Schema -->
@@ -787,7 +787,7 @@
   </div>
 
   <!-- ========== COOKIE BANNER ========== -->
-  <div class="cookie-banner" id="cookieBanner" role="dialog" aria-label="Aviso de cookies" aria-live="polite">
+  <div class="cookie-banner" id="cookieBanner" role="dialog" aria-label="Aviso de cookies" aria-live="polite" hidden>
     <div class="cookie-inner">
       <div class="cookie-icon">🍪</div>
       <div class="cookie-text">
@@ -800,7 +800,7 @@
       </div>
       <div class="cookie-actions">
         <button class="cookie-btn cookie-btn--accept" id="cookieAccept">Aceitar todos</button>
-        <button class="cookie-btn cookie-btn--reject" id="cookieReject">Apenas essenciais</button>
+        <button class="cookie-btn cookie-btn--decline" id="cookieReject">Apenas essenciais</button>
       </div>
     </div>
   </div>
@@ -812,13 +812,27 @@
   <script>
     (function () {
       var banner = document.getElementById('cookieBanner');
-      if (!localStorage.getItem('cookieConsent')) {
-        banner.classList.add('cookie-banner--visible');
+      var KEY = 'cookieConsent';
+      function hasConsent() {
+        try { if (localStorage.getItem(KEY)) return true; } catch (e) {}
+        try { if (sessionStorage.getItem(KEY)) return true; } catch (e) {}
+        try {
+          var parts = document.cookie.split(';');
+          for (var i = 0; i < parts.length; i++) {
+            if (parts[i].trim().indexOf(KEY + '=') === 0) return true;
+          }
+        } catch (e) {}
+        return false;
       }
+      if (!hasConsent()) banner.removeAttribute('hidden');
       function dismiss(choice) {
-        localStorage.setItem('cookieConsent', choice);
-        banner.classList.remove('cookie-banner--visible');
-        setTimeout(function () { banner.style.display = 'none'; }, 400);
+        try { localStorage.setItem(KEY, choice); } catch (e) {}
+        try { sessionStorage.setItem(KEY, choice); } catch (e) {}
+        try {
+          var exp = new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toUTCString();
+          document.cookie = KEY + '=' + choice + '; path=/; expires=' + exp + '; SameSite=Lax';
+        } catch (e) {}
+        banner.setAttribute('hidden', '');
       }
       document.getElementById('cookieAccept').addEventListener('click', function () { dismiss('all'); });
       document.getElementById('cookieReject').addEventListener('click', function () { dismiss('essential'); });
