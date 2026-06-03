@@ -400,6 +400,30 @@
       cursor: pointer; display: flex; align-items: center; justify-content: center;
     }
     #img-lightbox-close:hover { background: rgba(255,255,255,.25); }
+
+    /* ── BA PHOTO PAIRS ────────────────────────────────────────── */
+    .ba-par-label {
+      font-size: 11px; font-weight: 700; color: var(--accent);
+      margin: 12px 0 8px; text-transform: uppercase; letter-spacing: .5px;
+    }
+    .ba-photo-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 4px; }
+    .ba-photo-field { display: flex; flex-direction: column; gap: 5px; }
+    .ba-photo-label {
+      font-size: 10px; font-weight: 700; color: var(--text-dim);
+      text-transform: uppercase; letter-spacing: .7px;
+    }
+    .ba-thumb-wrap {
+      border-radius: 5px; overflow: hidden; background: var(--bg-light);
+      aspect-ratio: 4/3; cursor: pointer; position: relative;
+    }
+    .ba-thumb-wrap::after {
+      content: '🔍'; position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; background: rgba(0,0,0,.35);
+      opacity: 0; transition: opacity .2s; pointer-events: none;
+    }
+    .ba-thumb-wrap:hover::after { opacity: 1; }
+    .ba-thumb { width: 100%; height: 100%; object-fit: cover; display: block; }
   </style>
 </head>
 <body>
@@ -538,6 +562,63 @@
               </div>
               <span class="quill-label">Texto de Introdução</span>
               <div class="quill-wrap"><div id="quill-ba-intro"></div></div>
+
+              <div class="accordion-sep"></div>
+              <div class="accordion-sub-label">Fotos dos Pares Antes &amp; Depois</div>
+
+              <div class="ba-par-label">Par 1</div>
+              <div class="ba-photo-row">
+                <div class="ba-photo-field">
+                  <div class="ba-photo-label">Antes</div>
+                  <div class="ba-thumb-wrap" onclick="openLightbox(resolveImgSrc(document.getElementById('ba1-before-src').value))">
+                    <img id="ba1-before-thumb" class="ba-thumb" src="" alt="Antes 1">
+                  </div>
+                  <input id="ba1-before-src" type="text" class="field-input" style="font-size:11px" placeholder="img/before-hydroseed.webp" oninput="updatePhotoThumb('ba1-before')">
+                </div>
+                <div class="ba-photo-field">
+                  <div class="ba-photo-label">Depois</div>
+                  <div class="ba-thumb-wrap" onclick="openLightbox(resolveImgSrc(document.getElementById('ba1-after-src').value))">
+                    <img id="ba1-after-thumb" class="ba-thumb" src="" alt="Depois 1">
+                  </div>
+                  <input id="ba1-after-src" type="text" class="field-input" style="font-size:11px" placeholder="img/after-hydroseed.webp" oninput="updatePhotoThumb('ba1-after')">
+                </div>
+              </div>
+
+              <div class="ba-par-label">Par 2</div>
+              <div class="ba-photo-row">
+                <div class="ba-photo-field">
+                  <div class="ba-photo-label">Antes</div>
+                  <div class="ba-thumb-wrap" onclick="openLightbox(resolveImgSrc(document.getElementById('ba2-before-src').value))">
+                    <img id="ba2-before-thumb" class="ba-thumb" src="" alt="Antes 2">
+                  </div>
+                  <input id="ba2-before-src" type="text" class="field-input" style="font-size:11px" placeholder="img/before-hydroseed-2.webp" oninput="updatePhotoThumb('ba2-before')">
+                </div>
+                <div class="ba-photo-field">
+                  <div class="ba-photo-label">Depois</div>
+                  <div class="ba-thumb-wrap" onclick="openLightbox(resolveImgSrc(document.getElementById('ba2-after-src').value))">
+                    <img id="ba2-after-thumb" class="ba-thumb" src="" alt="Depois 2">
+                  </div>
+                  <input id="ba2-after-src" type="text" class="field-input" style="font-size:11px" placeholder="img/after-hydroseed-2.webp" oninput="updatePhotoThumb('ba2-after')">
+                </div>
+              </div>
+
+              <div class="ba-par-label">Par 3</div>
+              <div class="ba-photo-row">
+                <div class="ba-photo-field">
+                  <div class="ba-photo-label">Antes</div>
+                  <div class="ba-thumb-wrap" onclick="openLightbox(resolveImgSrc(document.getElementById('ba3-before-src').value))">
+                    <img id="ba3-before-thumb" class="ba-thumb" src="" alt="Antes 3">
+                  </div>
+                  <input id="ba3-before-src" type="text" class="field-input" style="font-size:11px" placeholder="img/before-hydroseed-3.webp" oninput="updatePhotoThumb('ba3-before')">
+                </div>
+                <div class="ba-photo-field">
+                  <div class="ba-photo-label">Depois</div>
+                  <div class="ba-thumb-wrap" onclick="openLightbox(resolveImgSrc(document.getElementById('ba3-after-src').value))">
+                    <img id="ba3-after-thumb" class="ba-thumb" src="" alt="Depois 3">
+                  </div>
+                  <input id="ba3-after-src" type="text" class="field-input" style="font-size:11px" placeholder="img/after-hydroseed-3.webp" oninput="updatePhotoThumb('ba3-after')">
+                </div>
+              </div>
             </div>
           </div>
 
@@ -809,6 +890,14 @@ function populateForm(d) {
 
   sv('ba-title', d.antes_depois?.title || '');
   if (quillBAIntro) quillBAIntro.root.innerHTML = d.antes_depois?.intro || '';
+  const pairs = d.antes_depois?.pairs || [];
+  [1, 2, 3].forEach(n => {
+    const p = pairs[n - 1] || {};
+    sv(`ba${n}-before-src`, p.before_src || '');
+    sv(`ba${n}-after-src`,  p.after_src  || '');
+    updatePhotoThumb(`ba${n}-before`);
+    updatePhotoThumb(`ba${n}-after`);
+  });
 
   sv('cta-question', d.cta?.question || '');
   sv('cta-headline', d.cta?.headline || '');
@@ -837,7 +926,11 @@ function collectFormValues() {
     },
     antes_depois: {
       title: gv('ba-title'),
-      intro: quillBAIntro ? quillBAIntro.root.innerHTML : ''
+      intro: quillBAIntro ? quillBAIntro.root.innerHTML : '',
+      pairs: [1, 2, 3].map(n => ({
+        before_src: gv(`ba${n}-before-src`),
+        after_src:  gv(`ba${n}-after-src`)
+      }))
     },
     cta: { question: gv('cta-question'), headline: gv('cta-headline') },
     contact: {
@@ -1030,6 +1123,13 @@ function syncPreview() {
     setText(doc, '#antes-depois-title', d.antes_depois.title);
     const bai = doc.getElementById('antes-depois-intro');
     if (bai) bai.innerHTML = d.antes_depois.intro;
+    if (Array.isArray(d.antes_depois.pairs)) {
+      d.antes_depois.pairs.forEach((p, i) => {
+        const n = i + 1;
+        if (p.before_src) doc.querySelectorAll(`[data-photo="ba${n}-before"]`).forEach(img => { img.src = p.before_src; });
+        if (p.after_src)  doc.querySelectorAll(`[data-photo="ba${n}-after"]`).forEach(img  => { img.src = p.after_src;  });
+      });
+    }
 
     // CTA
     setText(doc, '.cta-question', d.cta.question);
@@ -1115,17 +1215,27 @@ function cleanPreviewMarks(doc) {
 
 function doFlash(doc, section) {
   cleanPreviewMarks(doc);
-  const rect = section.getBoundingClientRect();
 
-  // Fixed-position ring — works regardless of parent overflow:hidden
-  const ov = doc.createElement('div');
+  const win = doc.defaultView;
+  const ov  = doc.createElement('div');
   ov.id = 'cms-flash-overlay';
   ov.style.cssText =
-    `position:fixed;top:${rect.top}px;left:${rect.left}px;` +
-    `width:${rect.width}px;height:${rect.height}px;` +
-    `border:4px solid #e53935;border-radius:3px;` +
-    `pointer-events:none;z-index:99998;box-sizing:border-box;opacity:1;`;
+    'position:fixed;border:4px solid #e53935;border-radius:3px;' +
+    'pointer-events:none;z-index:99998;box-sizing:border-box;opacity:1;';
   doc.body.appendChild(ov);
+
+  // rAF loop: keep overlay aligned with section while it scrolls
+  const flashStart = Date.now();
+  function tick() {
+    if (!ov.parentNode) return;
+    const r = section.getBoundingClientRect();
+    ov.style.top    = r.top    + 'px';
+    ov.style.left   = r.left   + 'px';
+    ov.style.width  = r.width  + 'px';
+    ov.style.height = r.height + 'px';
+    if (Date.now() - flashStart < 4000) win.requestAnimationFrame(tick);
+  }
+  tick();
 
   // Flash twice: on→off→on→off
   [440, 880, 1320, 1760].forEach((delay, i) => {
@@ -1137,17 +1247,17 @@ function doFlash(doc, section) {
   // After flash: switch to yellow editing ring + badge
   setTimeout(() => {
     if (ov.parentNode) {
-      ov.style.opacity  = '1';
-      ov.style.border   = '3px solid #F5C400';
+      ov.style.opacity = '1';
+      ov.style.border  = '3px solid #F5C400';
     }
     const badge = doc.createElement('div');
     badge.id = 'cms-editing-badge';
     badge.textContent = '✏ Editando esta seção';
     badge.style.cssText =
-      `position:fixed;bottom:20px;right:20px;` +
-      `background:#F5C400;color:#111;padding:7px 18px;border-radius:20px;` +
-      `font-size:13px;font-weight:700;z-index:99999;pointer-events:none;` +
-      `box-shadow:0 2px 14px rgba(0,0,0,.35);font-family:-apple-system,sans-serif;`;
+      'position:fixed;bottom:20px;right:20px;' +
+      'background:#F5C400;color:#111;padding:7px 18px;border-radius:20px;' +
+      'font-size:13px;font-weight:700;z-index:99999;pointer-events:none;' +
+      'box-shadow:0 2px 14px rgba(0,0,0,.35);font-family:-apple-system,sans-serif;';
     doc.body.appendChild(badge);
   }, 2200);
 }
@@ -1248,6 +1358,21 @@ function showNote(msg, type) {
   el.textContent = msg;
   el.className = 'show ' + type;
   setTimeout(() => { el.className = ''; }, 6000);
+}
+
+/* ================================================================
+   PHOTO HELPERS
+   ================================================================ */
+function resolveImgSrc(src) {
+  if (!src) return '';
+  if (src.startsWith('http') || src.startsWith('//') || src.startsWith('/')) return src;
+  return '../' + src;
+}
+
+function updatePhotoThumb(key) {
+  const input = document.getElementById(key + '-src');
+  const thumb = document.getElementById(key + '-thumb');
+  if (input && thumb) thumb.src = resolveImgSrc(input.value.trim());
 }
 
 /* ================================================================

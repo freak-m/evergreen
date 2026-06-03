@@ -42,6 +42,13 @@
       if (d.antes_depois) {
         if (d.antes_depois.title) setText('#antes-depois-title', d.antes_depois.title);
         setHTML('#antes-depois-intro', d.antes_depois.intro);
+        if (Array.isArray(d.antes_depois.pairs)) {
+          d.antes_depois.pairs.forEach((p, i) => {
+            const n = i + 1;
+            setImg(`ba${n}-before`, p.before_src);
+            setImg(`ba${n}-after`,  p.after_src);
+          });
+        }
       }
 
       if (d.hero) {
@@ -123,11 +130,6 @@
           if (bg) bg.style.backgroundImage = `url('${p.identity.hero_bg}')`;
         }
       }
-      ['ba1', 'ba2', 'ba3'].forEach(k => {
-        if (!p[k]) return;
-        setImg(`${k}-before`, p[k].before);
-        setImg(`${k}-after`,  p[k].after);
-      });
       if (p.portfolio) {
         ['taludes', 'industrial', 'urbanas', 'erosao'].forEach(k => {
           setImg(`portfolio-${k}`, p.portfolio[k]);
