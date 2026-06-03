@@ -1,26 +1,80 @@
 {
   "antes": [
-    { "image": "img/galeria-antes1.jpg", "label": "Área a Recuperar" },
-    { "image": "img/galeria-antes2.jpg", "label": "Solo Exposto" },
-    { "image": "img/galeria-antes3.jpg", "label": "Área a Recuperar" },
-    { "image": "img/galeria-antes4.jpg", "label": "Talude Exposto" },
-    { "image": "img/galeria-antes5.jpg", "label": "Erosão Ativa" },
-    { "image": "img/galeria-antes6.jpg", "label": "Talude Degradado" }
+    {
+      "image": "img/galeria-antes1.jpg",
+      "label": "Área a Recuperar"
+    },
+    {
+      "image": "img/galeria-antes2.jpg",
+      "label": "Solo Exposto"
+    },
+    {
+      "image": "img/galeria-antes3.jpg",
+      "label": "Área a Recuperar"
+    },
+    {
+      "image": "img/galeria-antes4.jpg",
+      "label": "Talude Exposto"
+    },
+    {
+      "image": "img/galeria-antes5.jpg",
+      "label": "Erosão Ativa"
+    },
+    {
+      "image": "img/galeria-antes6.jpg",
+      "label": "Talude Degradado"
+    }
   ],
   "aplicacao": [
-    { "image": "img/galeria-durante1.jpg", "label": "Hidrossemeadura em Curso" },
-    { "image": "img/galeria-durante2.jpg", "label": "Biomembrana Aplicada" },
-    { "image": "img/galeria-durante3.jpg", "label": "Biomembrana Aplicada" },
-    { "image": "img/galeria-durante4.jpg", "label": "Cobertura Verde Aplicada" },
-    { "image": "img/galeria-durante5.jpg", "label": "Hidrossemeadura em Curso" },
-    { "image": "img/galeria-durante6.jpg", "label": "Aplicação no Talude" }
+    {
+      "image": "img/galeria-durante1.jpg",
+      "label": "Hidrossemeadura em Curso"
+    },
+    {
+      "image": "img/galeria-durante2.jpg",
+      "label": "Biomembrana Aplicada"
+    },
+    {
+      "image": "img/galeria-durante3.jpg",
+      "label": "Biomembrana Aplicada"
+    },
+    {
+      "image": "img/galeria-durante4.jpg",
+      "label": "Cobertura Verde Aplicada"
+    },
+    {
+      "image": "img/galeria-durante5.jpg",
+      "label": "Hidrossemeadura em Curso"
+    },
+    {
+      "image": "img/galeria-durante6.jpg",
+      "label": "Aplicação no Talude"
+    }
   ],
   "resultado": [
-    { "image": "img/galeria-depois1.jpg", "label": "Tapete Verde Formado" },
-    { "image": "img/galeria-depois2.jpg", "label": "Revegetação Completa" },
-    { "image": "img/galeria-depois3.jpg", "label": "Cobertura Estabelecida" },
-    { "image": "img/galeria-depois4.jpg", "label": "Tapete Verde Formado" },
-    { "image": "img/galeria-depois5.jpg", "label": "Área Recuperada" },
-    { "image": "img/galeria-depois6.jpg", "label": "Verde Estabelecido" }
+    {
+      "image": "img/galeria-depois1.jpg",
+      "label": "Tapete Verde Formado"
+    },
+    {
+      "image": "img/galeria-depois2.jpg",
+      "label": "Revegetação Completa"
+    },
+    {
+      "image": "img/galeria-depois3.jpg",
+      "label": "Cobertura Estabelecida"
+    },
+    {
+      "image": "img/galeria-depois4.jpg",
+      "label": "Tapete Verde Formado"
+    },
+    {
+      "image": "img/galeria-depois5.jpg",
+      "label": "Área Recuperada"
+    },
+    {
+      "image": "img/galeria-depois6.jpg",
+      "label": "Verde Estabelecido"
+    }
   ]
 }
