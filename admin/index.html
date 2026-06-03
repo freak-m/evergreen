@@ -441,25 +441,27 @@
     .ba-change-btn:hover { background: rgba(245,196,0,.22); }
 
     /* ── GALLERY EDITOR ────────────────────────────────────────── */
-    .gallery-phase { margin-bottom: 14px; }
-    .gallery-phase + .gallery-phase { border-top: 1px solid var(--border); padding-top: 14px; }
-    .gallery-phase-hd {
-      display: flex; align-items: center; justify-content: space-between; margin-bottom: 9px;
+    .gallery-3col {
+      display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px;
     }
-    .gallery-phase-label {
-      font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px;
+    .gallery-col { display: flex; flex-direction: column; }
+    .gallery-col-hd {
+      text-align: center; font-size: 10px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .5px;
+      padding: 5px 2px 8px; border-bottom: 1px solid var(--border); margin-bottom: 8px;
     }
-    .gallery-phase-label.yellow { color: #f5c400; }
-    .gallery-phase-label.blue   { color: #42a5f5; }
-    .gallery-phase-label.green  { color: #66bb6a; }
-    .gallery-items-list { display: flex; flex-direction: column; gap: 7px; margin-bottom: 7px; }
+    .gallery-col-hd.yellow { color: #f5c400; }
+    .gallery-col-hd.blue   { color: #42a5f5; }
+    .gallery-col-hd.green  { color: #66bb6a; }
+    .gallery-items-list { display: flex; flex-direction: column; gap: 6px; margin-bottom: 6px; }
     .gallery-item-inner {
-      display: grid; grid-template-columns: 76px 1fr 22px; gap: 8px; align-items: start;
-      background: var(--bg-mid); border-radius: 6px; padding: 8px;
+      display: flex; flex-direction: column; gap: 4px;
+      background: var(--bg-mid); border-radius: 5px; padding: 6px;
     }
-    .gallery-item-fields { display: flex; flex-direction: column; gap: 4px; }
+    .gallery-item-btns { display: flex; gap: 4px; }
+    .gallery-item-btns .ba-change-btn { flex: 1; font-size: 9px; height: 24px; }
     .gallery-rm-btn {
-      width: 22px; height: 22px; padding: 0;
+      width: 24px; height: 24px; padding: 0; flex-shrink: 0;
       background: rgba(244,67,54,.12); border: 1px solid rgba(244,67,54,.22);
       border-radius: 4px; color: #ff7070; font-size: 11px; cursor: pointer;
       display: flex; align-items: center; justify-content: center;
@@ -467,12 +469,12 @@
     }
     .gallery-rm-btn:hover { background: rgba(244,67,54,.26); }
     .add-gallery-btn {
-      width: 100%; padding: 7px;
+      width: 100%; padding: 5px;
       background: rgba(245,196,0,.07); border: 1px dashed rgba(245,196,0,.28);
-      border-radius: 6px; color: var(--accent);
-      font-size: 12px; font-weight: 600; cursor: pointer;
+      border-radius: 5px; color: var(--accent);
+      font-size: 11px; font-weight: 700; cursor: pointer;
       transition: background .15s;
-      display: flex; align-items: center; justify-content: center; gap: 5px;
+      display: flex; align-items: center; justify-content: center;
     }
     .add-gallery-btn:hover { background: rgba(245,196,0,.14); }
 
@@ -1574,14 +1576,14 @@ function showNote(msg, type) {
 function buildGalleryAccordion() {
   const body = document.getElementById('gallery-accordion-body');
   if (!body) return;
-  body.innerHTML = GALLERY_PHASES.map(({ k, label, cls }) => `
-    <div class="gallery-phase">
-      <div class="gallery-phase-hd">
-        <span class="gallery-phase-label ${cls}">${label}</span>
-      </div>
-      <div class="gallery-items-list" id="gallery-${k}-list"></div>
-      <button type="button" class="add-gallery-btn" onclick="addGalleryItem('${k}')">+ Adicionar foto</button>
-    </div>`).join('');
+  body.innerHTML = `<div class="gallery-3col">${
+    GALLERY_PHASES.map(({ k, label, cls }) => `
+      <div class="gallery-col">
+        <div class="gallery-col-hd ${cls}">${label}</div>
+        <div class="gallery-items-list" id="gallery-${k}-list"></div>
+        <button type="button" class="add-gallery-btn" onclick="addGalleryItem('${k}')">+</button>
+      </div>`).join('')
+  }</div>`;
 }
 
 function populateGalleryForm(g) {
@@ -1609,18 +1611,16 @@ function appendGalleryItem(phase, item) {
       <div class="ba-thumb-wrap" onclick="openGalleryLightbox(this)">
         <img class="ba-thumb gallery-thumb"${src ? ` src="${esc(src)}"` : ''} alt="">
       </div>
-      <div class="gallery-item-fields">
-        <div class="ba-url-row">
-          <input type="text" class="field-input" style="font-size:11px" data-field="image"
-            value="${esc(item.image || '')}" placeholder="img/foto.jpg"
-            oninput="updateGalleryThumb(this)">
-          <button type="button" class="ba-change-btn" onclick="changeGalleryPhoto(this)">Trocar</button>
-        </div>
-        <input type="text" class="field-input" style="font-size:11px;margin-top:4px" data-field="label"
-          value="${esc(item.label || '')}" placeholder="Descrição da foto"
-          oninput="scheduleSyncPreview()">
+      <input type="text" class="field-input" style="font-size:10px" data-field="image"
+        value="${esc(item.image || '')}" placeholder="img/foto.jpg"
+        oninput="updateGalleryThumb(this)">
+      <input type="text" class="field-input" style="font-size:10px" data-field="label"
+        value="${esc(item.label || '')}" placeholder="Descrição"
+        oninput="scheduleSyncPreview()">
+      <div class="gallery-item-btns">
+        <button type="button" class="ba-change-btn" onclick="changeGalleryPhoto(this)">Trocar</button>
+        <button type="button" class="gallery-rm-btn" onclick="removeGalleryItem(this)" title="Remover">✕</button>
       </div>
-      <button type="button" class="gallery-rm-btn" onclick="removeGalleryItem(this)" title="Remover">✕</button>
     </div>`;
   list.appendChild(el);
 }
