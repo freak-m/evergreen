@@ -728,6 +728,51 @@
             <div class="accordion-body" id="gallery-accordion-body"></div>
           </div>
 
+          <!-- SOBRE NÓS -->
+          <div class="accordion-item" data-section="sobre">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+              <span class="tab-icon">🌿</span>
+              <span class="accordion-title">Sobre Nós</span>
+              <span class="accordion-arrow">▼</span>
+            </div>
+            <div class="accordion-body">
+              <div class="field-group">
+                <label class="field-label" for="sobre-lead">Lead (frase de destaque)</label>
+                <input id="sobre-lead" type="text" class="field-input" placeholder="Convertendo desafios ambientais em valor sustentável.">
+              </div>
+              <span class="quill-label">Corpo do Texto</span>
+              <div class="quill-wrap"><div id="quill-sobre-body"></div></div>
+            </div>
+          </div>
+
+          <!-- PROCESSO DE GERMINAÇÃO -->
+          <div class="accordion-item" data-section="aplicacao">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+              <span class="tab-icon">🌱</span>
+              <span class="accordion-title">Processo de Germinação</span>
+              <span class="accordion-arrow">▼</span>
+            </div>
+            <div class="accordion-body">
+              <div class="field-group">
+                <label class="field-label" for="processo-subtitle">Subtítulo da Seção</label>
+                <input id="processo-subtitle" type="text" class="field-input" placeholder="Como a hidrossemeadura age no solo…">
+              </div>
+              <div class="accordion-sep"></div>
+              <div id="processo-accordion-body"></div>
+            </div>
+          </div>
+
+          <!-- APLICAÇÕES / PORTFOLIO -->
+          <div class="accordion-item" data-section="portfolio">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+              <span class="tab-icon">📋</span>
+              <span class="accordion-title">Aplicações da Hidrossemeadura</span>
+              <span class="accordion-arrow">▼</span>
+            </div>
+            <div class="accordion-body" id="portfolio-accordion-body">
+            </div>
+          </div>
+
           <!-- CTA -->
           <div class="accordion-item" data-section="cta-section">
             <div class="accordion-header" onclick="toggleAccordion(this)">
@@ -756,6 +801,7 @@
             </div>
             <div class="accordion-body">
               <div class="accordion-sub-label">Cards de Informação</div>
+              <div class="field-note" style="margin-bottom:10px">O número do card WhatsApp controla o botão "Falar no WhatsApp" em todo o site</div>
               <div class="cards-list" id="cards-editor-list"></div>
               <button class="add-card-btn" onclick="addCard()">+ Adicionar card</button>
 
@@ -849,6 +895,7 @@ let syncTimer    = null;
 let quillWaLabel = null;
 let quillWaSub   = null;
 let quillBAIntro = null;
+let quillSobre   = null;
 
 /* ================================================================
    INSUMOS CONFIG
@@ -865,6 +912,20 @@ const GALLERY_PHASES = [
   { k: 'antes',     label: '📌 Antes',    cls: 'yellow' },
   { k: 'aplicacao', label: '📌 Aplicação', cls: 'blue'   },
   { k: 'resultado', label: '📌 Resultado', cls: 'green'  },
+];
+
+const PROCESSO_STEPS = [
+  { k: 'step1', n: 1, label: 'Passo 1 — Formação da Capa'     },
+  { k: 'step2', n: 2, label: 'Passo 2 — Retenção de Umidade'  },
+  { k: 'step3', n: 3, label: 'Passo 3 — Nutrição e Fixação'   },
+  { k: 'step4', n: 4, label: 'Passo 4 — Tapete Fechado'       },
+];
+
+const PORTFOLIO_KEYS = [
+  { k: 'taludes',    label: 'Hidrossemeadura de Taludes'       },
+  { k: 'industrial', label: 'Restauração de Áreas Industriais' },
+  { k: 'urbanas',    label: 'Revegetação de Zonas Urbanas'     },
+  { k: 'erosao',     label: 'Controle de Erosão Rural'         },
 ];
 
 function buildInsumoAccordion() {
@@ -891,6 +952,54 @@ function buildInsumoAccordion() {
     </div>`).join('');
 }
 
+function buildProcessoAccordion() {
+  const body = document.getElementById('processo-accordion-body');
+  if (!body) return;
+  body.innerHTML = PROCESSO_STEPS.map(({ k, n, label }) => `
+    <div class="insumo-editor">
+      <div class="insumo-key-label">${label}</div>
+      <div class="insumo-editor-grid">
+        <div class="insumo-thumb-col">
+          <div class="ba-thumb-wrap" onclick="openLightbox(resolveImgSrc(document.getElementById('processo-${k}-src').value))">
+            <img id="processo-${k}-thumb" class="ba-thumb" src="" alt="${label}">
+          </div>
+          <div class="ba-url-row">
+            <input id="processo-${k}-src" type="text" class="field-input" style="font-size:10px" placeholder="img/..." oninput="updatePhotoThumb('processo-${k}')">
+            <button type="button" class="ba-change-btn" onclick="changePhotoUrl('processo-${k}')">Trocar</button>
+          </div>
+        </div>
+        <div class="insumo-fields-col">
+          <input id="processo-${k}-title" type="text" class="field-input" placeholder="Título">
+          <textarea id="processo-${k}-text" class="field-input" placeholder="Descrição…"></textarea>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+function buildPortfolioAccordion() {
+  const body = document.getElementById('portfolio-accordion-body');
+  if (!body) return;
+  body.innerHTML = PORTFOLIO_KEYS.map(({ k, label }) => `
+    <div class="insumo-editor">
+      <div class="insumo-key-label">${label}</div>
+      <div class="insumo-editor-grid">
+        <div class="insumo-thumb-col">
+          <div class="ba-thumb-wrap" onclick="openLightbox(resolveImgSrc(document.getElementById('portfolio-${k}-src').value))">
+            <img id="portfolio-${k}-thumb" class="ba-thumb" src="" alt="${label}">
+          </div>
+          <div class="ba-url-row">
+            <input id="portfolio-${k}-src" type="text" class="field-input" style="font-size:10px" placeholder="img/..." oninput="updatePhotoThumb('portfolio-${k}')">
+            <button type="button" class="ba-change-btn" onclick="changePhotoUrl('portfolio-${k}')">Trocar</button>
+          </div>
+        </div>
+        <div class="insumo-fields-col">
+          <input id="portfolio-${k}-title" type="text" class="field-input" placeholder="Título">
+          <textarea id="portfolio-${k}-text" class="field-input" placeholder="Descrição…"></textarea>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
 /* ================================================================
    CARD TYPES
    ================================================================ */
@@ -910,6 +1019,8 @@ const CARD_TYPES = [
 (function init() {
   buildInsumoAccordion();
   buildGalleryAccordion();
+  buildProcessoAccordion();
+  buildPortfolioAccordion();
 
   // Quill editors
   quillBAIntro = new Quill('#quill-ba-intro', {
@@ -927,10 +1038,16 @@ const CARD_TYPES = [
     placeholder: 'Subtítulo/nota abaixo do botão…',
     modules: { toolbar: [['bold', 'italic'], ['clean']] }
   });
+  quillSobre = new Quill('#quill-sobre-body', {
+    theme: 'snow',
+    placeholder: 'Texto do corpo da seção Sobre Nós…',
+    modules: { toolbar: [['bold', 'italic'], [{ header: [3, false] }], ['clean']] }
+  });
 
   quillBAIntro.on('text-change', scheduleSyncPreview);
   quillWaLabel.on('text-change', scheduleSyncPreview);
   quillWaSub.on('text-change',   scheduleSyncPreview);
+  quillSobre.on('text-change',   scheduleSyncPreview);
 
   // Form sync on input/change
   const ep = document.getElementById('editor-panel');
@@ -1070,6 +1187,26 @@ function populateForm(d) {
     updatePhotoThumb(`insumo-${k}`);
   });
 
+  sv('sobre-lead', d.sobre?.lead || '');
+  if (quillSobre) quillSobre.root.innerHTML = d.sobre?.body || '';
+
+  sv('processo-subtitle', d.processo?.subtitle || '');
+  PROCESSO_STEPS.forEach(({ k }) => {
+    const step = d.processo?.[k] || {};
+    sv(`processo-${k}-src`,   step.src   || '');
+    sv(`processo-${k}-title`, step.title || '');
+    sv(`processo-${k}-text`,  step.text  || '');
+    updatePhotoThumb(`processo-${k}`);
+  });
+
+  PORTFOLIO_KEYS.forEach(({ k }) => {
+    const item = d.portfolio?.[k] || {};
+    sv(`portfolio-${k}-src`,   item.src   || '');
+    sv(`portfolio-${k}-title`, item.title || '');
+    sv(`portfolio-${k}-text`,  item.text  || '');
+    updatePhotoThumb(`portfolio-${k}`);
+  });
+
   renderCardsEditor(d.contact?.cards || []);
   if (quillWaLabel) quillWaLabel.root.innerHTML = d.contact?.wa_panel_label || '';
   if (quillWaSub)   quillWaSub.root.innerHTML   = d.contact?.wa_panel_sub   || '';
@@ -1105,6 +1242,23 @@ function collectFormValues() {
       src:   gv(`insumo-${k}-src`),
       title: gv(`insumo-${k}-title`),
       text:  gv(`insumo-${k}-text`)
+    }])),
+    sobre: {
+      lead: gv('sobre-lead'),
+      body: quillSobre ? quillSobre.root.innerHTML : ''
+    },
+    processo: {
+      subtitle: gv('processo-subtitle'),
+      ...Object.fromEntries(PROCESSO_STEPS.map(({ k }) => [k, {
+        src:   gv(`processo-${k}-src`),
+        title: gv(`processo-${k}-title`),
+        text:  gv(`processo-${k}-text`)
+      }]))
+    },
+    portfolio: Object.fromEntries(PORTFOLIO_KEYS.map(({ k }) => [k, {
+      src:   gv(`portfolio-${k}-src`),
+      title: gv(`portfolio-${k}-title`),
+      text:  gv(`portfolio-${k}-text`)
     }])),
     contact: {
       cards:         getCardsFromForm(),
@@ -1315,6 +1469,36 @@ function syncPreview() {
       });
     }
 
+    // Sobre Nós
+    const sobreLeadEl = doc.getElementById('sobre-lead');
+    if (sobreLeadEl && d.sobre?.lead) sobreLeadEl.textContent = d.sobre.lead;
+    const sobreBodyEl = doc.getElementById('sobre-body');
+    if (sobreBodyEl && d.sobre?.body) sobreBodyEl.innerHTML = d.sobre.body;
+
+    // Processo de Germinação
+    const procSubEl = doc.getElementById('processo-subtitle');
+    if (procSubEl && d.processo?.subtitle) procSubEl.textContent = d.processo.subtitle;
+    if (d.processo) {
+      PROCESSO_STEPS.forEach(({ k, n }) => {
+        const step = d.processo[k];
+        if (!step) return;
+        if (step.src) doc.querySelectorAll(`[data-photo="process-${n}"]`).forEach(img => { img.src = step.src; });
+        doc.querySelectorAll(`[data-process="${n}"] h3`).forEach(el => { if (step.title) el.textContent = step.title; });
+        doc.querySelectorAll(`[data-process="${n}"] p`).forEach(el  => { if (step.text)  el.textContent = step.text;  });
+      });
+    }
+
+    // Portfolio
+    if (d.portfolio) {
+      PORTFOLIO_KEYS.forEach(({ k }) => {
+        const item = d.portfolio[k];
+        if (!item) return;
+        if (item.src) doc.querySelectorAll(`[data-photo="portfolio-${k}"]`).forEach(img => { img.src = item.src; });
+        doc.querySelectorAll(`[data-portfolio="${k}"] h3`).forEach(el => { if (item.title) el.textContent = item.title; });
+        doc.querySelectorAll(`[data-portfolio="${k}"] p`).forEach(el  => { if (item.text)  el.textContent = item.text;  });
+      });
+    }
+
     // CTA
     setText(doc, '.cta-question', d.cta.question);
     setText(doc, '.cta-headline', d.cta.headline);
@@ -1438,6 +1622,7 @@ function doFlash(doc, section) {
     `position:absolute;top:${p.top}px;left:${p.left}px;` +
     `width:${p.width}px;height:${p.height}px;` +
     `border:4px solid #e53935;border-radius:3px;` +
+    `background:rgba(229,57,53,0.15);` +
     `pointer-events:none;z-index:99998;box-sizing:border-box;opacity:1;`;
   doc.body.appendChild(ov);
 
@@ -1456,8 +1641,9 @@ function doFlash(doc, section) {
     ov.style.left   = fp.left   + 'px';
     ov.style.width  = fp.width  + 'px';
     ov.style.height = fp.height + 'px';
-    ov.style.opacity = '1';
-    ov.style.border  = '3px solid #F5C400';
+    ov.style.opacity    = '1';
+    ov.style.border     = '3px solid #F5C400';
+    ov.style.background = 'transparent';
 
     const badge = doc.createElement('div');
     badge.id = 'cms-editing-badge';

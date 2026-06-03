@@ -105,6 +105,35 @@
         setText('#footer-location', d.footer.location);
         setText('#footer-hours',    d.footer.hours);
       }
+
+      if (d.sobre) {
+        const leadEl = document.getElementById('sobre-lead');
+        if (leadEl && d.sobre.lead) leadEl.textContent = d.sobre.lead;
+        const bodyEl = document.getElementById('sobre-body');
+        if (bodyEl && d.sobre.body) bodyEl.innerHTML = d.sobre.body;
+      }
+
+      if (d.processo) {
+        const subEl = document.getElementById('processo-subtitle');
+        if (subEl && d.processo.subtitle) subEl.textContent = d.processo.subtitle;
+        [1, 2, 3, 4].forEach(n => {
+          const step = d.processo[`step${n}`];
+          if (!step) return;
+          if (step.src) setImg(`process-${n}`, step.src);
+          document.querySelectorAll(`[data-process="${n}"] h3`).forEach(el => { if (step.title) el.textContent = step.title; });
+          document.querySelectorAll(`[data-process="${n}"] p`).forEach(el  => { if (step.text)  el.textContent = step.text;  });
+        });
+      }
+
+      if (d.portfolio) {
+        ['taludes', 'industrial', 'urbanas', 'erosao'].forEach(k => {
+          const item = d.portfolio[k];
+          if (!item) return;
+          if (item.src) setImg(`portfolio-${k}`, item.src);
+          document.querySelectorAll(`[data-portfolio="${k}"] h3`).forEach(el => { if (item.title) el.textContent = item.title; });
+          document.querySelectorAll(`[data-portfolio="${k}"] p`).forEach(el  => { if (item.text)  el.textContent = item.text;  });
+        });
+      }
     }
   } catch (_) {}
 

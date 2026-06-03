@@ -485,9 +485,10 @@
         </div>
         <div class="about-content">
           <div class="about-text">
-            <p class="lead-text">
+            <p class="lead-text" id="sobre-lead">
               Convertendo desafios ambientais em valor sustentável.
             </p>
+            <div id="sobre-body">
             <p>
               A <strong>Evergreen Hidrossemeadura</strong> é especialista em hidrossemeadura — a técnica mais eficiente para revegetação em larga escala. Através de uma mistura de sementes, fertilizantes, mulch e água, aplicada sob pressão sobre o solo exposto, criamos uma biomembrana que protege e regenera o ambiente.
             </p>
@@ -497,6 +498,7 @@
             <p>
               Do primeiro broto ao tapete fechado, acompanhamos cada etapa do processo garantindo resultados duradouros e certificados.
             </p>
+            </div>
 
             <div class="about-sectors">
               <div class="sector-tag"><i class="fas fa-road"></i> Infraestrutura</div>
@@ -554,11 +556,11 @@
     <div class="section-plaque">
       <h2>Processo de Germinação</h2>
     </div>
-    <p class="section-subtitle">Como a hidrossemeadura age no solo e transforma áreas degradadas em tapetes verdes.</p>
+    <p class="section-subtitle" id="processo-subtitle">Como a hidrossemeadura age no solo e transforma áreas degradadas em tapetes verdes.</p>
 
     <div class="board-frame-inner">
 
-        <div class="index-card index-card--img">
+        <div class="index-card index-card--img" data-process="1">
           <div class="card-number">01</div>
           <img src="img/fases-aplicacao.png" alt="Aplicação de Hidrossemeadura" loading="lazy" class="card-photo" data-photo="process-1">
           <div class="card-body">
@@ -567,7 +569,7 @@
           </div>
         </div>
 
-        <div class="index-card index-card--img">
+        <div class="index-card index-card--img" data-process="2">
           <div class="card-number">02</div>
           <img src="img/fases-aplicado.png" alt="Retenção de Umidade" loading="lazy" class="card-photo" data-photo="process-2">
           <div class="card-body">
@@ -576,7 +578,7 @@
           </div>
         </div>
 
-        <div class="index-card index-card--img">
+        <div class="index-card index-card--img" data-process="3">
           <div class="card-number">03</div>
           <img src="img/solo-fases.png" alt="Camadas do Solo" loading="lazy" class="card-photo" data-photo="process-3">
           <div class="card-body">
@@ -585,7 +587,7 @@
           </div>
         </div>
 
-        <div class="index-card index-card--img">
+        <div class="index-card index-card--img" data-process="4">
           <div class="card-number">04</div>
           <img src="img/nao-pise.png" alt="Tapete Fechado" loading="lazy" class="card-photo" data-photo="process-4">
           <div class="card-body">
@@ -608,7 +610,7 @@
       <div class="swiper-wrapper">
 
         <div class="swiper-slide">
-          <div class="portfolio-card">
+          <div class="portfolio-card" data-portfolio="taludes">
             <div class="portfolio-frame">
               <img src="img/portfolio-taludes.png" alt="Hidrossemeadura de Taludes" loading="lazy" data-photo="portfolio-taludes">
               <div class="portfolio-frame-border"></div>
@@ -627,7 +629,7 @@
         </div>
 
         <div class="swiper-slide">
-          <div class="portfolio-card">
+          <div class="portfolio-card" data-portfolio="industrial">
             <div class="portfolio-frame">
               <img src="img/portfolio-industrial.png" alt="Restauração Industrial" loading="lazy" data-photo="portfolio-industrial">
               <div class="portfolio-frame-border"></div>
@@ -646,7 +648,7 @@
         </div>
 
         <div class="swiper-slide">
-          <div class="portfolio-card">
+          <div class="portfolio-card" data-portfolio="urbanas">
             <div class="portfolio-frame">
               <img src="img/portfolio-urbanas.png" alt="Revegetação Urbana" loading="lazy" data-photo="portfolio-urbanas">
               <div class="portfolio-frame-border"></div>
@@ -665,7 +667,7 @@
         </div>
 
         <div class="swiper-slide">
-          <div class="portfolio-card">
+          <div class="portfolio-card" data-portfolio="erosao">
             <div class="portfolio-frame">
               <img src="img/portfolio-erosao.png" alt="Controle de Erosão" loading="lazy" data-photo="portfolio-erosao">
               <div class="portfolio-frame-border"></div>

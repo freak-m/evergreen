@@ -34,6 +34,23 @@
     "wa_panel_label": "<p>Fale com nossa equipe agora mesmo</p>",
     "wa_panel_sub": "<p>Resposta em até duas horas em horário comercial</p>"
   },
+  "sobre": {
+    "lead": "Convertendo desafios ambientais em valor sustentável.",
+    "body": "<p>A <strong>Evergreen Hidrossemeadura</strong> é especialista em hidrossemeadura — a técnica mais eficiente para revegetação em larga escala. Através de uma mistura de sementes, fertilizantes, mulch e água, aplicada sob pressão sobre o solo exposto, criamos uma biomembrana que protege e regenera o ambiente.</p><p>Atendemos infraestrutura, mineração, agronegócio e engenharia civil com foco total em ESG e conformidade ambiental. Nossos projetos cobrem taludes críticos, áreas industriais degradadas, margens de rodovias e zonas urbanas.</p><p>Do primeiro broto ao tapete fechado, acompanhamos cada etapa do processo garantindo resultados duradouros e certificados.</p>"
+  },
+  "processo": {
+    "subtitle": "Como a hidrossemeadura age no solo e transforma áreas degradadas em tapetes verdes.",
+    "step1": { "src": "img/fases-aplicacao.png", "title": "Formação da Capa Protetora",   "text": "Quando o líquido é projetado no solo, a água evapora e os agentes colantes criam uma crosta porosa que protege as sementes contra erosão, chuvas e ventos." },
+    "step2": { "src": "img/fases-aplicado.png",  "title": "Retenção de Umidade",           "text": "As fibras orgânicas e aditivos funcionam como uma esponja, absorvendo e liberando gradualmente a água, criando o microclima ideal para despertar o embrião da semente." },
+    "step3": { "src": "img/solo-fases.png",      "title": "Nutrição e Fixação Radicular",  "text": "Os fertilizantes de liberação lenta fornecem nutrição contínua enquanto as raízes se fixam nas camadas do solo, garantindo cobertura permanente e controle de erosão." },
+    "step4": { "src": "img/nao-pise.png",        "title": "Tapete Fechado",                "text": "Em 30 dias a cobertura vegetal está consolidada. O solo protegido, as raízes fixadas e o tapete verde formado — sinal de que a hidrossemeadura cumpriu seu papel." }
+  },
+  "portfolio": {
+    "taludes":    { "src": "img/portfolio-taludes.png",    "title": "Hidrossemeadura de Taludes",       "text": "Estabilização de encostas com cobertura vegetal permanente e controle de erosão superficial" },
+    "industrial": { "src": "img/portfolio-industrial.png", "title": "Restauração de Áreas Industriais", "text": "Recuperação de passivos ambientais em complexos industriais e minerários com foco ESG" },
+    "urbanas":    { "src": "img/portfolio-urbanas.png",    "title": "Revegetação de Zonas Urbanas",     "text": "Criação de áreas verdes, paisagismo de rodovias e recuperação de margens de rios em ambiente urbano" },
+    "erosao":     { "src": "img/portfolio-erosao.png",     "title": "Controle de Erosão Rural",         "text": "Prevenção e recuperação de áreas erodidas em propriedades agrícolas e reservas legais" }
+  },
   "insumos": {
     "fertilizantes": { "src": "img/fertilizantes.png",    "title": "Corretivo de Solo", "text": "Solotrat equilibra o pH e condiciona o solo para a germinação rápida e uniforme" },
     "sementes":      { "src": "img/sementes.png",         "title": "Sementes",          "text": "Variedades certificadas de grama líquida para cada tipo de solo e bioma" },
