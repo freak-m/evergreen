@@ -972,6 +972,9 @@
 <!-- NOTIFICATION -->
 <div id="notification"></div>
 
+<!-- HIDDEN FILE INPUT for photo upload -->
+<input type="file" id="photo-file-input" accept="image/*" style="display:none">
+
 <!-- IMAGE LIGHTBOX -->
 <div id="img-lightbox">
   <button id="img-lightbox-close" onclick="closeLightbox()">✕</button>
@@ -1991,16 +1994,6 @@ function updateGalleryThumb(input) {
   scheduleSyncPreview();
 }
 
-function changeGalleryPhoto(btn) {
-  const inner = btn.closest('.gallery-item-inner');
-  const input = inner.querySelector('[data-field="image"]');
-  const thumb = inner.querySelector('.gallery-thumb');
-  input.value = '';
-  if (thumb) thumb.removeAttribute('src');
-  input.focus();
-  scheduleSyncPreview();
-}
-
 function removeGalleryItem(btn) {
   btn.closest('.gallery-item').remove();
   scheduleSyncPreview();
@@ -2041,13 +2034,89 @@ function updatePhotoThumb(key) {
   if (link)  { link.href = src || '#'; link.style.opacity = src ? '' : '.3'; }
 }
 
+/* ── Photo upload via GitHub API ───────────────────────────── */
+let _uploadTargetKey   = null;  // for keyed fields (ba, insumo, processo, portfolio, seo-og)
+let _uploadTargetInput = null;  // for gallery fields
+
 function changePhotoUrl(key) {
-  const input = document.getElementById(key + '-src');
-  if (!input) return;
-  input.value = '';
-  updatePhotoThumb(key);
-  input.focus();
-  scheduleSyncPreview();
+  _uploadTargetKey   = key;
+  _uploadTargetInput = null;
+  document.getElementById('photo-file-input').click();
+}
+
+function changeGalleryPhoto(btn) {
+  const inner = btn.closest('.gallery-item-inner');
+  _uploadTargetKey   = null;
+  _uploadTargetInput = inner.querySelector('[data-field="image"]');
+  document.getElementById('photo-file-input').click();
+}
+
+document.getElementById('photo-file-input').addEventListener('change', async function () {
+  const file = this.files[0];
+  this.value = '';
+  if (!file) return;
+
+  const token = sessionStorage.getItem('cms_token');
+  if (!token) { showNote('Sessão expirada. Faça login novamente.', 'error'); return; }
+
+  // Immediate local preview via data URL
+  const dataUrl = await fileToDataUrl(file);
+  if (_uploadTargetKey) {
+    const thumb = document.getElementById(_uploadTargetKey + '-thumb');
+    if (thumb) thumb.src = dataUrl;
+  } else if (_uploadTargetInput) {
+    const thumb = _uploadTargetInput.closest('.gallery-item-inner')?.querySelector('.gallery-thumb');
+    if (thumb) thumb.src = dataUrl;
+  }
+
+  showNote('⬆ Enviando imagem…', 'success');
+
+  try {
+    const ext      = file.name.split('.').pop().toLowerCase();
+    const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, '_');
+    const path     = 'img/' + safeName;
+    const hdrs     = { 'Authorization': `token ${token}`, 'Content-Type': 'application/json', 'Accept': 'application/vnd.github.v3+json' };
+
+    // Check if file already exists (need SHA to overwrite)
+    let sha;
+    const chk = await fetch(`${API}/repos/${OWNER}/${REPO}/contents/${path}?ref=${BRANCH}`, { headers: hdrs });
+    if (chk.ok) sha = (await chk.json()).sha;
+
+    const b64  = dataUrl.split(',')[1];
+    const body = { message: 'CMS: upload ' + safeName, content: b64, branch: BRANCH };
+    if (sha) body.sha = sha;
+
+    const up = await fetch(`${API}/repos/${OWNER}/${REPO}/contents/${path}`, {
+      method: 'PUT', headers: hdrs, body: JSON.stringify(body)
+    });
+    if (!up.ok) { const e = await up.json().catch(() => ({})); throw new Error(e.message || `Erro ${up.status}`); }
+
+    if (_uploadTargetKey) {
+      const input = document.getElementById(_uploadTargetKey + '-src');
+      if (input) { input.value = path; updatePhotoThumb(_uploadTargetKey); }
+    } else if (_uploadTargetInput) {
+      _uploadTargetInput.value = path;
+      const thumb = _uploadTargetInput.closest('.gallery-item-inner')?.querySelector('.gallery-thumb');
+      if (thumb) { thumb.src = resolveImgSrc(path); }
+    }
+    scheduleSyncPreview();
+    showNote('✓ Imagem enviada: ' + path, 'success');
+
+  } catch (ex) {
+    showNote('Erro ao enviar: ' + ex.message, 'error');
+  }
+
+  _uploadTargetKey   = null;
+  _uploadTargetInput = null;
+});
+
+function fileToDataUrl(file) {
+  return new Promise((resolve, reject) => {
+    const r = new FileReader();
+    r.onload  = () => resolve(r.result);
+    r.onerror = reject;
+    r.readAsDataURL(file);
+  });
 }
 
 /* ================================================================
