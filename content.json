@@ -1,17 +1,8 @@
 {
   "seo": {
-    "title": "Hidrossemeadura e Plantio de Grama em Campinas SP | Evergreen Gramaverde",
+    "title": "Hidrossemeadura e Plantio de Grama em Campinas SP | Evergreen hidrossemeadura",
     "description": "Empresa especializada em hidrossemeadura, plantio e venda de grama em Campinas-SP. Atendemos obras civis, taludes, mineração e agronegócio. Solicite orçamento!",
     "keywords": "hidrossemeadura Campinas, plantio de grama Campinas, venda de grama Campinas, instalação de grama SP, gramado Campinas, revegetação talude, controle erosão, Evergreen Gramaverde"
-  },
-  "antes_depois": {
-    "title": "Hidrossemeadura: A Técnica Mais Usada nos EUA",
-    "intro": "<p>A hidrossemeadura é um método de plantio hidráulico amplamente utilizado nos Estados Unidos, país onde a técnica surgiu na década de 1940. O processo consiste na pulverização de uma mistura fluida composta por sementes, água, adubo e cobertura protetora diretamente sobre a terra. Essa prática é muito comum para a formação rápida de gramados, contenção de encostas e restauração de solos danificados.</p><h3>O Crescimento da Técnica no Cenário Americano</h3><p>Criado originalmente por volta de 1940 para fixar o solo e evitar desmoronamentos nas margens das grandes estradas norte-americanas, esse sistema evoluiu até se transformar em uma das principais soluções ecológicas do país. Atualmente, o setor movimenta bilhões de dólares anualmente em território americano, impulsionado por uma busca constante por eficiência e pelo uso de maquinários modernos de alta tecnologia.</p>",
-    "pairs": [
-      { "before_src": "img/before-hydroseed.webp",   "after_src": "img/after-hydroseed.webp"   },
-      { "before_src": "img/before-hydroseed-2.webp", "after_src": "img/after-hydroseed-2.webp" },
-      { "before_src": "img/before-hydroseed-3.webp", "after_src": "img/after-hydroseed-3.webp" }
-    ]
   },
   "hero": {
     "tagline": "Convertendo Desafios Ambientais em Valor Sustentável",
@@ -22,17 +13,54 @@
     "stat3_value": "100%",
     "stat3_label": "conformidade ambiental"
   },
+  "antes_depois": {
+    "title": "Hidrossemeadura: A Técnica Mais Usada nos EUA",
+    "intro": "<p>A hidrossemeadura é um método de plantio hidráulico amplamente utilizado nos Estados Unidos, país onde a técnica surgiu na década de 1940. O processo consiste na pulverização de uma mistura fluida composta por sementes, água, adubo e cobertura protetora diretamente sobre a terra. Essa prática é muito comum para a formação rápida de gramados, contenção de encostas e restauração de solos danificados.</p><h3>O Crescimento da Técnica no Cenário Americano</h3><p>Criado originalmente por volta de 1940 para fixar o solo e evitar desmoronamentos nas margens das grandes estradas norte-americanas, esse sistema evoluiu até se transformar em uma das principais soluções ecológicas do país. Atualmente, o setor movimenta bilhões de dólares anualmente em território americano, impulsionado por uma busca constante por eficiência e pelo uso de maquinários modernos de alta tecnologia.</p>",
+    "pairs": [
+      {
+        "before_src": "img/before-hydroseed.webp",
+        "after_src": "img/after-hydroseed.webp"
+      },
+      {
+        "before_src": "img/before-hydroseed-2.webp",
+        "after_src": "img/after-hydroseed-2.webp"
+      },
+      {
+        "before_src": "img/before-hydroseed-3.webp",
+        "after_src": "img/after-hydroseed-3.webp"
+      }
+    ]
+  },
   "cta": {
     "question": "Quer esse resultado na sua obra?",
     "headline": "Faça um orçamento já"
   },
-  "contact": {
-    "cards": [
-      { "type": "whatsapp", "display": "(19) 98945-5715", "link": "5519989455715" },
-      { "type": "hours", "text": "Seg–Sex: 8h às 18h", "note": "Plantão 24h" }
-    ],
-    "wa_panel_label": "<p>Fale com nossa equipe agora mesmo</p>",
-    "wa_panel_sub": "<p>Resposta em até duas horas em horário comercial</p>"
+  "insumos": {
+    "fertilizantes": {
+      "src": "img/fertilizantes.png",
+      "title": "Corretivo de Solo",
+      "text": "Solotrat equilibra o pH e condiciona o solo para a germinação rápida e uniforme"
+    },
+    "sementes": {
+      "src": "img/sementes.png",
+      "title": "Sementes",
+      "text": "Variedades certificadas de grama líquida para cada tipo de solo e bioma"
+    },
+    "mulches": {
+      "src": "img/mulches.png",
+      "title": "Mulch de Fibra",
+      "text": "Fibra de madeira + adubo orgânico que retém umidade e protege a biomembrana"
+    },
+    "fixadores": {
+      "src": "img/fixadores.png",
+      "title": "Fixador",
+      "text": "Liga os componentes ao solo com resistência ao escoamento por chuvas e ventos"
+    },
+    "fibra": {
+      "src": "img/fibra-de-madeira.png",
+      "title": "Adubo Orgânico",
+      "text": "Nutrição natural de liberação lenta que sustenta o crescimento por semanas"
+    }
   },
   "sobre": {
     "lead": "Convertendo desafios ambientais em valor sustentável.",
@@ -40,23 +68,64 @@
   },
   "processo": {
     "subtitle": "Como a hidrossemeadura age no solo e transforma áreas degradadas em tapetes verdes.",
-    "step1": { "src": "img/fases-aplicacao.png", "title": "Formação da Capa Protetora",   "text": "Quando o líquido é projetado no solo, a água evapora e os agentes colantes criam uma crosta porosa que protege as sementes contra erosão, chuvas e ventos." },
-    "step2": { "src": "img/fases-aplicado.png",  "title": "Retenção de Umidade",           "text": "As fibras orgânicas e aditivos funcionam como uma esponja, absorvendo e liberando gradualmente a água, criando o microclima ideal para despertar o embrião da semente." },
-    "step3": { "src": "img/solo-fases.png",      "title": "Nutrição e Fixação Radicular",  "text": "Os fertilizantes de liberação lenta fornecem nutrição contínua enquanto as raízes se fixam nas camadas do solo, garantindo cobertura permanente e controle de erosão." },
-    "step4": { "src": "img/nao-pise.png",        "title": "Tapete Fechado",                "text": "Em 30 dias a cobertura vegetal está consolidada. O solo protegido, as raízes fixadas e o tapete verde formado — sinal de que a hidrossemeadura cumpriu seu papel." }
+    "step1": {
+      "src": "img/fases-aplicacao.png",
+      "title": "Formação da Capa Protetora",
+      "text": "Quando o líquido é projetado no solo, a água evapora e os agentes colantes criam uma crosta porosa que protege as sementes contra erosão, chuvas e ventos."
+    },
+    "step2": {
+      "src": "img/fases-aplicado.png",
+      "title": "Retenção de Umidade",
+      "text": "As fibras orgânicas e aditivos funcionam como uma esponja, absorvendo e liberando gradualmente a água, criando o microclima ideal para despertar o embrião da semente."
+    },
+    "step3": {
+      "src": "img/solo-fases.png",
+      "title": "Nutrição e Fixação Radicular",
+      "text": "Os fertilizantes de liberação lenta fornecem nutrição contínua enquanto as raízes se fixam nas camadas do solo, garantindo cobertura permanente e controle de erosão."
+    },
+    "step4": {
+      "src": "img/nao-pise.png",
+      "title": "Tapete Fechado",
+      "text": "Em 30 dias a cobertura vegetal está consolidada. O solo protegido, as raízes fixadas e o tapete verde formado — sinal de que a hidrossemeadura cumpriu seu papel."
+    }
   },
   "portfolio": {
-    "taludes":    { "src": "img/portfolio-taludes.png",    "title": "Hidrossemeadura de Taludes",       "text": "Estabilização de encostas com cobertura vegetal permanente e controle de erosão superficial" },
-    "industrial": { "src": "img/portfolio-industrial.png", "title": "Restauração de Áreas Industriais", "text": "Recuperação de passivos ambientais em complexos industriais e minerários com foco ESG" },
-    "urbanas":    { "src": "img/portfolio-urbanas.png",    "title": "Revegetação de Zonas Urbanas",     "text": "Criação de áreas verdes, paisagismo de rodovias e recuperação de margens de rios em ambiente urbano" },
-    "erosao":     { "src": "img/portfolio-erosao.png",     "title": "Controle de Erosão Rural",         "text": "Prevenção e recuperação de áreas erodidas em propriedades agrícolas e reservas legais" }
+    "taludes": {
+      "src": "img/portfolio-taludes.png",
+      "title": "Hidrossemeadura de Taludes",
+      "text": "Estabilização de encostas com cobertura vegetal permanente e controle de erosão superficial"
+    },
+    "industrial": {
+      "src": "img/portfolio-industrial.png",
+      "title": "Restauração de Áreas Industriais",
+      "text": "Recuperação de passivos ambientais em complexos industriais e minerários com foco ESG"
+    },
+    "urbanas": {
+      "src": "img/portfolio-urbanas.png",
+      "title": "Revegetação de Zonas Urbanas",
+      "text": "Criação de áreas verdes, paisagismo de rodovias e recuperação de margens de rios em ambiente urbano"
+    },
+    "erosao": {
+      "src": "img/portfolio-erosao.png",
+      "title": "Controle de Erosão Rural",
+      "text": "Prevenção e recuperação de áreas erodidas em propriedades agrícolas e reservas legais"
+    }
   },
-  "insumos": {
-    "fertilizantes": { "src": "img/fertilizantes.png",    "title": "Corretivo de Solo", "text": "Solotrat equilibra o pH e condiciona o solo para a germinação rápida e uniforme" },
-    "sementes":      { "src": "img/sementes.png",         "title": "Sementes",          "text": "Variedades certificadas de grama líquida para cada tipo de solo e bioma" },
-    "mulches":       { "src": "img/mulches.png",          "title": "Mulch de Fibra",    "text": "Fibra de madeira + adubo orgânico que retém umidade e protege a biomembrana" },
-    "fixadores":     { "src": "img/fixadores.png",        "title": "Fixador",           "text": "Liga os componentes ao solo com resistência ao escoamento por chuvas e ventos" },
-    "fibra":         { "src": "img/fibra-de-madeira.png", "title": "Adubo Orgânico",    "text": "Nutrição natural de liberação lenta que sustenta o crescimento por semanas" }
+  "contact": {
+    "cards": [
+      {
+        "type": "whatsapp",
+        "display": "(19) 98945-5715",
+        "link": "5519989455715"
+      },
+      {
+        "type": "hours",
+        "text": "Seg–Sex: 8h às 18h",
+        "note": "Plantão 24h"
+      }
+    ],
+    "wa_panel_label": "<p>Fale com nossa equipe agora mesmo</p>",
+    "wa_panel_sub": "<p>Resposta em até duas horas em horário comercial</p>"
   },
   "footer": {
     "location": "Campinas – SP",
