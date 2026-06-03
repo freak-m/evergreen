@@ -604,7 +604,6 @@
                   </div>
                   <div class="ba-url-row">
                     <input id="ba1-before-src" type="text" class="field-input" style="font-size:11px" placeholder="img/before-hydroseed.webp" oninput="updatePhotoThumb('ba1-before')">
-                    <a id="ba1-before-link" class="ba-url-open" href="#" target="_blank" rel="noopener" title="Ver foto">🔗</a>
                     <button type="button" class="ba-change-btn" onclick="changePhotoUrl('ba1-before')">Trocar</button>
                   </div>
                 </div>
@@ -615,7 +614,6 @@
                   </div>
                   <div class="ba-url-row">
                     <input id="ba1-after-src" type="text" class="field-input" style="font-size:11px" placeholder="img/after-hydroseed.webp" oninput="updatePhotoThumb('ba1-after')">
-                    <a id="ba1-after-link" class="ba-url-open" href="#" target="_blank" rel="noopener" title="Ver foto">🔗</a>
                     <button type="button" class="ba-change-btn" onclick="changePhotoUrl('ba1-after')">Trocar</button>
                   </div>
                 </div>
@@ -630,7 +628,6 @@
                   </div>
                   <div class="ba-url-row">
                     <input id="ba2-before-src" type="text" class="field-input" style="font-size:11px" placeholder="img/before-hydroseed-2.webp" oninput="updatePhotoThumb('ba2-before')">
-                    <a id="ba2-before-link" class="ba-url-open" href="#" target="_blank" rel="noopener" title="Ver foto">🔗</a>
                     <button type="button" class="ba-change-btn" onclick="changePhotoUrl('ba2-before')">Trocar</button>
                   </div>
                 </div>
@@ -641,7 +638,6 @@
                   </div>
                   <div class="ba-url-row">
                     <input id="ba2-after-src" type="text" class="field-input" style="font-size:11px" placeholder="img/after-hydroseed-2.webp" oninput="updatePhotoThumb('ba2-after')">
-                    <a id="ba2-after-link" class="ba-url-open" href="#" target="_blank" rel="noopener" title="Ver foto">🔗</a>
                     <button type="button" class="ba-change-btn" onclick="changePhotoUrl('ba2-after')">Trocar</button>
                   </div>
                 </div>
@@ -656,7 +652,6 @@
                   </div>
                   <div class="ba-url-row">
                     <input id="ba3-before-src" type="text" class="field-input" style="font-size:11px" placeholder="img/before-hydroseed-3.webp" oninput="updatePhotoThumb('ba3-before')">
-                    <a id="ba3-before-link" class="ba-url-open" href="#" target="_blank" rel="noopener" title="Ver foto">🔗</a>
                     <button type="button" class="ba-change-btn" onclick="changePhotoUrl('ba3-before')">Trocar</button>
                   </div>
                 </div>
@@ -667,11 +662,21 @@
                   </div>
                   <div class="ba-url-row">
                     <input id="ba3-after-src" type="text" class="field-input" style="font-size:11px" placeholder="img/after-hydroseed-3.webp" oninput="updatePhotoThumb('ba3-after')">
-                    <a id="ba3-after-link" class="ba-url-open" href="#" target="_blank" rel="noopener" title="Ver foto">🔗</a>
                     <button type="button" class="ba-change-btn" onclick="changePhotoUrl('ba3-after')">Trocar</button>
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+
+          <!-- INSUMOS -->
+          <div class="accordion-item" data-section="parceiros">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+              <span class="tab-icon">🌱</span>
+              <span class="accordion-title">Nossos Insumos</span>
+              <span class="accordion-arrow">▼</span>
+            </div>
+            <div class="accordion-body" id="insumos-accordion-body">
             </div>
           </div>
 
@@ -691,17 +696,6 @@
                 <label class="field-label" for="cta-headline">Chamada principal</label>
                 <input id="cta-headline" type="text" class="field-input" placeholder="Faça um orçamento já">
               </div>
-            </div>
-          </div>
-
-          <!-- INSUMOS -->
-          <div class="accordion-item" data-section="parceiros">
-            <div class="accordion-header" onclick="toggleAccordion(this)">
-              <span class="tab-icon">🌱</span>
-              <span class="accordion-title">Nossos Insumos</span>
-              <span class="accordion-arrow">▼</span>
-            </div>
-            <div class="accordion-body" id="insumos-accordion-body">
             </div>
           </div>
 
@@ -831,7 +825,6 @@ function buildInsumoAccordion() {
           </div>
           <div class="ba-url-row">
             <input id="insumo-${k}-src" type="text" class="field-input" style="font-size:10px" placeholder="img/..." oninput="updatePhotoThumb('insumo-${k}')">
-            <a id="insumo-${k}-link" class="ba-url-open" href="#" target="_blank" rel="noopener" title="Ver foto">🔗</a>
             <button type="button" class="ba-change-btn" onclick="changePhotoUrl('insumo-${k}')">Trocar</button>
           </div>
         </div>
