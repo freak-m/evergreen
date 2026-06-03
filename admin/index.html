@@ -2093,11 +2093,12 @@ document.getElementById('photo-file-input').addEventListener('change', async fun
 
     if (_uploadTargetKey) {
       const input = document.getElementById(_uploadTargetKey + '-src');
-      if (input) { input.value = path; updatePhotoThumb(_uploadTargetKey); }
+      if (input) input.value = path;
+      // Keep data URL preview already shown — don't overwrite with the
+      // not-yet-deployed path (GitHub Pages takes a few minutes to publish)
     } else if (_uploadTargetInput) {
       _uploadTargetInput.value = path;
-      const thumb = _uploadTargetInput.closest('.gallery-item-inner')?.querySelector('.gallery-thumb');
-      if (thumb) { thumb.src = resolveImgSrc(path); }
+      // Thumb already shows data URL preview — leave it
     }
     scheduleSyncPreview();
     showNote('✓ Imagem enviada: ' + path, 'success');
