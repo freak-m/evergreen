@@ -2,7 +2,30 @@
   "seo": {
     "title": "Hidrossemeadura e Plantio de Grama em Campinas SP | Evergreen hidrossemeadura",
     "description": "Empresa especializada em hidrossemeadura, plantio e venda de grama em Campinas-SP. Atendemos obras civis, taludes, mineração e agronegócio. Solicite orçamento!",
-    "keywords": "hidrossemeadura Campinas, plantio de grama Campinas, venda de grama Campinas, instalação de grama SP, gramado Campinas, revegetação talude, controle erosão, Evergreen Gramaverde"
+    "keywords": "hidrossemeadura Campinas, plantio de grama Campinas, venda de grama Campinas, instalação de grama SP, gramado Campinas, revegetação talude, controle erosão, Evergreen Gramaverde",
+    "og_image": "https://www.evergreenhidrossemeadura.com.br/img/contato.jpg",
+    "business": {
+      "name": "Evergreen Gramaverde",
+      "telephone": "+55-19-98945-5715",
+      "email": "contato@evergreenhidrossemeadura.com.br",
+      "url": "https://www.evergreenhidrossemeadura.com.br",
+      "price_range": "$$",
+      "street_address": "",
+      "address_locality": "Campinas",
+      "address_region": "SP",
+      "postal_code": ""
+    },
+    "area_served": "Campinas, Jundiaí, Sorocaba, Piracicaba, Ribeirão Preto, Limeira, Americana, Indaiatuba, Valinhos, Vinhedo, São Paulo",
+    "faq": [
+      { "q": "O que é hidrossemeadura?", "a": "Hidrossemeadura é uma técnica de revegetação hidráulica que projeta sobre o solo uma mistura fluida de sementes, água, fertilizante, mulch de fibra e fixador. É ideal para taludes, áreas degradadas e controle de erosão, garantindo cobertura uniforme em terrenos de difícil acesso." },
+      { "q": "Quanto tempo leva para aparecerem os primeiros brotos após a hidrossemeadura?", "a": "Os primeiros brotos aparecem entre 5 e 7 dias após a aplicação. A cobertura completa do solo ocorre em torno de 30 dias, dependendo das condições climáticas, espécie de semente e irrigação." },
+      { "q": "A hidrossemeadura funciona em taludes e encostas íngremes?", "a": "Sim. A hidrossemeadura em taludes é uma das aplicações mais comuns e eficientes da técnica. O fixador presente na mistura adere ao solo inclinado, criando uma camada protetora que previne erosão e deslizamentos enquanto a vegetação se desenvolve." },
+      { "q": "A hidrossemeadura serve para controle de erosão?", "a": "Sim. A cobertura vegetal criada pela hidrossemeadura protege o solo da ação erosiva da chuva e do vento imediatamente após a aplicação, pois o mulch de fibra forma uma capa protetora antes mesmo da germinação das sementes." },
+      { "q": "Quais tipos de obras podem usar hidrossemeadura?", "a": "A hidrossemeadura é indicada para obras civis (rodovias, ferrovias, loteamentos), mineração, áreas industriais, agronegócio, revegetação urbana, jardins de grandes extensões e quaisquer terrenos que necessitem de cobertura vegetal rápida e eficiente." },
+      { "q": "Quais regiões a Evergreen Gramaverde atende?", "a": "Atendemos Campinas e toda a região metropolitana, incluindo Jundiaí, Sorocaba, Piracicaba, Ribeirão Preto, Limeira, Americana, Indaiatuba, Valinhos, Vinhedo e demais municípios do interior de São Paulo." },
+      { "q": "A Evergreen Gramaverde também vende e instala grama em placas?", "a": "Sim! Além da hidrossemeadura, realizamos fornecimento e instalação de grama em placas (esmeralda, bermuda, batatais e outras espécies) para jardins residenciais, comerciais, campos esportivos e condomínios." },
+      { "q": "Como solicitar um orçamento de hidrossemeadura em Campinas?", "a": "Entre em contato pelo WhatsApp (19) 98945-5715 ou pelo formulário do site. Nossa equipe analisa a área, o tipo de solo e as espécies mais adequadas para apresentar uma proposta personalizada sem compromisso." }
+    ]
   },
   "hero": {
     "tagline": "Convertendo Desafios Ambientais em Valor Sustentável",

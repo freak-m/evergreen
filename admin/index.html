@@ -478,6 +478,36 @@
     }
     .add-gallery-btn:hover { background: rgba(245,196,0,.14); }
 
+    /* ── SEO EXTENDED ─────────────────────────────────────────── */
+    .seo-section-hd {
+      font-size: 11.5px; font-weight: 700; color: var(--accent);
+      text-transform: uppercase; letter-spacing: 1px;
+      margin: 22px 0 12px; display: flex; align-items: center; gap: 6px;
+    }
+    .biz-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 12px; }
+    .biz-grid .field-group { margin-bottom: 10px; }
+
+    /* ── FAQ EDITOR ────────────────────────────────────────────── */
+    .faq-item {
+      background: var(--bg-mid); border: 1px solid var(--border);
+      border-radius: 7px; padding: 12px; margin-bottom: 8px;
+    }
+    .faq-item-top {
+      display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;
+    }
+    .faq-item-num { font-size: 11px; font-weight: 700; color: var(--text-dim); }
+    .faq-item .card-field { margin-bottom: 6px; }
+    .faq-item .card-field:last-child { margin-bottom: 0; }
+    .faq-item .card-field input,
+    .faq-item .card-field textarea {
+      width: 100%; padding: 6px 9px; background: var(--bg-dark);
+      border: 1px solid var(--border); border-radius: 5px;
+      color: var(--text); font-size: 12.5px; outline: none; font-family: inherit;
+    }
+    .faq-item .card-field input:focus,
+    .faq-item .card-field textarea:focus { border-color: var(--accent); }
+    .faq-item .card-field textarea { min-height: 68px; resize: vertical; line-height: 1.5; }
+
     /* ── INSUMOS EDITOR ────────────────────────────────────────── */
     .insumo-editor { padding: 4px 0 14px; }
     .insumo-editor + .insumo-editor { border-top: 1px solid var(--border); padding-top: 14px; }
@@ -572,6 +602,78 @@
           <label class="field-label" for="seo-keywords">Palavras-chave</label>
           <textarea id="seo-keywords" class="field-input tall" placeholder="Palavras separadas por vírgula"></textarea>
         </div>
+
+        <!-- OG IMAGE -->
+        <div class="seo-section-hd">🖼 Imagem de Compartilhamento</div>
+        <div class="field-note" style="margin:-8px 0 12px">Aparece ao compartilhar no WhatsApp, Facebook e Google. Recomendado: 1200×630px</div>
+        <div class="ba-thumb-wrap" style="aspect-ratio:16/9;max-width:240px;margin-bottom:10px" onclick="openLightbox(resolveImgSrc(document.getElementById('seo-og-src').value))">
+          <img id="seo-og-thumb" class="ba-thumb" src="" alt="OG Image">
+        </div>
+        <div class="ba-url-row" style="margin-bottom:20px">
+          <input id="seo-og-src" type="text" class="field-input" style="font-size:11px" placeholder="https://seusite.com.br/img/foto.jpg" oninput="updatePhotoThumb('seo-og')">
+          <button type="button" class="ba-change-btn" onclick="changePhotoUrl('seo-og')">Trocar</button>
+        </div>
+
+        <!-- DADOS DO NEGÓCIO -->
+        <div class="seo-section-hd">🏢 Dados do Negócio</div>
+        <div class="field-note" style="margin:-8px 0 14px">Alimentam o card da empresa no Google e o painel lateral de busca</div>
+        <div class="biz-grid">
+          <div class="field-group">
+            <label class="field-label" for="seo-biz-name">Nome da Empresa</label>
+            <input id="seo-biz-name" type="text" class="field-input" placeholder="Evergreen Gramaverde">
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="seo-biz-tel">Telefone / WhatsApp</label>
+            <input id="seo-biz-tel" type="text" class="field-input" placeholder="+55-19-98945-5715">
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="seo-biz-email">E-mail</label>
+            <input id="seo-biz-email" type="email" class="field-input" placeholder="contato@seusite.com.br">
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="seo-biz-url">URL do Site</label>
+            <input id="seo-biz-url" type="url" class="field-input" placeholder="https://...">
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="seo-biz-street">Endereço (Rua e Número)</label>
+            <input id="seo-biz-street" type="text" class="field-input" placeholder="Rua Exemplo, 123">
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="seo-biz-city">Cidade</label>
+            <input id="seo-biz-city" type="text" class="field-input" placeholder="Campinas">
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="seo-biz-state">Estado (sigla)</label>
+            <input id="seo-biz-state" type="text" class="field-input" placeholder="SP">
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="seo-biz-cep">CEP</label>
+            <input id="seo-biz-cep" type="text" class="field-input" placeholder="13000-000">
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="seo-biz-price">Faixa de Preço</label>
+            <select id="seo-biz-price" class="field-input" style="cursor:pointer">
+              <option value="$">$ — Econômico</option>
+              <option value="$$" selected>$$ — Moderado</option>
+              <option value="$$$">$$$ — Premium</option>
+              <option value="$$$$">$$$$ — Alto padrão</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- ÁREA DE ATENDIMENTO -->
+        <div class="seo-section-hd">📍 Área de Atendimento</div>
+        <div class="field-group">
+          <textarea id="seo-area-served" class="field-input" style="min-height:64px" placeholder="Campinas, Jundiaí, Sorocaba, Piracicaba, ..."></textarea>
+          <div class="field-note">Separe as cidades por vírgula — o Google usa para ranquear por região</div>
+        </div>
+
+        <!-- FAQ -->
+        <div class="seo-section-hd">❓ Perguntas Frequentes (FAQ)</div>
+        <div class="field-note" style="margin:-8px 0 14px">Aparecem diretamente no Google como rich results expansíveis — excelente para SEO</div>
+        <div id="faq-editor-list"></div>
+        <button type="button" class="add-card-btn" onclick="addFaqItem()">+ Adicionar pergunta</button>
+
       </div>
 
       <!-- SEÇÕES TAB -->
@@ -1156,6 +1258,28 @@ function populateForm(d) {
   sv('seo-desc',     d.seo?.description  || '');
   sv('seo-keywords', d.seo?.keywords     || '');
 
+  sv('seo-og-src', d.seo?.og_image || '');
+  updatePhotoThumb('seo-og');
+
+  const b = d.seo?.business || {};
+  sv('seo-biz-name',   b.name             || '');
+  sv('seo-biz-tel',    b.telephone        || '');
+  sv('seo-biz-email',  b.email            || '');
+  sv('seo-biz-url',    b.url              || '');
+  sv('seo-biz-street', b.street_address   || '');
+  sv('seo-biz-city',   b.address_locality || '');
+  sv('seo-biz-state',  b.address_region   || '');
+  sv('seo-biz-cep',    b.postal_code      || '');
+  sv('seo-biz-price',  b.price_range      || '$$');
+
+  sv('seo-area-served', d.seo?.area_served || '');
+
+  const faqList = document.getElementById('faq-editor-list');
+  if (faqList) {
+    faqList.innerHTML = '';
+    (d.seo?.faq || []).forEach(item => addFaqItem(item));
+  }
+
   sv('hero-tagline',   d.hero?.tagline    || '');
   sv('hero-stat1-value', d.hero?.stat1_value || '');
   sv('hero-stat1-label', d.hero?.stat1_label || '');
@@ -1221,7 +1345,21 @@ function collectFormValues() {
     seo: {
       title:       gv('seo-title'),
       description: gv('seo-desc'),
-      keywords:    gv('seo-keywords')
+      keywords:    gv('seo-keywords'),
+      og_image:    gv('seo-og-src'),
+      business: {
+        name:             gv('seo-biz-name'),
+        telephone:        gv('seo-biz-tel'),
+        email:            gv('seo-biz-email'),
+        url:              gv('seo-biz-url'),
+        price_range:      gv('seo-biz-price'),
+        street_address:   gv('seo-biz-street'),
+        address_locality: gv('seo-biz-city'),
+        address_region:   gv('seo-biz-state'),
+        postal_code:      gv('seo-biz-cep')
+      },
+      area_served: gv('seo-area-served'),
+      faq:         getFaqFromForm()
     },
     hero: {
       tagline:     gv('hero-tagline'),
@@ -1271,6 +1409,40 @@ function collectFormValues() {
 
 function sv(id, val) { const el = document.getElementById(id); if (el) el.value = val; }
 function gv(id)      { const el = document.getElementById(id); return el ? el.value.trim() : ''; }
+
+/* ================================================================
+   FAQ EDITOR
+   ================================================================ */
+function addFaqItem(item) {
+  item = item || { q: '', a: '' };
+  const list = document.getElementById('faq-editor-list');
+  if (!list) return;
+  const el = document.createElement('div');
+  el.className = 'faq-item';
+  el.innerHTML = `
+    <div class="faq-item-top">
+      <span class="faq-item-num">❓ Pergunta</span>
+      <button type="button" class="card-rm-btn" onclick="this.closest('.faq-item').remove()" title="Remover">✕</button>
+    </div>
+    <div class="card-field">
+      <label>Pergunta</label>
+      <input type="text" data-field="q" value="${esc(item.q || '')}" placeholder="Ex: O que é hidrossemeadura?">
+    </div>
+    <div class="card-field">
+      <label>Resposta</label>
+      <textarea data-field="a" placeholder="Resposta completa…">${esc(item.a || '')}</textarea>
+    </div>`;
+  list.appendChild(el);
+}
+
+function getFaqFromForm() {
+  return Array.from(document.querySelectorAll('#faq-editor-list .faq-item'))
+    .map(item => ({
+      q: item.querySelector('[data-field="q"]').value.trim(),
+      a: item.querySelector('[data-field="a"]').value.trim()
+    }))
+    .filter(f => f.q);
+}
 
 /* ================================================================
    TABS

@@ -37,6 +37,56 @@
         setMeta('meta[property="og:description"]',  d.seo.description);
         setMeta('meta[name="twitter:title"]',       d.seo.title);
         setMeta('meta[name="twitter:description"]', d.seo.description);
+        if (d.seo.og_image) {
+          setMeta('meta[property="og:image"]',  d.seo.og_image);
+          setMeta('meta[name="twitter:image"]', d.seo.og_image);
+        }
+
+        const ldEl = document.getElementById('ld-json');
+        if (ldEl) {
+          try {
+            const schema = JSON.parse(ldEl.textContent);
+            const graph  = schema['@graph'] || [];
+            const biz    = graph.find(n => (Array.isArray(n['@type']) ? n['@type'] : [n['@type']]).includes('LocalBusiness'));
+            if (biz) {
+              if (d.seo.og_image) biz.image = d.seo.og_image;
+              if (d.seo.business) {
+                const b = d.seo.business;
+                if (b.name) {
+                  biz.name = b.name;
+                  const ws = graph.find(n => n['@type'] === 'WebSite');
+                  if (ws) ws.name = b.name;
+                }
+                if (b.telephone) {
+                  biz.telephone = b.telephone;
+                  if (biz.contactPoint) biz.contactPoint.telephone = b.telephone;
+                  biz.sameAs = ['https://wa.me/' + b.telephone.replace(/\D/g, '')];
+                }
+                if (b.email)       biz.email      = b.email;
+                if (b.url)         biz.url        = b.url;
+                if (b.price_range) biz.priceRange = b.price_range;
+                if (!biz.address)  biz.address    = { '@type': 'PostalAddress', addressCountry: 'BR' };
+                if (b.street_address)   biz.address.streetAddress   = b.street_address;
+                if (b.address_locality) biz.address.addressLocality = b.address_locality;
+                if (b.address_region)   biz.address.addressRegion   = b.address_region;
+                if (b.postal_code)      biz.address.postalCode      = b.postal_code;
+              }
+              if (d.seo.area_served) {
+                biz.areaServed = d.seo.area_served
+                  .split(',').map(s => s.trim()).filter(Boolean)
+                  .map(name => ({ '@type': 'City', name }));
+              }
+            }
+            if (Array.isArray(d.seo.faq) && d.seo.faq.length > 0) {
+              let faqNode = graph.find(n => n['@type'] === 'FAQPage');
+              if (!faqNode) { faqNode = { '@type': 'FAQPage' }; graph.push(faqNode); }
+              faqNode.mainEntity = d.seo.faq
+                .filter(f => f.q && f.a)
+                .map(f => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } }));
+            }
+            ldEl.textContent = '\n  ' + JSON.stringify(schema, null, 2) + '\n  ';
+          } catch (_) {}
+        }
       }
 
       if (d.antes_depois) {
