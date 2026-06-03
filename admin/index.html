@@ -440,6 +440,42 @@
     }
     .ba-change-btn:hover { background: rgba(245,196,0,.22); }
 
+    /* ── GALLERY EDITOR ────────────────────────────────────────── */
+    .gallery-phase { margin-bottom: 14px; }
+    .gallery-phase + .gallery-phase { border-top: 1px solid var(--border); padding-top: 14px; }
+    .gallery-phase-hd {
+      display: flex; align-items: center; justify-content: space-between; margin-bottom: 9px;
+    }
+    .gallery-phase-label {
+      font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px;
+    }
+    .gallery-phase-label.yellow { color: #f5c400; }
+    .gallery-phase-label.blue   { color: #42a5f5; }
+    .gallery-phase-label.green  { color: #66bb6a; }
+    .gallery-items-list { display: flex; flex-direction: column; gap: 7px; margin-bottom: 7px; }
+    .gallery-item-inner {
+      display: grid; grid-template-columns: 76px 1fr 22px; gap: 8px; align-items: start;
+      background: var(--bg-mid); border-radius: 6px; padding: 8px;
+    }
+    .gallery-item-fields { display: flex; flex-direction: column; gap: 4px; }
+    .gallery-rm-btn {
+      width: 22px; height: 22px; padding: 0;
+      background: rgba(244,67,54,.12); border: 1px solid rgba(244,67,54,.22);
+      border-radius: 4px; color: #ff7070; font-size: 11px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background .15s;
+    }
+    .gallery-rm-btn:hover { background: rgba(244,67,54,.26); }
+    .add-gallery-btn {
+      width: 100%; padding: 7px;
+      background: rgba(245,196,0,.07); border: 1px dashed rgba(245,196,0,.28);
+      border-radius: 6px; color: var(--accent);
+      font-size: 12px; font-weight: 600; cursor: pointer;
+      transition: background .15s;
+      display: flex; align-items: center; justify-content: center; gap: 5px;
+    }
+    .add-gallery-btn:hover { background: rgba(245,196,0,.14); }
+
     /* ── INSUMOS EDITOR ────────────────────────────────────────── */
     .insumo-editor { padding: 4px 0 14px; }
     .insumo-editor + .insumo-editor { border-top: 1px solid var(--border); padding-top: 14px; }
@@ -680,6 +716,16 @@
             </div>
           </div>
 
+          <!-- GALERIA -->
+          <div class="accordion-item" data-section="galeria">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+              <span class="tab-icon">🖼</span>
+              <span class="accordion-title">Galeria de Projetos</span>
+              <span class="accordion-arrow">▼</span>
+            </div>
+            <div class="accordion-body" id="gallery-accordion-body"></div>
+          </div>
+
           <!-- CTA -->
           <div class="accordion-item" data-section="cta-section">
             <div class="accordion-header" onclick="toggleAccordion(this)">
@@ -795,6 +841,7 @@ const API    = 'https://api.github.com';
    STATE
    ================================================================ */
 let contentSha   = null;
+let gallerySha   = null;
 let previewReady = false;
 let syncTimer    = null;
 let quillWaLabel = null;
@@ -854,6 +901,7 @@ const CARD_TYPES = [
    ================================================================ */
 (function init() {
   buildInsumoAccordion();
+  buildGalleryAccordion();
 
   // Quill editors
   quillBAIntro = new Quill('#quill-ba-intro', {
@@ -927,17 +975,25 @@ async function doLogin(token, silent) {
   btn.innerHTML = '<span class="spinner"></span>';
 
   try {
-    const res = await fetch(
-      `${API}/repos/${OWNER}/${REPO}/contents/content.json?ref=${BRANCH}`,
-      { headers: { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github.v3+json' } }
-    );
-    if (!res.ok) {
-      const j = await res.json().catch(() => ({}));
-      throw new Error(j.message || `HTTP ${res.status}`);
+    const hdrs = { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github.v3+json' };
+    const [cRes, gRes] = await Promise.all([
+      fetch(`${API}/repos/${OWNER}/${REPO}/contents/content.json?ref=${BRANCH}`, { headers: hdrs }),
+      fetch(`${API}/repos/${OWNER}/${REPO}/contents/gallery.json?ref=${BRANCH}`, { headers: hdrs })
+    ]);
+    if (!cRes.ok) {
+      const j = await cRes.json().catch(() => ({}));
+      throw new Error(j.message || `HTTP ${cRes.status}`);
     }
-    const file = await res.json();
+    const file = await cRes.json();
     contentSha = file.sha;
     const data = JSON.parse(decodeURIComponent(escape(atob(file.content.replace(/\n/g, '')))));
+
+    if (gRes.ok) {
+      const gFile = await gRes.json();
+      gallerySha = gFile.sha;
+      const gData = JSON.parse(decodeURIComponent(escape(atob(gFile.content.replace(/\n/g, '')))));
+      populateGalleryForm(gData);
+    }
 
     sessionStorage.setItem('cms_token', token);
     document.getElementById('login-screen').style.display = 'none';
@@ -1280,6 +1336,25 @@ function syncPreview() {
     setText(doc, '#footer-location', d.footer.location);
     setText(doc, '#footer-hours',    d.footer.hours);
 
+    // Gallery
+    const pinMap = { antes: 'pin-yellow', aplicacao: 'pin-blue', resultado: 'pin-green' };
+    const gData = collectGalleryValues();
+    Object.entries(pinMap).forEach(([key, pin]) => {
+      const col = doc.querySelector(`[data-gallery-phase="${key}"]`);
+      if (!col || !Array.isArray(gData[key])) return;
+      col.innerHTML = '';
+      gData[key].forEach(({ image, label }) => {
+        const item    = doc.createElement('div');  item.className = 'gallery-item';
+        const pp      = doc.createElement('div');  pp.className   = `pushpin ${pin}`;
+        const frame   = doc.createElement('div');  frame.className = 'photo-frame';
+        const img     = doc.createElement('img');  img.src = image; img.alt = label || ''; img.loading = 'lazy';
+        const lbl     = doc.createElement('div');  lbl.className = 'photo-label'; lbl.textContent = label || '';
+        frame.append(img, lbl);
+        item.append(pp, frame);
+        col.append(item);
+      });
+    });
+
   } catch (_) { /* cross-origin or not ready */ }
 }
 
@@ -1337,25 +1412,26 @@ function doFlash(doc, section) {
   cleanPreviewMarks(doc);
 
   const win = doc.defaultView;
-  const ov  = doc.createElement('div');
+
+  function absPos() {
+    const r = section.getBoundingClientRect();
+    return {
+      top:    r.top  + (win.pageYOffset || doc.documentElement.scrollTop),
+      left:   r.left + (win.pageXOffset || doc.documentElement.scrollLeft),
+      width:  r.width,
+      height: r.height
+    };
+  }
+
+  const p = absPos();
+  const ov = doc.createElement('div');
   ov.id = 'cms-flash-overlay';
   ov.style.cssText =
-    'position:fixed;border:4px solid #e53935;border-radius:3px;' +
-    'pointer-events:none;z-index:99998;box-sizing:border-box;opacity:1;';
+    `position:absolute;top:${p.top}px;left:${p.left}px;` +
+    `width:${p.width}px;height:${p.height}px;` +
+    `border:4px solid #e53935;border-radius:3px;` +
+    `pointer-events:none;z-index:99998;box-sizing:border-box;opacity:1;`;
   doc.body.appendChild(ov);
-
-  // rAF loop: keep overlay aligned with section while it scrolls
-  const flashStart = Date.now();
-  function tick() {
-    if (!ov.parentNode) return;
-    const r = section.getBoundingClientRect();
-    ov.style.top    = r.top    + 'px';
-    ov.style.left   = r.left   + 'px';
-    ov.style.width  = r.width  + 'px';
-    ov.style.height = r.height + 'px';
-    if (Date.now() - flashStart < 4000) win.requestAnimationFrame(tick);
-  }
-  tick();
 
   // Flash twice: on→off→on→off
   [440, 880, 1320, 1760].forEach((delay, i) => {
@@ -1364,12 +1440,17 @@ function doFlash(doc, section) {
     }, delay);
   });
 
-  // After flash: switch to yellow editing ring + badge
+  // After flash: lock yellow ring at section's final position + badge
   setTimeout(() => {
-    if (ov.parentNode) {
-      ov.style.opacity = '1';
-      ov.style.border  = '3px solid #F5C400';
-    }
+    if (!ov.parentNode) return;
+    const fp = absPos();
+    ov.style.top    = fp.top    + 'px';
+    ov.style.left   = fp.left   + 'px';
+    ov.style.width  = fp.width  + 'px';
+    ov.style.height = fp.height + 'px';
+    ov.style.opacity = '1';
+    ov.style.border  = '3px solid #F5C400';
+
     const badge = doc.createElement('div');
     badge.id = 'cms-editing-badge';
     badge.textContent = '✏ Editando esta seção';
@@ -1395,7 +1476,7 @@ function scrollPreviewToSection(sectionId) {
     if (!section) return;
 
     section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    setTimeout(() => { try { doFlash(doc, section); } catch (_) {} }, 700);
+    setTimeout(() => { try { doFlash(doc, section); } catch (_) {} }, 1100);
 
   } catch (_) {}
 }
@@ -1429,32 +1510,33 @@ async function handlePublish() {
   btn.innerHTML = '<span class="spinner" style="border-top-color:#111"></span>';
 
   try {
-    const data = collectFormValues();
-    const json = JSON.stringify(data, null, 2);
-    const b64  = toB64Unicode(json);
+    const hdrs = {
+      'Authorization': `token ${token}`,
+      'Content-Type':  'application/json',
+      'Accept':        'application/vnd.github.v3+json'
+    };
 
-    const res = await fetch(`${API}/repos/${OWNER}/${REPO}/contents/content.json`, {
-      method: 'PUT',
-      headers: {
-        'Authorization': `token ${token}`,
-        'Content-Type':  'application/json',
-        'Accept':        'application/vnd.github.v3+json'
-      },
+    const cRes = await fetch(`${API}/repos/${OWNER}/${REPO}/contents/content.json`, {
+      method: 'PUT', headers: hdrs,
       body: JSON.stringify({
         message: 'CMS: atualizar conteúdo do site',
-        content: b64,
-        sha:     contentSha,
-        branch:  BRANCH
+        content: toB64Unicode(JSON.stringify(collectFormValues(), null, 2)),
+        sha: contentSha, branch: BRANCH
       })
     });
+    if (!cRes.ok) { const e = await cRes.json().catch(() => ({})); throw new Error(e.message || `Erro ${cRes.status}`); }
+    contentSha = (await cRes.json()).content.sha;
 
-    if (!res.ok) {
-      const e = await res.json().catch(() => ({}));
-      throw new Error(e.message || `Erro ${res.status}`);
-    }
-
-    const result = await res.json();
-    contentSha = result.content.sha;
+    const gRes = await fetch(`${API}/repos/${OWNER}/${REPO}/contents/gallery.json`, {
+      method: 'PUT', headers: hdrs,
+      body: JSON.stringify({
+        message: 'CMS: atualizar galeria de projetos',
+        content: toB64Unicode(JSON.stringify(collectGalleryValues(), null, 2)),
+        sha: gallerySha, branch: BRANCH
+      })
+    });
+    if (!gRes.ok) { const e = await gRes.json().catch(() => ({})); throw new Error(e.message || `Erro ${gRes.status}`); }
+    gallerySha = (await gRes.json()).content.sha;
 
     showNote('✓ Publicado com sucesso!\nO site atualiza em torno de 5 minutos.', 'success');
 
@@ -1478,6 +1560,108 @@ function showNote(msg, type) {
   el.textContent = msg;
   el.className = 'show ' + type;
   setTimeout(() => { el.className = ''; }, 6000);
+}
+
+/* ================================================================
+   GALLERY EDITOR
+   ================================================================ */
+const GALLERY_PHASES = [
+  { k: 'antes',     label: '📌 Antes',    cls: 'yellow' },
+  { k: 'aplicacao', label: '📌 Aplicação', cls: 'blue'   },
+  { k: 'resultado', label: '📌 Resultado', cls: 'green'  },
+];
+
+function buildGalleryAccordion() {
+  const body = document.getElementById('gallery-accordion-body');
+  if (!body) return;
+  body.innerHTML = GALLERY_PHASES.map(({ k, label, cls }) => `
+    <div class="gallery-phase">
+      <div class="gallery-phase-hd">
+        <span class="gallery-phase-label ${cls}">${label}</span>
+      </div>
+      <div class="gallery-items-list" id="gallery-${k}-list"></div>
+      <button type="button" class="add-gallery-btn" onclick="addGalleryItem('${k}')">+ Adicionar foto</button>
+    </div>`).join('');
+}
+
+function populateGalleryForm(g) {
+  GALLERY_PHASES.forEach(({ k }) => {
+    const list = document.getElementById(`gallery-${k}-list`);
+    if (!list) return;
+    list.innerHTML = '';
+    (g[k] || []).forEach(item => appendGalleryItem(k, item));
+  });
+}
+
+function addGalleryItem(phase) {
+  appendGalleryItem(phase, { image: '', label: '' });
+  scheduleSyncPreview();
+}
+
+function appendGalleryItem(phase, item) {
+  const list = document.getElementById(`gallery-${phase}-list`);
+  if (!list) return;
+  const el = document.createElement('div');
+  el.className = 'gallery-item';
+  const src = item.image ? resolveImgSrc(item.image) : '';
+  el.innerHTML = `
+    <div class="gallery-item-inner">
+      <div class="ba-thumb-wrap" onclick="openGalleryLightbox(this)">
+        <img class="ba-thumb gallery-thumb"${src ? ` src="${esc(src)}"` : ''} alt="">
+      </div>
+      <div class="gallery-item-fields">
+        <div class="ba-url-row">
+          <input type="text" class="field-input" style="font-size:11px" data-field="image"
+            value="${esc(item.image || '')}" placeholder="img/foto.jpg"
+            oninput="updateGalleryThumb(this)">
+          <button type="button" class="ba-change-btn" onclick="changeGalleryPhoto(this)">Trocar</button>
+        </div>
+        <input type="text" class="field-input" style="font-size:11px;margin-top:4px" data-field="label"
+          value="${esc(item.label || '')}" placeholder="Descrição da foto"
+          oninput="scheduleSyncPreview()">
+      </div>
+      <button type="button" class="gallery-rm-btn" onclick="removeGalleryItem(this)" title="Remover">✕</button>
+    </div>`;
+  list.appendChild(el);
+}
+
+function updateGalleryThumb(input) {
+  const thumb = input.closest('.gallery-item-inner').querySelector('.gallery-thumb');
+  const src = resolveImgSrc(input.value.trim());
+  if (thumb) { if (src) thumb.src = src; else thumb.removeAttribute('src'); }
+  scheduleSyncPreview();
+}
+
+function changeGalleryPhoto(btn) {
+  const inner = btn.closest('.gallery-item-inner');
+  const input = inner.querySelector('[data-field="image"]');
+  const thumb = inner.querySelector('.gallery-thumb');
+  input.value = '';
+  if (thumb) thumb.removeAttribute('src');
+  input.focus();
+  scheduleSyncPreview();
+}
+
+function removeGalleryItem(btn) {
+  btn.closest('.gallery-item').remove();
+  scheduleSyncPreview();
+}
+
+function openGalleryLightbox(thumbWrap) {
+  const input = thumbWrap.closest('.gallery-item-inner').querySelector('[data-field="image"]');
+  if (input && input.value.trim()) openLightbox(resolveImgSrc(input.value.trim()));
+}
+
+function collectGalleryValues() {
+  return Object.fromEntries(GALLERY_PHASES.map(({ k }) => {
+    const items = Array.from(document.querySelectorAll(`#gallery-${k}-list .gallery-item`))
+      .map(item => ({
+        image: item.querySelector('[data-field="image"]').value.trim(),
+        label: item.querySelector('[data-field="label"]').value.trim()
+      }))
+      .filter(item => item.image);
+    return [k, items];
+  }));
 }
 
 /* ================================================================
