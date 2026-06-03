@@ -859,6 +859,12 @@ const INSUMO_KEYS = [
   { k: 'fibra',         label: 'Adubo Orgânico'    },
 ];
 
+const GALLERY_PHASES = [
+  { k: 'antes',     label: '📌 Antes',    cls: 'yellow' },
+  { k: 'aplicacao', label: '📌 Aplicação', cls: 'blue'   },
+  { k: 'resultado', label: '📌 Resultado', cls: 'green'  },
+];
+
 function buildInsumoAccordion() {
   const body = document.getElementById('insumos-accordion-body');
   if (!body) return;
@@ -1565,12 +1571,6 @@ function showNote(msg, type) {
 /* ================================================================
    GALLERY EDITOR
    ================================================================ */
-const GALLERY_PHASES = [
-  { k: 'antes',     label: '📌 Antes',    cls: 'yellow' },
-  { k: 'aplicacao', label: '📌 Aplicação', cls: 'blue'   },
-  { k: 'resultado', label: '📌 Resultado', cls: 'green'  },
-];
-
 function buildGalleryAccordion() {
   const body = document.getElementById('gallery-accordion-body');
   if (!body) return;
