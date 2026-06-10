@@ -102,7 +102,10 @@
       display: flex; align-items: center; gap: 10px;
       padding: 18px 16px 16px;
       border-bottom: 1px solid var(--border);
+      text-decoration: none;
+      transition: opacity .15s;
     }
+    .sidebar-logo:hover { opacity: .8; }
     .sidebar-logo img {
       width: 34px; height: 34px; object-fit: contain;
       filter: drop-shadow(0 0 5px rgba(245,196,0,.2));
@@ -745,13 +748,13 @@
 
   <!-- SIDEBAR -->
   <aside id="sidebar">
-    <div class="sidebar-logo">
-      <img src="../img/logo.png" alt="">
+    <a class="sidebar-logo" href="https://www.evergreenhidrossemeadura.com.br" target="_blank" rel="noopener" title="Abrir site">
+      <img src="../img/logo.png" alt="Evergreen">
       <div class="sidebar-logo-text">
         <strong>Evergreen</strong>
         <span>CMS</span>
       </div>
-    </div>
+    </a>
 
     <div class="nav-label">Analytics</div>
     <button class="tab-btn active" data-tab="dashboard"><span class="tab-icon">📊</span> Cloudflare Metrics</button>
