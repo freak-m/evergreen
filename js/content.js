@@ -151,6 +151,21 @@
         }
       }
 
+      // ── WhatsApp click tracking ─────────────────────────────────
+      const workerUrl = (d.integrations?.worker_url || '').trim();
+      if (workerUrl) {
+        document.querySelectorAll('a[href*="wa.me/"]').forEach(a => {
+          a.addEventListener('click', () => {
+            fetch(workerUrl, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ event: 'wa' }),
+              keepalive: true,
+            }).catch(() => {});
+          });
+        });
+      }
+
       if (d.footer) {
         setText('#footer-location', d.footer.location);
         setText('#footer-hours',    d.footer.hours);
