@@ -1613,10 +1613,14 @@ async function doLogin(token, silent) {
 
   } catch (ex) {
     if (!silent) {
-      err.textContent = 'Token inválido ou sem acesso. Verifique as permissões (Contents: read & write).';
+      const msg = ex.message || '';
+      const isAuthError = msg.includes('401') || msg.includes('Bad credentials') || msg.includes('Unauthorized');
+      err.textContent = isAuthError
+        ? 'Token inválido ou sem acesso. Verifique as permissões (Contents: read & write).'
+        : 'Erro ao conectar: ' + (msg || 'verifique sua conexão e tente novamente.');
       err.classList.add('show');
+      localStorage.removeItem('cms_token');
     }
-    localStorage.removeItem('cms_token');
     document.getElementById('login-screen').style.display = 'flex';
     document.getElementById('app').style.display = 'none';
   } finally {
