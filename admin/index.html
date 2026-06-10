@@ -1560,7 +1560,7 @@ const CARD_TYPES = [
   initDashboard();
 
   // Restore session
-  const saved = sessionStorage.getItem('cms_token');
+  const saved = localStorage.getItem('cms_token');
   if (saved) autoLogin(saved);
 })();
 
@@ -1606,7 +1606,7 @@ async function doLogin(token, silent) {
       populateGalleryForm(gData);
     }
 
-    sessionStorage.setItem('cms_token', token);
+    localStorage.setItem('cms_token', token);
     document.getElementById('login-screen').style.display = 'none';
     document.getElementById('app').style.display = 'flex';
     populateForm(data);
@@ -1616,7 +1616,7 @@ async function doLogin(token, silent) {
       err.textContent = 'Token inválido ou sem acesso. Verifique as permissões (Contents: read & write).';
       err.classList.add('show');
     }
-    sessionStorage.removeItem('cms_token');
+    localStorage.removeItem('cms_token');
     document.getElementById('login-screen').style.display = 'flex';
     document.getElementById('app').style.display = 'none';
   } finally {
@@ -1626,7 +1626,7 @@ async function doLogin(token, silent) {
 }
 
 function handleLogout() {
-  sessionStorage.removeItem('cms_token');
+  localStorage.removeItem('cms_token');
   document.getElementById('app').style.display = 'none';
   document.getElementById('login-screen').style.display = 'flex';
   document.getElementById('token-input').value = '';
@@ -2274,7 +2274,7 @@ function togglePreview() {
    PUBLISH
    ================================================================ */
 async function handlePublish() {
-  const token = sessionStorage.getItem('cms_token');
+  const token = localStorage.getItem('cms_token');
   if (!token) { showNote('Sessão expirada. Faça login novamente.', 'error'); return; }
 
   const btn = document.getElementById('publish-btn');
@@ -2458,7 +2458,7 @@ document.getElementById('photo-file-input').addEventListener('change', async fun
   this.value = '';
   if (!file) return;
 
-  const token = sessionStorage.getItem('cms_token');
+  const token = localStorage.getItem('cms_token');
   if (!token) { showNote('Sessão expirada. Faça login novamente.', 'error'); return; }
 
   // Immediate local preview via data URL
