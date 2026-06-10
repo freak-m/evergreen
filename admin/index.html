@@ -1730,6 +1730,8 @@ function populateForm(d) {
   const workerUrl = localStorage.getItem(CF_WORKER_KEY) || integ.worker_url || '';
   sv('cf-worker-url', workerUrl);
   if (workerUrl) localStorage.setItem(CF_WORKER_KEY, workerUrl);
+  _dashInitialized = false;
+  initDashboard();
 }
 
 function collectFormValues() {
