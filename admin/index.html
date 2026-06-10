@@ -1360,14 +1360,16 @@ const API    = 'https://api.github.com';
 /* ================================================================
    STATE
    ================================================================ */
-let contentSha   = null;
-let gallerySha   = null;
-let previewReady = false;
-let syncTimer    = null;
-let quillWaLabel = null;
-let quillWaSub   = null;
-let quillBAIntro = null;
-let quillSobre   = null;
+let contentSha      = null;
+let gallerySha      = null;
+let previewReady    = false;
+let syncTimer       = null;
+let quillWaLabel    = null;
+let quillWaSub      = null;
+let quillBAIntro    = null;
+let quillSobre      = null;
+let _dashInitialized = false;
+let _dashPeriod      = 7;
 
 /* ================================================================
    INSUMOS CONFIG
@@ -2531,8 +2533,6 @@ function fileToDataUrl(file) {
 /* ================================================================
    CLOUDFLARE ANALYTICS DASHBOARD
    ================================================================ */
-let _dashInitialized = false;
-let _dashPeriod      = 7;
 
 const COUNTRY_NAMES = {
   BR:'Brasil', US:'EUA', AR:'Argentina', PT:'Portugal', DE:'Alemanha',
