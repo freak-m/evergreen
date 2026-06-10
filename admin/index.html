@@ -2614,6 +2614,7 @@ function connectWorkerUrl() {
 function reconfigureDashboard() {
   localStorage.removeItem(CF_WORKER_KEY);
   sv('cf-worker-url', '');
+  sv('dash-setup-url', '');
   _dashInitialized = false;
   initDashboard();
 }
