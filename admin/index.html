@@ -175,6 +175,7 @@
     #editor-panel.full-width { width: auto; flex: 1; }
     .tab-content { display: none; padding: 22px 18px; }
     .tab-content.active { display: block; }
+    .tab-centered { max-width: 860px; margin: 0 auto; }
 
     /* ── FORM ELEMENTS ─────────────────────────────────────────── */
     .field-group { margin-bottom: 18px; }
@@ -526,77 +527,87 @@
     .insumo-fields-col textarea.field-input { min-height: 58px; font-size: 12px; }
 
     /* ── DASHBOARD ─────────────────────────────────────────────── */
-    .dash-period-bar {
-      display: flex; gap: 6px; margin-bottom: 14px; align-items: center;
-    }
+    .dash-header { display: flex; align-items: center; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; }
+    .dash-period-bar { display: flex; gap: 4px; }
     .dash-period-btn {
-      padding: 6px 14px; border-radius: 6px;
+      padding: 6px 13px; border-radius: 6px;
       background: var(--bg-mid); border: 1px solid var(--border);
       color: var(--text-dim); font-size: 12px; font-weight: 600;
       cursor: pointer; transition: background .15s, color .15s, border-color .15s;
     }
-    .dash-period-btn.active {
-      background: rgba(245,196,0,.12); border-color: rgba(245,196,0,.4); color: var(--accent);
-    }
+    .dash-period-btn.active { background: rgba(245,196,0,.12); border-color: rgba(245,196,0,.4); color: var(--accent); }
     .dash-period-btn:hover:not(.active) { background: var(--bg-light); color: var(--text); }
-    .dash-refresh-btn {
-      margin-left: auto; padding: 6px 12px;
+    .dash-cache-badge {
+      font-size: 10px; color: var(--text-dim);
+      background: var(--bg-light); border: 1px solid var(--border);
+      border-radius: 4px; padding: 3px 8px;
+    }
+    .dash-header-actions { margin-left: auto; display: flex; gap: 6px; }
+    .dash-action-btn {
+      padding: 6px 12px; border-radius: 6px;
       background: var(--bg-mid); border: 1px solid var(--border);
-      border-radius: 6px; color: var(--text-dim); font-size: 14px;
+      color: var(--text-dim); font-size: 11.5px; font-weight: 600;
       cursor: pointer; transition: background .15s;
     }
-    .dash-refresh-btn:hover { background: var(--bg-light); color: var(--text); }
-    .dash-banner {
-      padding: 9px 13px; border-radius: 6px; font-size: 12px; font-weight: 600;
-      margin-bottom: 12px;
-    }
+    .dash-action-btn:hover { background: var(--bg-light); color: var(--text); }
+    .dash-banner { padding: 9px 13px; border-radius: 6px; font-size: 12px; font-weight: 600; margin-bottom: 12px; }
     .dash-banner-yellow { background: rgba(245,196,0,.14); border: 1px solid rgba(245,196,0,.3); color: #e0b000; }
     .dash-banner-red    { background: rgba(244,67,54,.14);  border: 1px solid rgba(244,67,54,.3);  color: #ff7070; }
-    .dash-kpi-grid {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 14px;
-    }
+    /* KPI row */
+    .dash-kpi-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
     .dash-kpi-card {
       background: var(--bg-mid); border: 1px solid var(--border);
-      border-radius: 8px; padding: 13px 15px;
+      border-radius: 10px; padding: 14px 16px; overflow: hidden;
     }
-    .dash-kpi-label {
-      font-size: 10px; font-weight: 700; color: var(--text-dim);
-      text-transform: uppercase; letter-spacing: .7px; margin-bottom: 5px;
-    }
-    .dash-kpi-value { font-size: 22px; font-weight: 800; color: var(--accent); line-height: 1.1; }
-    .dash-kpi-sub   { font-size: 10px; color: var(--text-dim); margin-top: 3px; }
-    .dash-chart-wrap {
+    .dash-kpi-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 2px; }
+    .dash-kpi-label { font-size: 10px; font-weight: 700; color: var(--text-dim); text-transform: uppercase; letter-spacing: .7px; }
+    .dash-kpi-value { font-size: 32px; font-weight: 800; color: var(--text); line-height: 1.1; margin-bottom: 8px; }
+    .dash-kpi-bottom { display: flex; align-items: flex-end; justify-content: space-between; }
+    .trend-up   { font-size: 10px; font-weight: 700; background: rgba(76,175,80,.18); color: #66bb6a; border-radius: 4px; padding: 2px 6px; }
+    .trend-down { font-size: 10px; font-weight: 700; background: rgba(244,67,54,.15); color: #ff7070; border-radius: 4px; padding: 2px 6px; }
+    /* Time card */
+    .dash-time-card {
       background: var(--bg-mid); border: 1px solid var(--border);
-      border-radius: 8px; padding: 14px; margin-bottom: 14px;
+      border-radius: 10px; padding: 14px 16px; margin-bottom: 10px;
+      display: flex; align-items: center; justify-content: space-between;
     }
-    .dash-chart-title {
-      font-size: 11px; font-weight: 700; color: var(--text-dim);
-      text-transform: uppercase; letter-spacing: .7px; margin-bottom: 10px;
-    }
-    #dash-chart { display: flex; align-items: flex-end; gap: 3px; height: 80px; }
-    .dash-bar-col { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px; min-width: 0; }
-    .dash-bar { width: 100%; background: rgba(245,196,0,.5); border-radius: 2px 2px 0 0; min-height: 2px; }
-    .dash-bar-lbl {
-      font-size: 8px; color: var(--text-dim); white-space: nowrap;
-      overflow: hidden; text-overflow: ellipsis; max-width: 100%;
-    }
-    .dash-events-row {
-      display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 14px;
-    }
-    .dash-event-card {
-      background: var(--bg-mid); border: 1px solid var(--border);
-      border-radius: 8px; padding: 11px 13px; text-align: center;
-    }
-    .dash-event-icon  { font-size: 18px; margin-bottom: 4px; }
-    .dash-event-value { font-size: 18px; font-weight: 800; color: var(--text); }
-    .dash-event-label { font-size: 10px; color: var(--text-dim); margin-top: 2px; }
-    .dash-empty {
-      text-align: center; color: var(--text-dim); padding: 36px 20px;
-      font-size: 13px; line-height: 1.6;
-    }
-    .dash-setup {
-      text-align: center; padding: 40px 24px;
-    }
+    .dash-time-label { font-size: 10px; font-weight: 700; color: var(--text-dim); text-transform: uppercase; letter-spacing: .7px; margin-bottom: 4px; }
+    .dash-time-value { font-size: 28px; font-weight: 800; color: var(--text); }
+    .dash-time-note  { font-size: 10px; color: var(--text-dim); }
+    /* Charts */
+    .dash-chart-wrap { background: var(--bg-mid); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; margin-bottom: 10px; }
+    .dash-chart-hd { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+    .dash-chart-title { font-size: 11px; font-weight: 700; color: var(--text-dim); text-transform: uppercase; letter-spacing: .7px; }
+    .dash-legend { display: flex; align-items: center; gap: 4px; font-size: 10.5px; color: var(--text-dim); }
+    .dash-legend-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+    .dash-dual-chart { display: flex; align-items: flex-end; gap: 4px; height: 120px; overflow: hidden; }
+    .dash-day-group { flex: 1; display: flex; flex-direction: column; align-items: center; min-width: 0; }
+    .dash-day-bars { display: flex; align-items: flex-end; gap: 2px; width: 100%; justify-content: center; }
+    .dash-day-col { display: flex; flex-direction: column; align-items: center; gap: 2px; flex: 1; min-width: 0; }
+    .dash-day-bar { width: 100%; border-radius: 2px 2px 0 0; min-height: 2px; }
+    .dash-day-bar.yellow { background: #F5C400; }
+    .dash-day-bar.blue   { background: #42a5f5; }
+    .dash-day-bar.green  { background: #4caf50; }
+    .dash-bar-val { font-size: 8px; color: var(--text-dim); white-space: nowrap; line-height: 1; }
+    .dash-day-lbl { font-size: 8px; color: var(--text-dim); margin-top: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; text-align: center; }
+    /* Bottom row */
+    .dash-bottom-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+    .dash-card { background: var(--bg-mid); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; }
+    .dash-card-hd { font-size: 11px; font-weight: 700; color: var(--text-dim); text-transform: uppercase; letter-spacing: .7px; margin-bottom: 12px; }
+    .dash-country-item { margin-bottom: 10px; }
+    .dash-country-row { display: flex; align-items: center; gap: 7px; margin-bottom: 3px; }
+    .dash-country-flag { font-size: 14px; flex-shrink: 0; }
+    .dash-country-name { flex: 1; font-size: 12px; color: var(--text); min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .dash-country-count { font-size: 11px; color: var(--text-dim); font-weight: 600; flex-shrink: 0; }
+    .dash-country-track { height: 3px; background: var(--bg-deep); border-radius: 2px; }
+    .dash-country-fill  { height: 3px; background: var(--accent); border-radius: 2px; }
+    .dash-device-item { display: flex; align-items: center; gap: 10px; margin-bottom: 11px; }
+    .dash-device-dot  { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+    .dash-device-name { flex: 1; font-size: 12px; color: var(--text); }
+    .dash-device-count { font-size: 15px; font-weight: 800; color: var(--text); }
+    /* Empty + setup */
+    .dash-empty { text-align: center; color: var(--text-dim); padding: 36px 20px; font-size: 13px; line-height: 1.6; }
+    .dash-setup { text-align: center; padding: 40px 24px; }
     .dash-setup-title { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
     .dash-setup-sub   { font-size: 12px; color: var(--text-dim); margin-bottom: 20px; line-height: 1.6; }
     .dash-setup .field-input { text-align: left; margin-bottom: 12px; }
@@ -1080,47 +1091,89 @@
 
       <!-- DASHBOARD TAB -->
       <div id="tab-dashboard" class="tab-content active">
-        <div class="sec-header">📊 Cloudflare Metrics</div>
+        <div class="tab-centered">
+          <div class="sec-header">📊 Cloudflare Metrics</div>
 
-        <!-- Setup prompt — shown when no Worker URL is configured -->
-        <div id="dash-setup" class="dash-setup" style="display:none">
-          <div style="font-size:40px;margin-bottom:12px">🔗</div>
-          <div class="dash-setup-title">Conectar Cloudflare Analytics</div>
-          <div class="dash-setup-sub">Digite a URL do Worker para visualizar as métricas do site.</div>
-          <input id="dash-setup-url" type="url" class="field-input" placeholder="https://analytics.evergreenhidrossemeadura.com.br">
-          <button type="button" class="dash-connect-btn" onclick="connectWorkerUrl()">Conectar</button>
-        </div>
-
-        <!-- Dashboard content — shown after URL is configured -->
-        <div id="dash-main">
-          <div class="dash-period-bar">
-            <button type="button" class="dash-period-btn active" data-days="7" onclick="selectPeriod(7)">7 dias</button>
-            <button type="button" class="dash-period-btn" data-days="30" onclick="selectPeriod(30)">30 dias</button>
-            <button type="button" class="dash-period-btn" data-days="90" onclick="selectPeriod(90)">90 dias</button>
-            <button type="button" class="dash-refresh-btn" onclick="refreshDashboard()" title="Atualizar">↻</button>
+          <!-- Setup prompt — shown when no Worker URL is configured -->
+          <div id="dash-setup" class="dash-setup">
+            <div style="font-size:40px;margin-bottom:12px">🔗</div>
+            <div class="dash-setup-title">Conectar Cloudflare Analytics</div>
+            <div class="dash-setup-sub">Digite a URL do Worker para visualizar as métricas do site.</div>
+            <input id="dash-setup-url" type="url" class="field-input" placeholder="https://analytics.evergreenhidrossemeadura.com.br">
+            <button type="button" class="dash-connect-btn" onclick="connectWorkerUrl()">Conectar</button>
           </div>
 
-          <div id="dash-banner-updating" class="dash-banner dash-banner-yellow" style="display:none">⟳ Atualizando dados…</div>
-          <div id="dash-banner-error" class="dash-banner dash-banner-red" style="display:none"></div>
+          <!-- Dashboard content — shown after URL is configured -->
+          <div id="dash-main" style="display:none">
+            <div class="dash-header">
+              <div class="dash-period-bar">
+                <button type="button" class="dash-period-btn active" data-days="7" onclick="selectPeriod(7)">7 dias</button>
+                <button type="button" class="dash-period-btn" data-days="30" onclick="selectPeriod(30)">30 dias</button>
+                <button type="button" class="dash-period-btn" data-days="90" onclick="selectPeriod(90)">90 dias</button>
+                <span id="dash-cache-badge" class="dash-cache-badge" style="display:none"></span>
+              </div>
+              <div class="dash-header-actions">
+                <button type="button" class="dash-action-btn" onclick="refreshDashboard()">↻ Atualizar</button>
+                <button type="button" class="dash-action-btn" onclick="reconfigureDashboard()">⚙ Reconfigurar</button>
+              </div>
+            </div>
 
-          <div class="dash-kpi-grid" id="dash-kpi-grid"></div>
+            <div id="dash-banner-updating" class="dash-banner dash-banner-yellow" style="display:none">⟳ Atualizando dados…</div>
+            <div id="dash-banner-error" class="dash-banner dash-banner-red" style="display:none"></div>
 
-          <div class="dash-chart-wrap">
-            <div class="dash-chart-title">Visitas por Dia</div>
-            <div id="dash-chart"></div>
-          </div>
+            <div class="dash-kpi-row" id="dash-kpi-row"></div>
 
-          <div class="dash-events-row" id="dash-events-row"></div>
+            <div class="dash-time-card" id="dash-time-card" style="display:none">
+              <div>
+                <div class="dash-time-label">Tempo Médio na Página</div>
+                <div class="dash-time-note" id="dash-time-note"></div>
+              </div>
+              <div class="dash-time-value" id="dash-time-value">—</div>
+            </div>
 
-          <div id="dash-empty" class="dash-empty" style="display:none">
-            <div style="font-size:36px;margin-bottom:8px">📊</div>
-            <div>Nenhum dado disponível para o período selecionado.</div>
+            <div class="dash-chart-wrap">
+              <div class="dash-chart-hd">
+                <div class="dash-chart-title">Visitas Únicas &amp; Page Views por Dia</div>
+                <div class="dash-legend">
+                  <div class="dash-legend-dot yellow"></div><span>Visitas únicas</span>
+                  <div class="dash-legend-dot blue" style="margin-left:8px"></div><span>Page Views</span>
+                </div>
+              </div>
+              <div class="dash-dual-chart" id="dash-dual-chart"></div>
+            </div>
+
+            <div class="dash-chart-wrap" id="dash-wa-chart-wrap" style="display:none">
+              <div class="dash-chart-hd">
+                <div class="dash-chart-title">Cliques WhatsApp por Dia</div>
+                <div class="dash-legend">
+                  <div class="dash-legend-dot green"></div><span>WA Clicks</span>
+                </div>
+              </div>
+              <div class="dash-dual-chart" id="dash-wa-chart"></div>
+            </div>
+
+            <div class="dash-bottom-row">
+              <div class="dash-card">
+                <div class="dash-card-hd">Locais</div>
+                <div id="dash-countries"></div>
+              </div>
+              <div class="dash-card">
+                <div class="dash-card-hd">Dispositivos</div>
+                <div id="dash-devices"></div>
+              </div>
+            </div>
+
+            <div id="dash-empty" class="dash-empty" style="display:none">
+              <div style="font-size:36px;margin-bottom:8px">📊</div>
+              <div>Nenhum dado disponível para o período selecionado.</div>
+            </div>
           </div>
         </div>
       </div>
 
       <!-- INTEGRAÇÕES TAB -->
       <div id="tab-integracoes" class="tab-content">
+        <div class="tab-centered">
         <div class="sec-header" style="justify-content:space-between">
           🔌 Anúncios &amp; Verificação
           <span class="integ-save-badge">Salvo com Publicar</span>
@@ -1175,6 +1228,7 @@
           </div>
           <button type="button" class="action-btn" style="background:rgba(245,196,0,.1);color:var(--accent);border:1px solid rgba(245,196,0,.25);width:auto;padding:8px 16px" onclick="saveCfWorkerUrl()">Salvar URL</button>
         </div>
+        </div><!-- /tab-centered -->
       </div>
 
     </div><!-- /editor-panel -->
@@ -2385,6 +2439,58 @@ function fileToDataUrl(file) {
 let _dashInitialized = false;
 let _dashPeriod      = 7;
 
+const COUNTRY_NAMES = {
+  BR:'Brasil', US:'EUA', AR:'Argentina', PT:'Portugal', DE:'Alemanha',
+  GB:'Reino Unido', FR:'França', MX:'México', CL:'Chile', CO:'Colômbia',
+  IT:'Itália', ES:'Espanha', JP:'Japão', CN:'China', AU:'Austrália',
+  CA:'Canadá', IN:'Índia', NL:'Países Baixos', CH:'Suíça', BE:'Bélgica'
+};
+
+function flag(cc) {
+  if (!cc || cc.length !== 2) return '🌐';
+  return String.fromCodePoint(...[...cc.toUpperCase()].map(c => 0x1F1E6 - 65 + c.charCodeAt(0)));
+}
+
+function fmtTime(secs) {
+  if (secs == null) return '—';
+  if (secs < 60) return secs.toFixed(0) + 's';
+  return Math.floor(secs / 60) + 'm ' + (secs % 60).toFixed(0) + 's';
+}
+
+function pctChange(curr, prev) {
+  if (!prev) return null;
+  return Math.round(((curr - prev) / prev) * 100);
+}
+
+function trendBadge(pct) {
+  if (pct === null) return '<span style="opacity:.4;font-size:10px">vs. período anterior</span>';
+  const cls  = pct >= 0 ? 'trend-up' : 'trend-down';
+  const sign = pct >= 0 ? '+' : '';
+  return `<span class="${cls}">${sign}${pct}%</span>`;
+}
+
+function sparkline(values, color) {
+  if (!values || values.length < 2) return '';
+  const max = Math.max(...values, 1);
+  const pts = values.map((v, i) => {
+    const x = (i / (values.length - 1)) * 60;
+    const y = 18 - Math.round((v / max) * 16);
+    return x + ',' + y;
+  }).join(' ');
+  return '<svg width="60" height="20" viewBox="0 0 60 20" style="display:block;flex-shrink:0">'
+    + '<polyline points="' + pts + '" fill="none" stroke="' + color + '" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/>'
+    + '</svg>';
+}
+
+function updateCacheBadge(ts) {
+  const el = document.getElementById('dash-cache-badge');
+  if (!el) return;
+  if (!ts) { el.style.display = 'none'; return; }
+  const ago = Math.round((Date.now() - ts) / 60000);
+  el.textContent = 'cache ' + (ago < 1 ? 'agora' : ago + 'min atrás');
+  el.style.display = '';
+}
+
 function initDashboard() {
   const workerUrl = (localStorage.getItem(CF_WORKER_KEY) || '').trim();
   if (!workerUrl) {
@@ -2405,6 +2511,13 @@ function connectWorkerUrl() {
   if (!url) return;
   localStorage.setItem(CF_WORKER_KEY, url);
   sv('cf-worker-url', url);
+  _dashInitialized = false;
+  initDashboard();
+}
+
+function reconfigureDashboard() {
+  localStorage.removeItem(CF_WORKER_KEY);
+  sv('cf-worker-url', '');
   _dashInitialized = false;
   initDashboard();
 }
@@ -2432,6 +2545,7 @@ async function loadDashboardData(days, forceRefresh) {
 
   if (parsed && (Date.now() - parsed._ts) < CACHE_MAX_MS) {
     renderDashboard(parsed.data, days);
+    updateCacheBadge(parsed._ts);
     const stale = (Date.now() - parsed._ts) >= CACHE_CHECK_MS;
     if (!forceRefresh && !stale) return;
     showBanner('updating');
@@ -2439,8 +2553,9 @@ async function loadDashboardData(days, forceRefresh) {
       .then(fresh => {
         hideBanner('updating');
         if (fresh) {
-          renderDashboard(fresh, days);
           localStorage.setItem(cacheKey, JSON.stringify({ data: fresh, _ts: Date.now() }));
+          renderDashboard(fresh, days);
+          updateCacheBadge(Date.now());
         }
       })
       .catch(() => {
@@ -2455,8 +2570,9 @@ async function loadDashboardData(days, forceRefresh) {
     const fresh = await fetchCfAnalytics(days);
     hideBanner('updating');
     if (fresh) {
-      renderDashboard(fresh, days);
       localStorage.setItem(cacheKey, JSON.stringify({ data: fresh, _ts: Date.now() }));
+      renderDashboard(fresh, days);
+      updateCacheBadge(Date.now());
     } else {
       showDashEmpty();
     }
@@ -2479,76 +2595,144 @@ async function fetchCfAnalytics(days) {
 function renderDashboard(json, days) {
   document.getElementById('dash-empty').style.display = 'none';
 
-  let daily = [], totalReqs = 0, totalPageViews = 0, totalThreats = 0, uniqueVisitors = 0;
-  try {
-    const zones  = json?.data?.viewer?.zones || [];
-    const zone   = zones[0] || {};
-    // Worker returns "current" (aliased from httpRequests1dGroups)
-    const groups = (zone.current || zone.httpRequests1dGroups || []).slice().sort((a, b) =>
-      a.dimensions.date.localeCompare(b.dimensions.date)
-    );
-    daily          = groups.map(g => ({
-      date:      g.dimensions.date,
-      requests:  g.sum?.requests  || 0,
-      pageViews: g.sum?.pageViews || g.sum?.bytes || 0,
-      uniques:   g.uniq?.uniques  || 0,
-    }));
-    totalReqs      = daily.reduce((s, g) => s + g.requests,  0);
-    totalPageViews = daily.reduce((s, g) => s + g.pageViews, 0);
-    uniqueVisitors = daily.reduce((s, g) => s + g.uniques,   0);
-
-    // Compare with previous period if available
-    const prev = zone.prev?.[0];
-    if (prev) totalThreats = prev.sum?.requests || 0; // used as prev-period reference
-  } catch (_) {}
-
-  document.getElementById('dash-kpi-grid').innerHTML = [
-    { label: 'Requisições',       value: fmt(totalReqs),      sub: 'últimos ' + days + ' dias' },
-    { label: 'Visitantes Únicos', value: fmt(uniqueVisitors), sub: 'últimos ' + days + ' dias' },
-    { label: 'Page Views',        value: fmt(totalPageViews), sub: 'últimos ' + days + ' dias' },
-    { label: 'Período Anterior',  value: fmt(totalThreats),   sub: 'requisições' },
-  ].map(({ label, value, sub }) =>
-    `<div class="dash-kpi-card">
-      <div class="dash-kpi-label">${label}</div>
-      <div class="dash-kpi-value">${value}</div>
-      <div class="dash-kpi-sub">${sub}</div>
-    </div>`
-  ).join('');
-
-  renderChart(daily);
-
+  const zones  = json?.data?.viewer?.zones || [];
+  const zone   = zones[0] || {};
   const events = json?.events || {};
-  const timeVal = events.time_avg != null
-    ? (events.time_avg + 's')
-    : fmt(events.time || 0);
-  const timeLabel = events.time_avg != null ? 'Tempo Médio na Página' : 'Eventos de Tempo';
 
-  document.getElementById('dash-events-row').innerHTML = [
-    { icon: '💬', value: fmt(events.wa    || 0), label: 'Cliques WhatsApp'  },
-    { icon: '🖼',  value: fmt(events.photo || 0), label: 'Fotos Visualizadas' },
-    { icon: '⏱',  value: timeVal,                label: timeLabel            },
-  ].map(({ icon, value, label }) =>
-    `<div class="dash-event-card">
-      <div class="dash-event-icon">${icon}</div>
-      <div class="dash-event-value">${value}</div>
-      <div class="dash-event-label">${label}</div>
+  const current = (zone.current || zone.httpRequests1dGroups || []).slice().sort((a, b) =>
+    a.dimensions.date.localeCompare(b.dimensions.date)
+  );
+  const prevRaw = (zone.prev || []).slice().sort((a, b) =>
+    a.dimensions.date.localeCompare(b.dimensions.date)
+  );
+
+  const daily = current.map(g => ({
+    date:      g.dimensions.date,
+    requests:  g.sum?.requests  || 0,
+    pageViews: g.sum?.pageViews || 0,
+    uniques:   g.uniq?.uniques  || 0,
+  }));
+
+  const totalReqs      = daily.reduce((s, g) => s + g.requests,  0);
+  const totalPageViews = daily.reduce((s, g) => s + g.pageViews, 0);
+  const totalUniques   = daily.reduce((s, g) => s + g.uniques,   0);
+  const prevReqs       = prevRaw.reduce((s, g) => s + (g.sum?.requests  || 0), 0);
+  const prevViews      = prevRaw.reduce((s, g) => s + (g.sum?.pageViews || 0), 0);
+  const prevUniques    = prevRaw.reduce((s, g) => s + (g.uniq?.uniques  || 0), 0);
+
+  const kpis = [
+    { label: 'Visitas Únicas',    value: fmt(totalUniques),   spark: sparkline(daily.map(d => d.uniques),   '#F5C400'), trend: trendBadge(pctChange(totalUniques,   prevUniques)) },
+    { label: 'Page Views',        value: fmt(totalPageViews), spark: sparkline(daily.map(d => d.pageViews), '#42a5f5'), trend: trendBadge(pctChange(totalPageViews, prevViews))   },
+    { label: 'Requisições',       value: fmt(totalReqs),      spark: sparkline(daily.map(d => d.requests),  '#a78bfa'), trend: trendBadge(pctChange(totalReqs,      prevReqs))    },
+    { label: 'Cliques WhatsApp',  value: fmt(events.wa || 0), spark: sparkline(events.waDaily || [],        '#4ade80'), trend: '' },
+  ];
+
+  document.getElementById('dash-kpi-row').innerHTML = kpis.map(k =>
+    `<div class="dash-kpi-card">
+      <div class="dash-kpi-top"><div class="dash-kpi-label">${k.label}</div>${k.spark}</div>
+      <div class="dash-kpi-value">${k.value}</div>
+      <div class="dash-kpi-bottom">${k.trend}</div>
     </div>`
   ).join('');
+
+  const timeCard = document.getElementById('dash-time-card');
+  if (events.time_avg != null) {
+    document.getElementById('dash-time-value').textContent = fmtTime(events.time_avg);
+    document.getElementById('dash-time-note').textContent  = 'média dos últimos ' + days + ' dias';
+    timeCard.style.display = '';
+  } else {
+    timeCard.style.display = 'none';
+  }
+
+  renderDualChart(daily);
+  renderWaChart(events.waDaily || [], events.waDates || []);
+  renderCountries(zone.countries || []);
+  renderDevices(zone.devices    || []);
 }
 
-function renderChart(daily) {
-  const chart = document.getElementById('dash-chart');
-  if (!chart) return;
-  if (!daily.length) {
-    chart.innerHTML = '<div style="color:var(--text-dim);font-size:12px;margin:auto">Sem dados</div>';
-    return;
-  }
-  const maxVal = Math.max(...daily.map(d => d.requests), 1);
-  chart.innerHTML = daily.map(d => {
-    const h = Math.max(Math.round((d.requests / maxVal) * 72), 2);
-    return `<div class="dash-bar-col">
-      <div class="dash-bar" style="height:${h}px" title="${d.date}: ${fmt(d.requests)} req"></div>
-      <div class="dash-bar-lbl">${d.date.slice(5)}</div>
+function renderDualChart(daily) {
+  const el = document.getElementById('dash-dual-chart');
+  if (!el) return;
+  if (!daily.length) { el.innerHTML = '<div class="dash-empty">Sem dados</div>'; return; }
+  const maxP = Math.max(...daily.map(d => d.pageViews), ...daily.map(d => d.uniques), 1);
+  el.innerHTML = daily.map(d => {
+    const hU = Math.max(Math.round((d.uniques   / maxP) * 80), 2);
+    const hP = Math.max(Math.round((d.pageViews / maxP) * 80), 2);
+    return `<div class="dash-day-group">
+      <div class="dash-day-bars">
+        <div class="dash-day-col">
+          <div class="dash-bar-val">${fmt(d.uniques)}</div>
+          <div class="dash-day-bar yellow" style="height:${hU}px" title="Únicos: ${fmt(d.uniques)}"></div>
+        </div>
+        <div class="dash-day-col">
+          <div class="dash-bar-val">${fmt(d.pageViews)}</div>
+          <div class="dash-day-bar blue" style="height:${hP}px" title="Page Views: ${fmt(d.pageViews)}"></div>
+        </div>
+      </div>
+      <div class="dash-day-lbl">${d.date.slice(5)}</div>
+    </div>`;
+  }).join('');
+}
+
+function renderWaChart(counts, dates) {
+  const el   = document.getElementById('dash-wa-chart');
+  const wrap = document.getElementById('dash-wa-chart-wrap');
+  if (!el) return;
+  if (!counts.length) { if (wrap) wrap.style.display = 'none'; return; }
+  if (wrap) wrap.style.display = '';
+  const maxV = Math.max(...counts, 1);
+  el.innerHTML = counts.map((v, i) => {
+    const h   = Math.max(Math.round((v / maxV) * 80), 2);
+    const lbl = dates[i] ? dates[i].slice(5) : String(i + 1);
+    return `<div class="dash-day-group">
+      <div class="dash-day-bars" style="justify-content:center">
+        <div class="dash-day-col">
+          <div class="dash-bar-val">${v}</div>
+          <div class="dash-day-bar green" style="height:${h}px" title="WA: ${v}"></div>
+        </div>
+      </div>
+      <div class="dash-day-lbl">${lbl}</div>
+    </div>`;
+  }).join('');
+}
+
+function renderCountries(countries) {
+  const el = document.getElementById('dash-countries');
+  if (!el) return;
+  const sorted = countries.slice().sort((a, b) => (b.requests || 0) - (a.requests || 0)).slice(0, 8);
+  if (!sorted.length) { el.innerHTML = '<div class="dash-empty">Sem dados</div>'; return; }
+  const max = sorted[0].requests || 1;
+  el.innerHTML = sorted.map(c => {
+    const cc  = c.country || c.clientCountryName || '??';
+    const req = c.requests || 0;
+    const pct = Math.round((req / max) * 100);
+    return `<div class="dash-country-item">
+      <div class="dash-country-row">
+        <span class="dash-country-flag">${flag(cc)}</span>
+        <span class="dash-country-name">${COUNTRY_NAMES[cc] || cc}</span>
+        <span class="dash-country-count">${fmt(req)}</span>
+      </div>
+      <div class="dash-country-track"><div class="dash-country-fill" style="width:${pct}%"></div></div>
+    </div>`;
+  }).join('');
+}
+
+function renderDevices(devices) {
+  const el = document.getElementById('dash-devices');
+  if (!el) return;
+  if (!devices.length) { el.innerHTML = '<div class="dash-empty">Sem dados</div>'; return; }
+  const total = devices.reduce((s, d) => s + (d.requests || 0), 0) || 1;
+  const icons = { desktop:'🖥', mobile:'📱', tablet:'💻', other:'❓' };
+  const names = { desktop:'Desktop', mobile:'Mobile', tablet:'Tablet', other:'Outro' };
+  const colors = { mobile:'#F5C400', desktop:'#42a5f5', tablet:'#a78bfa', other:'#6b7280' };
+  el.innerHTML = devices.map(d => {
+    const type = (d.type || d.deviceType || '').toLowerCase();
+    const req  = d.requests || 0;
+    const pct  = Math.round((req / total) * 100);
+    return `<div class="dash-device-item">
+      <span class="dash-device-dot" style="background:${colors[type] || colors.other}"></span>
+      <span class="dash-device-name">${icons[type] || icons.other} ${names[type] || type}</span>
+      <span class="dash-device-count">${pct}% <span style="color:var(--text-dim);font-size:11px">${fmt(req)}</span></span>
     </div>`;
   }).join('');
 }
@@ -2571,11 +2755,12 @@ function hideBanner(type) {
 }
 
 function showDashEmpty() {
-  document.getElementById('dash-empty').style.display         = '';
-  document.getElementById('dash-kpi-grid').innerHTML          = '';
-  document.getElementById('dash-events-row').innerHTML        = '';
-  const chart = document.getElementById('dash-chart');
-  if (chart) chart.innerHTML = '';
+  const el = document.getElementById('dash-empty');
+  if (el) el.style.display = '';
+  ['dash-kpi-row','dash-dual-chart','dash-wa-chart','dash-countries','dash-devices'].forEach(id => {
+    const e = document.getElementById(id);
+    if (e) e.innerHTML = '';
+  });
 }
 
 function fmt(n) {
