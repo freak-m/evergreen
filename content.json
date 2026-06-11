@@ -16,6 +16,24 @@
       "postal_code": ""
     },
     "area_served": "Campinas, Jundiaí, Sorocaba, Piracicaba, Ribeirão Preto, Limeira, Americana, Indaiatuba, Valinhos, Vinhedo, São Paulo",
+    "social_links": {
+      "instagram": "",
+      "facebook": "",
+      "linkedin": "",
+      "google_business": ""
+    },
+    "geo": {
+      "latitude": "-22.9056",
+      "longitude": "-47.0608"
+    },
+    "opening_hours": {
+      "weekday_open": "08:00",
+      "weekday_close": "18:00",
+      "saturday_open": "08:00",
+      "saturday_close": "12:00",
+      "sunday_open": "",
+      "sunday_close": ""
+    },
     "faq": [
       {
         "q": "O que é hidrossemeadura?",
@@ -180,6 +198,7 @@
   },
   "integrations": {
     "google_analytics": "",
+    "google_verify": "",
     "meta_pixel": "",
     "meta_verify": "",
     "worker_url": "https://analytics.evergreenhidrossemeadura.com.br/"

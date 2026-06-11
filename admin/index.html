@@ -885,6 +885,75 @@
           <div class="field-note">Separe as cidades por vírgula — o Google usa para ranquear por região</div>
         </div>
 
+        <!-- REDES SOCIAIS -->
+        <div class="seo-section-hd">🔗 Redes Sociais (sameAs)</div>
+        <div class="field-note" style="margin:-8px 0 14px">Links das redes sociais confirmam a identidade da empresa para o Google e enriquecem o painel de conhecimento (Knowledge Panel)</div>
+        <div class="biz-grid">
+          <div class="field-group">
+            <label class="field-label" for="seo-social-instagram">Instagram</label>
+            <input id="seo-social-instagram" type="url" class="field-input" placeholder="https://www.instagram.com/evergreenhidrossemeadura">
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="seo-social-facebook">Facebook</label>
+            <input id="seo-social-facebook" type="url" class="field-input" placeholder="https://www.facebook.com/evergreenhidrossemeadura">
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="seo-social-linkedin">LinkedIn</label>
+            <input id="seo-social-linkedin" type="url" class="field-input" placeholder="https://www.linkedin.com/company/evergreen">
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="seo-social-gbusiness">Google Business</label>
+            <input id="seo-social-gbusiness" type="url" class="field-input" placeholder="https://g.page/evergreenhidrossemeadura">
+            <div class="field-note">Google Maps → Compartilhar → copie o link curto</div>
+          </div>
+        </div>
+
+        <!-- LOCALIZAÇÃO -->
+        <div class="seo-section-hd">🗺 Localização (Coordenadas)</div>
+        <div class="field-note" style="margin:-8px 0 14px">Usadas no Schema.org para indicar a posição exata no mapa — aumenta relevância em buscas locais "perto de mim"</div>
+        <div class="biz-grid">
+          <div class="field-group">
+            <label class="field-label" for="seo-geo-lat">Latitude</label>
+            <input id="seo-geo-lat" type="text" class="field-input" placeholder="-22.9056">
+            <div class="field-note">Google Maps → clique com botão direito no local → copie o 1º número</div>
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="seo-geo-lng">Longitude</label>
+            <input id="seo-geo-lng" type="text" class="field-input" placeholder="-47.0608">
+            <div class="field-note">Google Maps → clique com botão direito no local → copie o 2º número</div>
+          </div>
+        </div>
+
+        <!-- HORÁRIO DE FUNCIONAMENTO -->
+        <div class="seo-section-hd">🕐 Horário de Funcionamento</div>
+        <div class="field-note" style="margin:-8px 0 14px">Exibido no painel da empresa no Google Search e Maps. Deixe em branco os dias em que não há atendimento.</div>
+        <div class="biz-grid">
+          <div class="field-group">
+            <label class="field-label">Seg–Sex — Abre</label>
+            <input id="seo-hours-wd-open" type="time" class="field-input" value="08:00">
+          </div>
+          <div class="field-group">
+            <label class="field-label">Seg–Sex — Fecha</label>
+            <input id="seo-hours-wd-close" type="time" class="field-input" value="18:00">
+          </div>
+          <div class="field-group">
+            <label class="field-label">Sábado — Abre</label>
+            <input id="seo-hours-sat-open" type="time" class="field-input" value="08:00">
+          </div>
+          <div class="field-group">
+            <label class="field-label">Sábado — Fecha</label>
+            <input id="seo-hours-sat-close" type="time" class="field-input" value="12:00">
+          </div>
+          <div class="field-group">
+            <label class="field-label">Domingo — Abre <span style="font-weight:400;color:var(--text-dim)">(opcional)</span></label>
+            <input id="seo-hours-sun-open" type="time" class="field-input">
+          </div>
+          <div class="field-group">
+            <label class="field-label">Domingo — Fecha <span style="font-weight:400;color:var(--text-dim)">(opcional)</span></label>
+            <input id="seo-hours-sun-close" type="time" class="field-input">
+          </div>
+        </div>
+
         <!-- FAQ -->
         <div class="seo-section-hd">❓ Perguntas Frequentes (FAQ)</div>
         <div class="field-note" style="margin:-8px 0 14px">Aparecem diretamente no Google como rich results expansíveis — excelente para SEO</div>
@@ -1289,12 +1358,19 @@
         <div class="integ-card">
           <div class="integ-card-hd">
             <div class="integ-icon ga-icon">📊</div>
-            <div class="integ-card-title">Google Analytics</div>
+            <div class="integ-card-title">Google Analytics &amp; Search Console</div>
           </div>
-          <div class="field-group" style="margin-bottom:0">
-            <label class="field-label">Google Analytics — ID de Medição</label>
-            <input id="integ-ga-id" type="text" class="field-input" placeholder="G-XXXXXXXXXX">
-            <div class="integ-helper">Google Analytics → Admin → Fluxos de dados → ID de medição</div>
+          <div class="biz-grid">
+            <div class="field-group" style="margin-bottom:0">
+              <label class="field-label">Google Analytics — ID de Medição</label>
+              <input id="integ-ga-id" type="text" class="field-input" placeholder="G-XXXXXXXXXX">
+              <div class="integ-helper">Google Analytics → Admin → Fluxos de dados → ID de medição</div>
+            </div>
+            <div class="field-group" style="margin-bottom:0">
+              <label class="field-label">Google Search Console — Verificação</label>
+              <input id="integ-google-verify" type="text" class="field-input" placeholder="código de verificação">
+              <div class="integ-helper">Search Console → Configurações → Verificação de propriedade → Tag HTML → copie o conteúdo do atributo <code>content</code></div>
+            </div>
           </div>
         </div>
 
@@ -1681,6 +1757,24 @@ function populateForm(d) {
 
   sv('seo-area-served', d.seo?.area_served || '');
 
+  const sl = d.seo?.social_links || {};
+  sv('seo-social-instagram', sl.instagram    || '');
+  sv('seo-social-facebook',  sl.facebook     || '');
+  sv('seo-social-linkedin',  sl.linkedin     || '');
+  sv('seo-social-gbusiness', sl.google_business || '');
+
+  const geo = d.seo?.geo || {};
+  sv('seo-geo-lat', geo.latitude  || '');
+  sv('seo-geo-lng', geo.longitude || '');
+
+  const oh = d.seo?.opening_hours || {};
+  sv('seo-hours-wd-open',   oh.weekday_open   || '08:00');
+  sv('seo-hours-wd-close',  oh.weekday_close  || '18:00');
+  sv('seo-hours-sat-open',  oh.saturday_open  || '08:00');
+  sv('seo-hours-sat-close', oh.saturday_close || '12:00');
+  sv('seo-hours-sun-open',  oh.sunday_open    || '');
+  sv('seo-hours-sun-close', oh.sunday_close   || '');
+
   const faqList = document.getElementById('faq-editor-list');
   if (faqList) {
     faqList.innerHTML = '';
@@ -1747,9 +1841,10 @@ function populateForm(d) {
   updateFooterWaAuto();
 
   const integ = d.integrations || {};
-  sv('integ-ga-id',      integ.google_analytics || '');
-  sv('integ-meta-pixel', integ.meta_pixel       || '');
-  sv('integ-meta-verify',integ.meta_verify      || '');
+  sv('integ-ga-id',          integ.google_analytics || '');
+  sv('integ-google-verify',  integ.google_verify    || '');
+  sv('integ-meta-pixel',     integ.meta_pixel       || '');
+  sv('integ-meta-verify',    integ.meta_verify      || '');
   const workerUrl = localStorage.getItem(CF_WORKER_KEY) || integ.worker_url || '';
   sv('cf-worker-url', workerUrl);
   if (workerUrl) localStorage.setItem(CF_WORKER_KEY, workerUrl);
@@ -1776,7 +1871,25 @@ function collectFormValues() {
         postal_code:      gv('seo-biz-cep')
       },
       area_served: gv('seo-area-served'),
-      faq:         getFaqFromForm()
+      social_links: {
+        instagram:       gv('seo-social-instagram'),
+        facebook:        gv('seo-social-facebook'),
+        linkedin:        gv('seo-social-linkedin'),
+        google_business: gv('seo-social-gbusiness')
+      },
+      geo: {
+        latitude:  gv('seo-geo-lat'),
+        longitude: gv('seo-geo-lng')
+      },
+      opening_hours: {
+        weekday_open:   gv('seo-hours-wd-open'),
+        weekday_close:  gv('seo-hours-wd-close'),
+        saturday_open:  gv('seo-hours-sat-open'),
+        saturday_close: gv('seo-hours-sat-close'),
+        sunday_open:    gv('seo-hours-sun-open'),
+        sunday_close:   gv('seo-hours-sun-close')
+      },
+      faq: getFaqFromForm()
     },
     hero: {
       tagline:     gv('hero-tagline'),
@@ -1823,6 +1936,7 @@ function collectFormValues() {
     footer: { location: gv('footer-location'), hours: gv('footer-hours') },
     integrations: {
       google_analytics: gv('integ-ga-id'),
+      google_verify:    gv('integ-google-verify'),
       meta_pixel:       gv('integ-meta-pixel'),
       meta_verify:      gv('integ-meta-verify'),
       worker_url:       gv('cf-worker-url')

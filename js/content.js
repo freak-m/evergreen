@@ -60,7 +60,14 @@
                 if (b.telephone) {
                   biz.telephone = b.telephone;
                   if (biz.contactPoint) biz.contactPoint.telephone = b.telephone;
-                  biz.sameAs = ['https://wa.me/' + b.telephone.replace(/\D/g, '')];
+                }
+                // sameAs: built from social_links + whatsapp
+                {
+                  const sl = d.seo?.social_links || {};
+                  const waLink = b.telephone ? 'https://wa.me/' + b.telephone.replace(/\D/g, '') : null;
+                  const links = [waLink, sl.instagram, sl.facebook, sl.linkedin, sl.google_business]
+                    .filter(Boolean);
+                  if (links.length > 0) biz.sameAs = links;
                 }
                 if (b.email)       biz.email      = b.email;
                 if (b.url)         biz.url        = b.url;
@@ -70,6 +77,29 @@
                 if (b.address_locality) biz.address.addressLocality = b.address_locality;
                 if (b.address_region)   biz.address.addressRegion   = b.address_region;
                 if (b.postal_code)      biz.address.postalCode      = b.postal_code;
+              }
+              // Geo coordinates
+              if (d.seo.geo?.latitude && d.seo.geo?.longitude) {
+                biz.geo = {
+                  '@type': 'GeoCoordinates',
+                  latitude:  parseFloat(d.seo.geo.latitude),
+                  longitude: parseFloat(d.seo.geo.longitude)
+                };
+              }
+              // Opening hours
+              if (d.seo.opening_hours) {
+                const oh = d.seo.opening_hours;
+                const specs = [];
+                if (oh.weekday_open && oh.weekday_close) {
+                  specs.push({ '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday'], opens: oh.weekday_open, closes: oh.weekday_close });
+                }
+                if (oh.saturday_open && oh.saturday_close) {
+                  specs.push({ '@type': 'OpeningHoursSpecification', dayOfWeek: 'Saturday', opens: oh.saturday_open, closes: oh.saturday_close });
+                }
+                if (oh.sunday_open && oh.sunday_close) {
+                  specs.push({ '@type': 'OpeningHoursSpecification', dayOfWeek: 'Sunday', opens: oh.sunday_open, closes: oh.sunday_close });
+                }
+                if (specs.length > 0) biz.openingHoursSpecification = specs;
               }
               if (d.seo.area_served) {
                 biz.areaServed = d.seo.area_served
@@ -277,6 +307,14 @@
           const m = document.createElement('meta');
           m.name = 'facebook-domain-verification';
           m.content = metaVerify;
+          document.head.appendChild(m);
+        }
+
+        const googleVerify = (d.integrations.google_verify || '').trim();
+        if (googleVerify) {
+          const m = document.createElement('meta');
+          m.name = 'google-site-verification';
+          m.content = googleVerify;
           document.head.appendChild(m);
         }
       }
