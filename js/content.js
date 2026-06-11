@@ -167,16 +167,24 @@
 
         // ── Photo click tracking (delegated — covers dynamic gallery items too)
         document.addEventListener('click', e => {
-          const photoEl = e.target.closest('[data-photo]');
+          const photoEl  = e.target.closest('[data-photo]');
           const galleryEl = !photoEl && e.target.closest('.gallery-item');
           if (!photoEl && !galleryEl) return;
-          const name = photoEl
-            ? photoEl.getAttribute('data-photo')
-            : (galleryEl.querySelector('img')?.alt || 'gallery');
+          let name, src;
+          if (photoEl) {
+            name = photoEl.getAttribute('data-photo');
+            const img = photoEl.tagName === 'IMG' ? photoEl : photoEl.querySelector('img');
+            src  = img?.src || '';
+          } else {
+            const img = galleryEl.querySelector('img');
+            name = img?.alt || 'gallery';
+            src  = img?.src || '';
+          }
+          try { src = new URL(src).pathname; } catch (_) { src = ''; }
           fetch(workerUrl, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ event: 'photo', value: name }),
+            body: JSON.stringify({ event: 'photo', value: name + '|' + src }),
             keepalive: true,
           }).catch(() => {});
         });
