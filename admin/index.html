@@ -2809,16 +2809,17 @@ function renderDevices2(devices) {
   const names  = { desktop:'Desktop', mobile:'Mobile', tablet:'Tablet', other:'Outro' };
   const colors = { desktop:'#42a5f5', mobile:'#F5A623', tablet:'#e040fb', other:'#6b7280' };
   legendEl.innerHTML = devices.map(d => {
-    const type = (d.type || d.deviceType || '').toLowerCase();
+    const type  = (d.dimensions?.clientDeviceType || d.type || d.deviceType || '').toLowerCase();
+    const count = d.count || d.requests || 0;
     return '<div class="dash-d2-item">'
       + '<span class="dash-d2-dot" style="background:' + (colors[type] || colors.other) + '"></span>'
-      + '<span class="dash-d2-name">' + (names[type] || type) + '</span>'
-      + '<span class="dash-d2-count">' + fmt(d.requests || 0) + '</span></div>';
+      + '<span class="dash-d2-name">' + (names[type] || type || 'Outro') + '</span>'
+      + '<span class="dash-d2-count">' + fmt(count) + '</span></div>';
   }).join('');
   if (canvas) {
     drawDonut(canvas, devices.map(d => ({
-      value: d.requests || 0,
-      color: colors[(d.type || d.deviceType || '').toLowerCase()] || colors.other
+      value: d.count || d.requests || 0,
+      color: colors[(d.dimensions?.clientDeviceType || d.type || d.deviceType || '').toLowerCase()] || colors.other
     })));
   }
 }
