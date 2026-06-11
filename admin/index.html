@@ -1231,14 +1231,12 @@
               <div class="dash-bar2-wrap" id="dash-bar2-chart"></div>
             </div>
 
-            <!-- WA clicks by day -->
-            <div class="dash-section-card" id="dash-wa-section" style="display:none">
-              <span class="dash-section-title">CLIQUES WHATSAPP POR DIA</span>
-              <div class="dash-wa2-wrap" id="dash-wa2-chart"></div>
-            </div>
-
-            <!-- Dispositivos -->
-            <div class="dash-bottom2-row" style="grid-template-columns:1fr">
+            <!-- WA clicks + Dispositivos side by side -->
+            <div class="dash-bottom2-row">
+              <div class="dash-section-card" id="dash-wa-section" style="margin-bottom:0">
+                <span class="dash-section-title">CLIQUES WHATSAPP POR DIA</span>
+                <div class="dash-wa2-wrap" id="dash-wa2-chart"></div>
+              </div>
               <div class="dash-devices2-card">
                 <span class="dash-section-title">DISPOSITIVOS</span>
                 <div id="dash-devices2-legend" class="dash-devices2-legend"></div>
@@ -2754,11 +2752,9 @@ function renderBar2Chart(daily) {
 }
 
 function renderWa2Chart(counts, dates) {
-  const el   = document.getElementById('dash-wa2-chart');
-  const wrap = document.getElementById('dash-wa-section');
+  const el = document.getElementById('dash-wa2-chart');
   if (!el) return;
-  if (!counts.length || counts.every(v => v === 0)) { if (wrap) wrap.style.display = 'none'; return; }
-  if (wrap) wrap.style.display = '';
+  if (!counts.length || counts.every(v => v === 0)) { el.innerHTML = '<div class="dash-empty" style="padding:20px 0;font-size:12px">Sem cliques registados</div>'; return; }
   const W = 400, H = 160, padX = 28, padT = 24, padB = 18;
   const innerW = W - padX * 2, innerH = H - padT - padB;
   const max = Math.max(...counts, 1), n = counts.length;
