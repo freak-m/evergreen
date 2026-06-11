@@ -1212,23 +1212,21 @@
               </div>
             </div>
 
-            <!-- Time on page -->
-            <div class="dash-time2-card" id="dash-time-card" style="display:none">
-              <div>
+            <!-- Visitas por dia + Tempo na página side by side -->
+            <div class="dash-bottom2-row">
+              <div class="dash-section-card" style="margin-bottom:0">
+                <span class="dash-section-title">VISITAS POR DIA</span>
+                <div class="dash-chart-legend2">
+                  <span class="dash-legend-dot yellow"></span>&nbsp;Visitas únicas
+                  <span class="dash-legend-dot blue" style="margin-left:12px"></span>&nbsp;Page Views
+                </div>
+                <div class="dash-bar2-wrap" id="dash-bar2-chart"></div>
+              </div>
+              <div class="dash-time2-card" id="dash-time-card" style="flex-direction:column;align-items:flex-start;justify-content:center">
                 <div class="dash-time2-label">TEMPO NA PÁGINA</div>
                 <div class="dash-time2-value" id="dash-time-value">—</div>
+                <span class="dash-time2-badge" style="margin-top:8px">média</span>
               </div>
-              <span class="dash-time2-badge">média</span>
-            </div>
-
-            <!-- Visitas por dia grouped bar chart -->
-            <div class="dash-section-card">
-              <span class="dash-section-title">VISITAS POR DIA</span>
-              <div class="dash-chart-legend2">
-                <span class="dash-legend-dot yellow"></span>&nbsp;Visitas únicas
-                <span class="dash-legend-dot blue" style="margin-left:12px"></span>&nbsp;Page Views
-              </div>
-              <div class="dash-bar2-wrap" id="dash-bar2-chart"></div>
             </div>
 
             <!-- WA clicks + Dispositivos side by side -->
@@ -2720,13 +2718,7 @@ function renderDashboard(json, days) {
   document.getElementById('kpi-visitas-chart').innerHTML   = areaChart(daily.map(d => d.uniques),   dates, '#F5C400', 'rgba(245,196,0,.28)');
   document.getElementById('kpi-pageviews-chart').innerHTML = areaChart(daily.map(d => d.pageViews), dates, '#42a5f5', 'rgba(66,165,245,.22)');
 
-  const timeCard = document.getElementById('dash-time-card');
-  if (events.time_avg) {
-    document.getElementById('dash-time-value').textContent = fmtTime(events.time_avg);
-    timeCard.style.display = '';
-  } else {
-    timeCard.style.display = 'none';
-  }
+  document.getElementById('dash-time-value').textContent = events.time_avg ? fmtTime(events.time_avg) : '—';
 
   renderBar2Chart(daily);
   renderWa2Chart(events.waDaily || [], events.waDates || []);
