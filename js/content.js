@@ -167,18 +167,28 @@
 
         // ── Time on page tracking ───────────────────────────────
         const _pageStart = Date.now();
-        const _sendTime  = () => {
+        let _lastPing    = 0;
+        const _postTime  = (secs) => fetch(workerUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ event: 'time', value: secs }),
+          keepalive: true,
+        }).catch(() => {});
+
+        // Periodic ping every 30 s while page is visible
+        setInterval(() => {
+          if (document.visibilityState === 'hidden') return;
           const secs = Math.round((Date.now() - _pageStart) / 1000);
-          if (secs < 3) return;
-          const blob = new Blob([JSON.stringify({ event: 'time', value: secs })], { type: 'application/json' });
-          if (!navigator.sendBeacon(workerUrl, blob)) {
-            fetch(workerUrl, {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ event: 'time', value: secs }),
-              keepalive: true,
-            }).catch(() => {});
-          }
+          if (secs - _lastPing < 30) return;
+          _lastPing = secs;
+          _postTime(secs);
+        }, 30000);
+
+        // Final ping on exit
+        const _sendTime = () => {
+          const secs = Math.round((Date.now() - _pageStart) / 1000);
+          if (secs < 5) return;
+          _postTime(secs);
         };
         document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') _sendTime(); });
         window.addEventListener('pagehide', _sendTime);
