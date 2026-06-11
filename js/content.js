@@ -170,12 +170,15 @@
         const _sendTime  = () => {
           const secs = Math.round((Date.now() - _pageStart) / 1000);
           if (secs < 3) return;
-          fetch(workerUrl, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ event: 'time', value: secs }),
-            keepalive: true,
-          }).catch(() => {});
+          const blob = new Blob([JSON.stringify({ event: 'time', value: secs })], { type: 'application/json' });
+          if (!navigator.sendBeacon(workerUrl, blob)) {
+            fetch(workerUrl, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ event: 'time', value: secs }),
+              keepalive: true,
+            }).catch(() => {});
+          }
         };
         document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') _sendTime(); });
         window.addEventListener('pagehide', _sendTime);
