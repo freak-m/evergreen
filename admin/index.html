@@ -2743,29 +2743,73 @@ function renderBar2Chart(daily) {
 function renderWa2Chart(counts, dates) {
   const el = document.getElementById('dash-wa2-chart');
   if (!el) return;
-  if (!counts.length || counts.every(v => v === 0)) { el.innerHTML = '<div class="dash-empty" style="padding:20px 0;font-size:12px">Sem cliques registados</div>'; return; }
-  const W = 400, H = 160, padX = 28, padT = 24, padB = 18;
-  const innerW = W - padX * 2, innerH = H - padT - padB;
+  if (!counts.length || counts.every(v => v === 0)) {
+    el.innerHTML = '<div class="dash-empty" style="padding:28px 0;font-size:12px;font-family:-apple-system,BlinkMacSystemFont,\'Segoe UI\',sans-serif">Sem cliques registados</div>';
+    return;
+  }
+  const W = 500, H = 180, padL = 10, padR = 10, padT = 28, padB = 24;
+  const innerW = W - padL - padR, innerH = H - padT - padB;
   const max = Math.max(...counts, 1), n = counts.length;
-  const step = n > 1 ? innerW / (n - 1) : innerW, barW = Math.max(step * 0.55, 4);
+  const barW = Math.max(innerW / n * 0.45, 6);
   const pts = counts.map((v, i) => ({
-    x: padX + (n > 1 ? (i / (n - 1)) * innerW : innerW / 2),
-    y: padT + (1 - v / max) * innerH, v
+    x: padL + (n === 1 ? innerW / 2 : (i / (n - 1)) * innerW),
+    y: padT + (1 - v / max) * innerH,
+    v,
   }));
+  const baseY = padT + innerH;
+
+  // gradient fill under line
+  const areaPath = 'M ' + pts.map(p => p.x + ' ' + p.y).join(' L ')
+    + ' L ' + pts[pts.length - 1].x + ' ' + baseY
+    + ' L ' + pts[0].x + ' ' + baseY + ' Z';
+
+  // bars
   const bars = pts.map(p =>
-    '<rect x="' + (p.x - barW/2) + '" y="' + p.y + '" width="' + barW + '" height="' + (padT + innerH - p.y) + '" fill="rgba(74,222,128,.85)" rx="2"/>'
+    '<rect x="' + (p.x - barW / 2).toFixed(1) + '" y="' + p.y.toFixed(1) + '"'
+    + ' width="' + barW.toFixed(1) + '" height="' + (baseY - p.y).toFixed(1) + '"'
+    + ' fill="url(#waBarGrad)" rx="3"/>'
   ).join('');
-  const line    = pts.map(p => p.x + ',' + p.y).join(' ');
-  const circles = pts.map(p => '<circle cx="' + p.x + '" cy="' + p.y + '" r="3" fill="#4ade80"/>').join('');
-  const labels  = pts.map(p => !p.v ? '' :
-    '<text x="' + p.x + '" y="' + (p.y - 5) + '" text-anchor="middle" fill="#4ade80" font-size="8.5" font-weight="700">' + p.v + '</text>'
+
+  // line
+  const linePts = pts.map(p => p.x.toFixed(1) + ',' + p.y.toFixed(1)).join(' ');
+
+  // dots (only on non-zero)
+  const dots = pts.filter(p => p.v).map(p =>
+    '<circle cx="' + p.x.toFixed(1) + '" cy="' + p.y.toFixed(1) + '" r="3.5" fill="#25d366" stroke="#1a1a1a" stroke-width="1.5"/>'
   ).join('');
-  const dLabels = pts.map((p, i) => !dates[i] ? '' :
-    '<text x="' + p.x + '" y="' + H + '" text-anchor="middle" fill="#555" font-size="7">' + dates[i].slice(5).replace('-', '/') + '</text>'
+
+  // value labels (only non-zero)
+  const valLabels = pts.filter(p => p.v).map(p =>
+    '<text x="' + p.x.toFixed(1) + '" y="' + (p.y - 8).toFixed(1) + '"'
+    + ' text-anchor="middle" fill="#4ade80" font-size="10" font-weight="700"'
+    + ' font-family="-apple-system,BlinkMacSystemFont,\'Segoe UI\',sans-serif">' + p.v + '</text>'
   ).join('');
-  el.innerHTML = '<svg width="100%" height="' + H + '" viewBox="0 0 ' + W + ' ' + H + '" preserveAspectRatio="none" style="display:block;overflow:visible">'
-    + bars + '<polyline points="' + line + '" fill="none" stroke="#4ade80" stroke-width="1.8" stroke-linejoin="round"/>'
-    + circles + labels + dLabels + '</svg>';
+
+  // date labels
+  const dateLabels = pts.map((p, i) => !dates[i] ? '' :
+    '<text x="' + p.x.toFixed(1) + '" y="' + (H - 4) + '"'
+    + ' text-anchor="middle" fill="#666" font-size="9"'
+    + ' font-family="-apple-system,BlinkMacSystemFont,\'Segoe UI\',sans-serif">'
+    + dates[i].slice(5).replace('-', '/') + '</text>'
+  ).join('');
+
+  el.innerHTML =
+    '<svg width="100%" height="' + H + '" viewBox="0 0 ' + W + ' ' + H + '" preserveAspectRatio="none" style="display:block;overflow:visible">'
+    + '<defs>'
+    + '<linearGradient id="waBarGrad" x1="0" y1="0" x2="0" y2="1">'
+    + '<stop offset="0%" stop-color="#25d366" stop-opacity=".9"/>'
+    + '<stop offset="100%" stop-color="#25d366" stop-opacity=".3"/>'
+    + '</linearGradient>'
+    + '<linearGradient id="waAreaGrad" x1="0" y1="0" x2="0" y2="1">'
+    + '<stop offset="0%" stop-color="#4ade80" stop-opacity=".18"/>'
+    + '<stop offset="100%" stop-color="#4ade80" stop-opacity="0"/>'
+    + '</linearGradient>'
+    + '</defs>'
+    + '<path d="' + areaPath + '" fill="url(#waAreaGrad)"/>'
+    + bars
+    + '<polyline points="' + linePts + '" fill="none" stroke="#25d366" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>'
+    + dots + valLabels + dateLabels
+    + '</svg>';
 }
 
 function renderCountries2(countries) {
