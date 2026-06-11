@@ -647,9 +647,10 @@
       border-radius: 10px; padding: 16px 22px; margin-bottom: 12px;
       display: flex; align-items: center; justify-content: space-between;
     }
-    .dash-time2-label { font-size: 10px; font-weight: 700; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+    .dash-time2-label { font-size: 11px; font-weight: 800; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
     .dash-time2-value { font-size: 40px; font-weight: 900; color: var(--text); line-height: 1; }
     .dash-time2-badge { font-size: 11px; color: var(--text-dim); background: var(--bg-light); border: 1px solid var(--border); border-radius: 4px; padding: 3px 10px; flex-shrink: 0; }
+    .dash-time2-chart { width: 100%; margin-top: 14px; }
     .dash-section-card { background: var(--bg-mid); border: 1px solid var(--border); border-radius: 10px; padding: 18px 20px; margin-bottom: 12px; }
     .dash-section-title { display: block; font-size: 11px; font-weight: 800; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
     .dash-chart-legend2 { display: flex; align-items: center; gap: 5px; font-size: 11px; color: var(--text-dim); margin-bottom: 16px; justify-content: flex-end; }
@@ -1241,10 +1242,13 @@
             </div>
 
             <div class="dash-bottom2-row">
-              <div class="dash-time2-card" id="dash-time-card" style="flex-direction:column;align-items:flex-start;justify-content:center">
+              <div class="dash-time2-card" id="dash-time-card" style="flex-direction:column;align-items:flex-start;justify-content:flex-start">
                 <div class="dash-time2-label">TEMPO NA PÁGINA</div>
-                <div class="dash-time2-value" id="dash-time-value">—</div>
-                <span class="dash-time2-badge" style="margin-top:8px">média</span>
+                <div style="display:flex;align-items:baseline;gap:10px">
+                  <div class="dash-time2-value" id="dash-time-value">—</div>
+                  <span class="dash-time2-badge">média</span>
+                </div>
+                <div class="dash-time2-chart" id="dash-time-chart"></div>
               </div>
               <div class="dash-devices2-card">
                 <span class="dash-section-title">DISPOSITIVOS</span>
@@ -2747,6 +2751,7 @@ function renderDashboard(json, days) {
 
   renderBar2Chart(daily);
   renderWa2Chart(events.waDaily || [], events.waDates || []);
+  renderTimeChart(events.timeDates || [], events.timeDaily || []);
   renderPhotoTop(events.photoTop || []);
   renderCountries2(zone.countries || []);
   renderDevices2(zone.devices    || []);
@@ -2839,6 +2844,43 @@ function renderWa2Chart(counts, dates) {
     + '<polyline points="' + linePts + '" fill="none" stroke="#25d366" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>'
     + dots + valLabels + dateLabels
     + '</svg>';
+}
+
+function renderTimeChart(dates, values) {
+  const el = document.getElementById('dash-time-chart');
+  if (!el) return;
+  if (!values.length || values.every(v => v === 0)) { el.innerHTML = ''; return; }
+  const W = 340, H = 56, padL = 4, padR = 4, padT = 10, padB = 16;
+  const innerW = W - padL - padR, innerH = H - padT - padB;
+  const max = Math.max(...values, 1), n = values.length;
+  const baseY = padT + innerH;
+  const pts = values.map((v, i) => ({
+    x: padL + (n === 1 ? innerW / 2 : (i / (n - 1)) * innerW),
+    y: padT + (1 - v / max) * innerH, v,
+  }));
+  const areaPts = pts.map(p => p.x.toFixed(1) + ',' + p.y.toFixed(1)).join(' ')
+    + ` ${pts[pts.length-1].x.toFixed(1)},${baseY} ${pts[0].x.toFixed(1)},${baseY}`;
+  const linePts = pts.map(p => p.x.toFixed(1) + ',' + p.y.toFixed(1)).join(' ');
+  const dots = pts.map(p => p.v
+    ? `<circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="2.5" fill="#F5C400"/>`
+    : '').join('');
+  const dLabels = pts.map((p, i) => !dates[i] ? '' :
+    `<text x="${p.x.toFixed(1)}" y="${H}" text-anchor="middle" fill="#555" font-size="7" font-family="-apple-system,sans-serif">${dates[i].slice(5).replace('-','/')}</text>`
+  ).join('');
+  const valLabels = pts.filter(p => p.v).map(p =>
+    `<text x="${p.x.toFixed(1)}" y="${(p.y - 4).toFixed(1)}" text-anchor="middle" fill="#F5C400" font-size="7.5" font-weight="700" font-family="-apple-system,sans-serif">${fmtTime(p.v)}</text>`
+  ).join('');
+  el.innerHTML = `<svg width="100%" height="${H}" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" style="display:block;overflow:visible">
+    <defs>
+      <linearGradient id="timeAreaGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#F5C400" stop-opacity=".25"/>
+        <stop offset="100%" stop-color="#F5C400" stop-opacity="0"/>
+      </linearGradient>
+    </defs>
+    <polygon points="${areaPts}" fill="url(#timeAreaGrad)"/>
+    <polyline points="${linePts}" fill="none" stroke="#F5C400" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/>
+    ${dots}${valLabels}${dLabels}
+  </svg>`;
 }
 
 function renderPhotoTop(items) {
