@@ -677,6 +677,14 @@
     .dash-photo-row { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; font-size: 12px; }
     .dash-photo-row:last-child { margin-bottom: 0; }
     .dash-photo-label { flex: 0 0 150px; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+    .dash-photo-thumb-btn { background: none; border: none; padding: 0; cursor: zoom-in; flex-shrink: 0; display: block; }
+    .dash-photo-thumb-btn img { width: 72px; height: 52px; object-fit: cover; border-radius: 5px; border: 1px solid rgba(255,255,255,.15); display: block; transition: opacity .15s, transform .15s; }
+    .dash-photo-thumb-btn:hover img { opacity: .8; transform: scale(1.04); }
+    #dash-photo-overlay { display: none; position: fixed; inset: 0; z-index: 9999; background: rgba(0,0,0,.82); backdrop-filter: blur(6px); align-items: center; justify-content: center; cursor: zoom-out; }
+    #dash-photo-overlay.active { display: flex; }
+    #dash-photo-overlay img { max-width: min(90vw, 860px); max-height: 80vh; border-radius: 8px; box-shadow: 0 8px 48px rgba(0,0,0,.7); cursor: default; animation: lbOpen .2s ease; }
+    #dash-photo-overlay-close { position: absolute; top: 18px; right: 22px; background: none; border: none; color: #fff; font-size: 28px; cursor: pointer; opacity: .7; line-height: 1; }
+    #dash-photo-overlay-close:hover { opacity: 1; }
     .dash-photo-bar-wrap { flex: 1; background: rgba(255,255,255,.07); border-radius: 4px; height: 10px; overflow: hidden; }
     .dash-photo-bar { height: 100%; background: linear-gradient(90deg, #4ade80, #25d366); border-radius: 4px; transition: width .4s ease; }
     .dash-photo-count { flex: 0 0 28px; text-align: right; color: #4ade80; font-weight: 700; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
@@ -2845,7 +2853,7 @@ function renderPhotoTop(items) {
     const pct  = Math.round((item.count / max) * 100);
     const imgSrc = src ? `../${src.replace(/^\//, '')}` : '';
     const thumb = imgSrc
-      ? `<a href="${imgSrc}" target="_blank" rel="noopener" style="flex-shrink:0;display:block"><img src="${imgSrc}" style="width:72px;height:52px;object-fit:cover;border-radius:5px;border:1px solid rgba(255,255,255,.15);display:block" onmouseover="this.style.opacity='.75'" onmouseout="this.style.opacity='1'"></a>`
+      ? `<button class="dash-photo-thumb-btn" onclick="openDashPhotoOverlay('${imgSrc}')"><img src="${imgSrc}" alt="${name}"></button>`
       : `<div style="width:72px;height:52px;flex-shrink:0;background:rgba(255,255,255,.06);border-radius:5px"></div>`;
     return `<div class="dash-photo-row">
       ${thumb}
@@ -2970,6 +2978,21 @@ function closeLightbox() {
 document.getElementById('img-lightbox').addEventListener('click', function(e) {
   if (e.target === this) closeLightbox();
 });
+</script>
+<div id="dash-photo-overlay" onclick="closeDashPhotoOverlay()">
+  <button id="dash-photo-overlay-close" onclick="closeDashPhotoOverlay()">✕</button>
+  <img id="dash-photo-overlay-img" src="" alt="" onclick="event.stopPropagation()">
+</div>
+<script>
+function openDashPhotoOverlay(src) {
+  document.getElementById('dash-photo-overlay-img').src = src;
+  document.getElementById('dash-photo-overlay').classList.add('active');
+}
+function closeDashPhotoOverlay() {
+  document.getElementById('dash-photo-overlay').classList.remove('active');
+  document.getElementById('dash-photo-overlay-img').src = '';
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDashPhotoOverlay(); });
 </script>
 </body>
 </html>
